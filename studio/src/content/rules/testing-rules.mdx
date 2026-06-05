@@ -1,0 +1,68 @@
+---
+name: "Testing Rules"
+description: "Testing standards for quality software — test pyramid, naming conventions, coverage requirements, and what to test."
+rule_type: "claude"
+category: ["general"]
+tags: ["testing", "unit-tests", "integration", "coverage", "quality"]
+platform: ["claude-code", "codex"]
+file_name: "testing-rules.md"
+is_featured: false
+order: 18
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# Testing Rules
+
+## Test Pyramid
+
+- **Unit Tests** (70%): Fast, isolated, test one thing
+- **Integration Tests** (20%): Test component interactions
+- **E2E Tests** (10%): Critical user journeys only
+
+## What to Test
+
+Always test:
+- Happy path (normal usage)
+- Edge cases (empty, null, zero, max values)
+- Error paths (invalid input, failures)
+- Security boundaries (auth, authorization)
+
+Don't test:
+- Third-party library internals
+- Implementation details (that change with refactoring)
+- Code that's trivially correct (getters/setters)
+
+## Test Quality
+
+- One assertion per test (focus on one behavior)
+- Descriptive test names: `it('returns 404 when user not found')`
+- Independent tests — no shared mutable state
+- Deterministic — same result every run
+- Fast — unit tests under 50ms each
+
+## Test Structure (AAA)
+
+```
+// Arrange
+const user = buildUser({ role: 'admin' })
+
+// Act
+const result = canAccessDashboard(user)
+
+// Assert
+expect(result).toBe(true)
+```
+
+## Coverage
+
+- 80%+ line coverage for business logic
+- 100% for security-critical code
+- Coverage is a metric, not a goal — don't write tests just for coverage
+
+## Test Data
+
+- Use factory functions, not hardcoded objects
+- Randomize what you can (use faker for realistic data)
+- Test with realistic data volumes (not just 1 item)
+- Clean up test data after each test

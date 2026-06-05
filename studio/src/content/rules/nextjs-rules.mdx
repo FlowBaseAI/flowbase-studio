@@ -1,0 +1,56 @@
+---
+name: "Next.js Rules"
+description: "Next.js App Router best practices — Server Components, data fetching, routing, and performance optimization."
+rule_type: "claude"
+category: ["react"]
+tags: ["nextjs", "app-router", "server-components", "react"]
+platform: ["claude-code", "codex"]
+file_name: "nextjs-rules.md"
+is_featured: false
+order: 5
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# Next.js App Router Rules
+
+## Server vs Client Components
+
+- Default to Server Components — they're faster and have zero bundle cost
+- Add `'use client'` only when you need: browser APIs, event handlers, state, or effects
+- Keep `'use client'` boundary as low in the tree as possible
+- Never import Server Components into Client Components
+
+## Data Fetching
+
+- Fetch data in Server Components using `async/await` directly
+- Use `cache()` to deduplicate fetch calls across the request
+- `revalidate` for ISR: `export const revalidate = 60`
+- `unstable_cache` for caching database queries
+
+## Routing
+
+- `page.tsx` for routes, `layout.tsx` for shared UI
+- `loading.tsx` for instant loading UI (React Suspense)
+- `error.tsx` for error boundaries
+- Route Groups `(group)` for organizing without affecting URL
+- Parallel Routes `@slot` for complex layouts
+
+## Performance
+
+- Use `next/image` for all images — never `<img>`
+- Use `next/font` for fonts — never external `<link>`
+- `next/link` for all internal navigation
+- Dynamic imports for heavy client-side components
+
+## Server Actions
+
+- Validate all inputs server-side in Server Actions
+- Use `revalidatePath` or `revalidateTag` after mutations
+- Handle errors and return typed responses
+
+## Environment Variables
+
+- Public vars: `NEXT_PUBLIC_` prefix
+- Server-only vars: never expose to client
+- Use `env.ts` with Zod validation for type-safe env vars

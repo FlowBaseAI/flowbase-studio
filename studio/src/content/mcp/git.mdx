@@ -1,0 +1,29 @@
+---
+name: "Git MCP"
+description: "Give Claude access to local Git repositories — read history, diffs, branches, and manage commits without leaving your AI workflow."
+category: ["devtools", "git"]
+tags: ["git", "version-control", "commits", "branches", "diff"]
+platform: ["claude-code", "codex"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-git"
+config_snippet:
+  mcpServers:
+    git:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-git", "--repository", "/path/to/repo"]
+is_featured: false
+order: 15
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+The Git MCP server gives Claude direct access to your local Git repositories. It can read commits, diffs, branches, tags, and history to provide deep codebase context.
+
+## Use Cases
+
+- **Commit Message Generation**: Generate meaningful commit messages from diffs
+- **Change Analysis**: Understand what changed between any two commits
+- **Code History**: Trace the evolution of specific functions or files
+- **Branch Management**: Get summaries of branch differences

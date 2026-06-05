@@ -1,0 +1,31 @@
+---
+name: "Linear MCP"
+description: "Connect Claude to Linear — manage issues, sprints, and projects programmatically from your AI-powered development workflow."
+category: ["devtools", "productivity"]
+tags: ["linear", "issues", "project-management", "sprint"]
+platform: ["claude-code"]
+github_url: "https://github.com/jerhadf/linear-mcp-server"
+install_cmd: "npx -y linear-mcp-server"
+config_snippet:
+  mcpServers:
+    linear:
+      command: "npx"
+      args: ["-y", "linear-mcp-server"]
+      env:
+        LINEAR_API_KEY: "lin_api_your_key"
+is_featured: false
+order: 20
+author: "Community"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+Linear MCP lets Claude interact with your Linear workspace — read issues, create tasks, update sprint status, and manage your engineering team's workflow.
+
+## Use Cases
+
+- **Issue Triage**: Automatically categorize and label incoming issues
+- **Sprint Planning**: Generate sprint summaries and capacity analysis
+- **Bug Reports**: Create well-structured bug reports from error logs
+- **Progress Reports**: Generate weekly engineering progress summaries

@@ -1,0 +1,29 @@
+---
+name: "SQLite MCP"
+description: "Give Claude access to local SQLite databases — run queries, inspect schemas, and analyze data without a server."
+category: ["database"]
+tags: ["sqlite", "database", "sql", "local"]
+platform: ["claude-code", "codex", "gemini-cli"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-sqlite"
+config_snippet:
+  mcpServers:
+    sqlite:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-sqlite", "--db-path", "/path/to/database.db"]
+is_featured: false
+order: 11
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+SQLite MCP gives Claude direct access to SQLite database files on your local filesystem. Perfect for local development, data analysis, and projects that don't need a full database server.
+
+## Use Cases
+
+- **Local Data Analysis**: Query and analyze local SQLite databases
+- **App Development**: Inspect your app's SQLite data during development
+- **Data Migration**: Help plan and execute data migrations
+- **Prototyping**: Quickly build data models and test queries

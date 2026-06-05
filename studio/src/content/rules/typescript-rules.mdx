@@ -1,0 +1,55 @@
+---
+name: "TypeScript Rules"
+description: "Strict TypeScript rules for type safety, clean code, and modern patterns that prevent runtime errors."
+rule_type: "claude"
+category: ["typescript"]
+tags: ["typescript", "types", "strict", "javascript"]
+platform: ["claude-code", "codex"]
+file_name: "typescript-rules.md"
+is_featured: true
+order: 2
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# TypeScript Rules
+
+## Type Safety
+
+- Enable `strict: true` in tsconfig — no exceptions
+- Never use `any` — use `unknown` and narrow it
+- No type assertions (`as`) unless absolutely necessary with comment explaining why
+- Prefer `interface` for object shapes, `type` for unions/intersections
+- Use `readonly` for data that shouldn't mutate
+- Use `const` assertions for literal types: `as const`
+
+## Functions
+
+- Always type function parameters and return values explicitly
+- Prefer function declarations over arrow functions for top-level functions
+- Use overloads for functions with multiple signatures
+- Avoid optional parameters at the start of parameter lists
+
+## Nullability
+
+- Use optional chaining (`?.`) instead of null checks when appropriate
+- Use nullish coalescing (`??`) not `||` for default values (avoids falsy pitfalls)
+- Explicitly handle `null` and `undefined` — don't hide them
+- Prefer early returns over nested if-else chains
+
+## Imports
+
+- Use `import type` for type-only imports
+- Group imports: external → internal → types
+- No default exports from library files (use named exports)
+
+## Enums
+
+- Prefer `const` objects with `as const` over `enum`
+- If using enum, use string enums for debugging clarity
+
+## Modern Patterns
+
+- Use template literal types for string validation
+- Use `satisfies` operator for type checking without widening
+- Use `infer` for extracting types from generics

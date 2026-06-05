@@ -1,0 +1,35 @@
+---
+name: "Brave Search MCP"
+description: "Give Claude real-time web search capabilities using Brave Search API — find current information, news, and web content."
+category: ["search", "web"]
+tags: ["search", "web", "brave", "internet", "research"]
+platform: ["claude-code", "codex", "gemini-cli"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-brave-search"
+config_snippet:
+  mcpServers:
+    brave-search:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-brave-search"]
+      env:
+        BRAVE_API_KEY: "your_brave_api_key"
+is_featured: true
+order: 7
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+Brave Search MCP gives Claude access to real-time web search. Claude can search for current events, documentation, tutorials, and any web content beyond its training cutoff.
+
+## Use Cases
+
+- **Research Agent**: Search and synthesize information from the web
+- **News Monitoring**: Get current news on any topic
+- **Technical Research**: Find latest docs, changelogs, and tutorials
+- **Fact Checking**: Verify claims with current web sources
+
+## Setup
+
+Get a free API key at [brave.com/search/api](https://brave.com/search/api/).

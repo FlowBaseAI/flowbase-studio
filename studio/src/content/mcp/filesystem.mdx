@@ -1,0 +1,44 @@
+---
+name: "Filesystem MCP"
+description: "Give Claude Code secure access to your local filesystem — read, write, and manage files within specified directories."
+category: ["storage", "utility"]
+tags: ["filesystem", "files", "local", "read", "write"]
+platform: ["claude-code", "codex", "gemini-cli"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-filesystem /path/to/allow"
+config_snippet:
+  mcpServers:
+    filesystem:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-filesystem", "/Users/username/projects"]
+is_featured: true
+order: 2
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+The Filesystem MCP server provides Claude with secure, sandboxed access to your local files. You define which directories are accessible, and Claude can read, write, create, and delete files within those boundaries.
+
+## Use Cases
+
+- **Project File Management**: Read and modify project files directly
+- **Content Generation**: Write blog posts, docs, and code to disk
+- **Data Processing**: Read CSV/JSON files and process data
+- **Configuration Management**: Update config files across your project
+
+## Configuration
+
+Specify the directories you want to allow access to as arguments.
+
+```json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/your/project/path"]
+    }
+  }
+}
+```

@@ -1,0 +1,49 @@
+---
+name: "GitHub MCP"
+description: "Connect Claude Code to GitHub — read repos, manage issues, create PRs, and automate workflows directly from your AI agent."
+category: ["devtools", "git"]
+tags: ["github", "git", "repository", "issues", "pr"]
+platform: ["claude-code", "codex"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-github"
+config_snippet:
+  mcpServers:
+    github:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-github"]
+      env:
+        GITHUB_TOKEN: "your_github_token"
+is_featured: true
+order: 1
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+The GitHub MCP server lets Claude Code interact with GitHub repositories programmatically. You can search code, read files, manage issues, create pull requests, and automate your entire GitHub workflow.
+
+## Use Cases
+
+- **Code Review Automation**: Ask Claude to review PRs and post inline comments
+- **Issue Management**: Auto-triage issues, assign labels, and suggest fixes
+- **Repository Analysis**: Analyze code quality, find vulnerabilities, summarize changes
+- **PR Creation**: Generate commit messages and create PRs from local changes
+
+## Configuration
+
+Set your `GITHUB_TOKEN` environment variable with a personal access token that has `repo` scope.
+
+```json
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "ghp_your_token_here"
+      }
+    }
+  }
+}
+```

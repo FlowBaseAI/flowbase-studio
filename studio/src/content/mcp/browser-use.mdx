@@ -1,0 +1,33 @@
+---
+name: "Browser Use MCP"
+description: "Let Claude control a real browser — navigate pages, click elements, fill forms, extract content, and automate web workflows."
+category: ["browser", "automation"]
+tags: ["browser", "web", "automation", "scraping", "playwright"]
+platform: ["claude-code"]
+github_url: "https://github.com/browser-use/browser-use"
+install_cmd: "pip install browser-use && python -m browser_use.mcp"
+config_snippet:
+  mcpServers:
+    browser-use:
+      command: "python"
+      args: ["-m", "browser_use.mcp"]
+is_featured: true
+order: 3
+author: "browser-use"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+Browser Use MCP gives Claude the ability to control a real Chromium browser. It can navigate URLs, interact with UI elements, extract structured data from pages, and automate complex web tasks.
+
+## Use Cases
+
+- **Web Scraping**: Extract structured data from any website
+- **Form Automation**: Fill and submit forms automatically
+- **Web Research**: Browse and summarize information from multiple sites
+- **UI Testing**: Verify your web app's behavior end-to-end
+
+## Requirements
+
+Python 3.11+ and `pip install browser-use` required.

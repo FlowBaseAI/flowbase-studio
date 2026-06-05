@@ -1,0 +1,32 @@
+---
+name: "Slack MCP"
+description: "Connect Claude to Slack — read channels, post messages, search conversations, and automate team communication workflows."
+category: ["comms", "productivity"]
+tags: ["slack", "messaging", "team", "communication"]
+platform: ["claude-code"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-slack"
+config_snippet:
+  mcpServers:
+    slack:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-slack"]
+      env:
+        SLACK_BOT_TOKEN: "xoxb-your-bot-token"
+        SLACK_TEAM_ID: "T0XXXXXXXXX"
+is_featured: false
+order: 10
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+The Slack MCP server lets Claude interact with your Slack workspace. Read channel history, post messages, search conversations, and build automated team workflows.
+
+## Use Cases
+
+- **Daily Summaries**: Summarize channel activity overnight
+- **Auto Responses**: Draft responses to common questions
+- **Incident Reports**: Post structured incident updates automatically
+- **Team Notifications**: Send formatted notifications from your code

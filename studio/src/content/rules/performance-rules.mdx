@@ -1,0 +1,65 @@
+---
+name: "Performance Rules"
+description: "Web performance rules — Core Web Vitals, loading optimization, runtime performance, and measurement standards."
+rule_type: "claude"
+category: ["astro", "react"]
+tags: ["performance", "core-web-vitals", "loading", "optimization"]
+platform: ["claude-code"]
+file_name: "performance-rules.md"
+is_featured: false
+order: 20
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# Performance Rules
+
+## Core Web Vitals Targets
+
+- **LCP** (Largest Contentful Paint): < 2.5s
+- **INP** (Interaction to Next Paint): < 200ms
+- **CLS** (Cumulative Layout Shift): < 0.1
+
+## Loading Performance
+
+- Preload LCP resource (hero image or font)
+- `loading="lazy"` for below-fold images
+- `fetchpriority="high"` for LCP image
+- Inline critical CSS (above-fold styles)
+- Defer non-critical JavaScript
+- Preconnect to third-party origins
+
+## Images
+
+- Use modern formats: WebP or AVIF
+- Specify `width` and `height` to prevent CLS
+- Serve responsive images with `srcset`
+- Compress images: WebP <100KB for hero, <30KB for thumbnails
+
+## JavaScript
+
+- Bundle size budget: < 150KB gzipped per route
+- Code split at route level — no monolithic bundles
+- Tree shake unused exports
+- Avoid importing entire libraries for one function
+
+## Fonts
+
+- System font stack for body text when possible
+- Subset custom fonts to used characters
+- `font-display: swap` to prevent FOIT
+- Preload fonts used above the fold
+
+## Measurement
+
+- Lighthouse CI in every PR pipeline
+- Test on slow 3G, not just fast WiFi
+- Real User Monitoring (RUM) in production
+- Performance budget alerts when regression detected
+
+## Runtime Performance
+
+- Avoid forced layout (read then write DOM, never interleave)
+- Use `requestAnimationFrame` for animations
+- Debounce scroll/resize handlers
+- Virtualize long lists (> 100 items)

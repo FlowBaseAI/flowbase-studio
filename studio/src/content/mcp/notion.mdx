@@ -1,0 +1,31 @@
+---
+name: "Notion MCP"
+description: "Connect Claude to your Notion workspace — read pages, create content, manage databases, and automate your knowledge base."
+category: ["productivity", "knowledge"]
+tags: ["notion", "knowledge-base", "docs", "database"]
+platform: ["claude-code"]
+github_url: "https://github.com/makenotion/notion-mcp-server"
+install_cmd: "npx -y @notionhq/notion-mcp-server"
+config_snippet:
+  mcpServers:
+    notion:
+      command: "npx"
+      args: ["-y", "@notionhq/notion-mcp-server"]
+      env:
+        OPENAPI_MCP_HEADERS: '{"Authorization": "Bearer your_notion_token", "Notion-Version": "2022-06-28"}'
+is_featured: false
+order: 6
+author: "Notion"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+The official Notion MCP server lets Claude interact with your Notion workspace. Read pages, create new content, query databases, and keep your knowledge base up to date automatically.
+
+## Use Cases
+
+- **Meeting Notes**: Auto-generate and save meeting summaries to Notion
+- **Content Planning**: Manage editorial calendars and content databases
+- **Knowledge Base**: Search and retrieve information from your Notion docs
+- **Task Management**: Create and update tasks in Notion databases

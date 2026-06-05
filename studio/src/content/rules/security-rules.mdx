@@ -1,0 +1,59 @@
+---
+name: "Security Rules"
+description: "Security-first development rules — OWASP protections, secrets management, input validation, and defensive coding."
+rule_type: "claude"
+category: ["general"]
+tags: ["security", "owasp", "secrets", "validation", "defense"]
+platform: ["claude-code"]
+file_name: "security-rules.md"
+is_featured: false
+order: 16
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# Security Rules
+
+## Secrets Management
+
+- Never hardcode secrets, API keys, or credentials in source code
+- Use environment variables — never commit `.env` files
+- Rotate secrets that have been exposed immediately
+- Use a secrets manager (Vault, AWS Secrets Manager) for production
+
+## Input Validation
+
+- Validate all user input at system boundaries — never trust client data
+- Whitelist acceptable values; reject everything else
+- Sanitize before rendering to prevent XSS
+- Use parameterized queries — never string concatenation for SQL
+
+## Authentication & Authorization
+
+- Hash passwords with bcrypt (cost factor 12+) or Argon2
+- Implement rate limiting on auth endpoints
+- Use short-lived JWTs with refresh tokens
+- Check authorization on every sensitive operation — don't rely on UI hiding
+
+## HTTP Security Headers
+
+```
+Content-Security-Policy: default-src 'self'
+X-Frame-Options: DENY
+X-Content-Type-Options: nosniff
+Referrer-Policy: strict-origin-when-cross-origin
+Permissions-Policy: camera=(), microphone=()
+```
+
+## Data Protection
+
+- Encrypt sensitive data at rest
+- Use HTTPS everywhere — no mixed content
+- Minimize data collection — don't store what you don't need
+- Log access to sensitive data for audit trails
+
+## Dependencies
+
+- Run `npm audit` / `pip-audit` in CI
+- Update dependencies with security patches promptly
+- Review new dependencies before adding (supply chain risk)

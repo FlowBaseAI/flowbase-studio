@@ -1,0 +1,31 @@
+---
+name: "OpenAI MCP"
+description: "Access OpenAI models from within Claude workflows — use GPT-4, DALL-E, Whisper, and embeddings as tools in your agent."
+category: ["ai", "utility"]
+tags: ["openai", "gpt", "dall-e", "embeddings", "ai"]
+platform: ["claude-code"]
+github_url: "https://github.com/openai/openai-mcp"
+install_cmd: "npx -y @openai/mcp"
+config_snippet:
+  mcpServers:
+    openai:
+      command: "npx"
+      args: ["-y", "@openai/mcp"]
+      env:
+        OPENAI_API_KEY: "sk-your-openai-key"
+is_featured: false
+order: 17
+author: "OpenAI"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+The OpenAI MCP gives Claude access to OpenAI's suite of models and APIs, enabling multi-model workflows where each AI does what it's best at.
+
+## Use Cases
+
+- **Image Generation**: Generate images with DALL-E from within Claude
+- **Transcription**: Use Whisper to transcribe audio files
+- **Embeddings**: Generate text embeddings for semantic search
+- **Multi-model Reasoning**: Route specialized tasks to optimal models

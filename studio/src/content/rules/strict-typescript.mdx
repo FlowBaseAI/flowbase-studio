@@ -1,0 +1,69 @@
+---
+name: "Strict TypeScript Rules"
+description: "Maximum TypeScript strictness — exhaustive type checking, no escape hatches, and type-driven development."
+rule_type: "claude"
+category: ["typescript"]
+tags: ["typescript", "strict", "advanced", "type-safety"]
+platform: ["claude-code", "codex"]
+file_name: "strict-typescript.md"
+is_featured: false
+order: 12
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# Strict TypeScript Rules
+
+## tsconfig.json Requirements
+
+```json
+{
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true
+  }
+}
+```
+
+## Zero Escape Hatches
+
+- `any` is banned — use `unknown` + type narrowing
+- `as` casts require comment with justification
+- `!` non-null assertions require comment with proof
+- `@ts-ignore` is forbidden
+- `// eslint-disable` requires ticket number in comment
+
+## Exhaustive Pattern Matching
+
+```typescript
+// Always handle all union cases
+function assertNever(x: never): never {
+  throw new Error(`Unhandled case: ${x}`)
+}
+
+switch (action.type) {
+  case 'ADD': return handleAdd(action)
+  case 'REMOVE': return handleRemove(action)
+  default: return assertNever(action.type) // compile error if case missing
+}
+```
+
+## Result Types (No throw)
+
+```typescript
+type Result<T, E = Error> =
+  | { success: true; data: T }
+  | { success: false; error: E }
+```
+
+Use Result types for operations that can fail. Reserve `throw` for truly exceptional, unrecoverable errors.
+
+## Generic Constraints
+
+- All generics must have meaningful constraints
+- Document what T is in JSDoc when non-obvious
+- Avoid unconstrained `T` when you know the shape

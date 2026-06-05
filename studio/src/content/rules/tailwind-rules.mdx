@@ -1,0 +1,57 @@
+---
+name: "Tailwind CSS Rules"
+description: "Tailwind CSS best practices — utility organization, custom components, responsive design, and avoiding common pitfalls."
+rule_type: "claude"
+category: ["astro", "react"]
+tags: ["tailwind", "css", "styling", "responsive", "design"]
+platform: ["claude-code"]
+file_name: "tailwind-rules.md"
+is_featured: false
+order: 14
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# Tailwind CSS Rules
+
+## Utility Organization
+
+Order utilities consistently:
+1. Layout (display, position, float)
+2. Sizing (width, height, padding, margin)
+3. Typography (font, text, leading)
+4. Visual (background, border, shadow, opacity)
+5. Interactive (cursor, pointer-events, transitions)
+6. Responsive variants last
+
+## Component Extraction
+
+Extract to a component when:
+- Same utility combination appears 3+ times
+- The combination is logically meaningful
+- It's used across multiple files
+
+Don't extract just to be DRY — repetition in utility classes is acceptable.
+
+## Responsive Design
+
+- Mobile-first: base styles are mobile, add `sm:`, `md:`, `lg:` for larger screens
+- Test at 320px, 768px, 1024px, 1280px breakpoints
+- Don't use `max-sm:` or `max-md:` — use min-width breakpoints
+
+## Dark Mode
+
+- Use CSS variables for theme colors, not `dark:` prefix in every class
+- Define design tokens in `@theme` or `:root`
+
+## Custom Values
+
+- Use `[]` arbitrary values sparingly: `w-[137px]` is a red flag
+- If you need it more than once, add it to `theme.extend`
+- Prefer named spacing steps over magic numbers
+
+## Performance
+
+- PurgeCSS (built into Tailwind v3+) removes unused classes automatically
+- Don't use string concatenation for class names — they won't be purged
+- Safe pattern: `cn('base-class', condition && 'conditional-class')`

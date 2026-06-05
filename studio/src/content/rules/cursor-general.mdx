@@ -1,0 +1,50 @@
+---
+name: "Cursor General Rules"
+description: "General Cursor Rules for consistent AI-assisted coding — code style, naming, and behavior guidelines."
+rule_type: "cursor"
+category: ["general"]
+tags: ["cursor", "general", "coding", "style"]
+platform: ["codex"]
+file_name: "cursor-general.md"
+is_featured: false
+order: 9
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# Cursor General Rules
+
+## Code Style
+
+- Use consistent indentation (2 spaces for JS/TS, 4 for Python)
+- Meaningful variable names — no single letter variables except loop counters
+- No magic numbers — use named constants
+- No commented-out code in commits
+
+## Behavior
+
+- Don't make assumptions about intent — ask if unclear
+- Show complete files when making multiple changes, not just diffs
+- Prefer editing existing patterns over introducing new ones
+- Test your changes mentally before presenting
+
+## Communication
+
+- Explain significant changes before implementing
+- When multiple approaches exist, present options with trade-offs
+- Flag potential breaking changes explicitly
+- Don't silently change things outside the requested scope
+
+## File Operations
+
+- Never delete files without explicit instruction
+- Preserve existing comments unless specifically asked to remove
+- Maintain existing code style even if you'd do it differently
+- Don't reformat code unrelated to the task
+
+## Error Handling
+
+- Don't swallow exceptions silently
+- Provide meaningful error messages with context
+- Add logging for debugging complex operations
+- Validate inputs at function entry points

@@ -1,0 +1,29 @@
+---
+name: "Fetch MCP"
+description: "Let Claude fetch any URL and convert web pages to Markdown — extract content from articles, documentation, and APIs."
+category: ["web", "utility"]
+tags: ["fetch", "http", "web", "scraping", "markdown"]
+platform: ["claude-code", "codex", "gemini-cli"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-fetch"
+config_snippet:
+  mcpServers:
+    fetch:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-fetch"]
+is_featured: false
+order: 9
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+The Fetch MCP server allows Claude to retrieve and convert web content to Markdown. It handles HTML-to-text conversion, handles pagination, and respects robots.txt.
+
+## Use Cases
+
+- **Documentation Fetching**: Pull in API docs or library references
+- **Article Summarization**: Fetch and summarize web articles
+- **API Testing**: Make HTTP requests and process responses
+- **Research**: Gather information from multiple web sources

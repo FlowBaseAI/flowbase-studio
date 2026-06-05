@@ -1,0 +1,56 @@
+---
+name: "React Rules"
+description: "Modern React best practices — hooks, performance, component design, and patterns for maintainable React applications."
+rule_type: "claude"
+category: ["react"]
+tags: ["react", "hooks", "components", "performance", "jsx"]
+platform: ["claude-code", "codex"]
+file_name: "react-rules.md"
+is_featured: false
+order: 4
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# React Rules
+
+## Components
+
+- One component per file
+- Function components only — no class components
+- Component names in PascalCase
+- Keep components under 200 lines — extract if larger
+- Separate presentation from logic (custom hooks for logic)
+
+## Hooks
+
+- Never call hooks conditionally or in loops
+- Custom hooks start with `use` prefix
+- `useEffect` dependencies must be complete and accurate
+- Prefer `useReducer` over multiple related `useState` calls
+- `useMemo` and `useCallback` only when profiling shows a benefit
+
+## State Management
+
+- Lift state to the lowest common ancestor
+- Prefer local state — don't reach for global state first
+- Colocate state with the component that owns it
+- Avoid prop drilling beyond 2 levels — use context or composition
+
+## Performance
+
+- Key prop on list items must be stable and unique (not index)
+- `React.memo` for components that render frequently with same props
+- Avoid creating objects/functions in render — they cause re-renders
+- Lazy load heavy components with `React.lazy`
+
+## Event Handling
+
+- Name handlers `handle{Event}`: `handleClick`, `handleSubmit`
+- Never inline arrow functions in JSX for performance-sensitive lists
+
+## TypeScript
+
+- Type component props explicitly — no implicit any
+- Use `React.FC` sparingly — just type the function directly
+- `ReactNode` for children prop type

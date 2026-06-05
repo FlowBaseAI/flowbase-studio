@@ -1,0 +1,54 @@
+---
+name: "Cursor TypeScript Rules"
+description: "TypeScript-specific Cursor Rules — strict typing, modern patterns, and TypeScript best practices for Cursor users."
+rule_type: "cursor"
+category: ["typescript"]
+tags: ["cursor", "typescript", "types", "strict"]
+platform: ["codex"]
+file_name: "cursor-typescript.md"
+is_featured: false
+order: 10
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# Cursor TypeScript Rules
+
+## Strictness
+
+- Always work with `strict: true` — never weaken it
+- Resolve all TypeScript errors before completing a task
+- No `@ts-ignore` or `@ts-expect-error` without comment explaining why
+- Prefer compile-time errors over runtime errors
+
+## Type Definitions
+
+- Export types that are used across files
+- Co-locate types with their primary usage
+- Use descriptive type names: `UserId` not `id`, `ApiResponse<T>` not `Response`
+- Document complex generic types with JSDoc
+
+## Patterns to Follow
+
+```typescript
+// Prefer
+const config = { port: 3000 } as const
+type Config = typeof config
+
+// Over
+const config: { port: number } = { port: 3000 }
+```
+
+```typescript
+// Prefer discriminated unions
+type Result<T> = { ok: true; data: T } | { ok: false; error: string }
+
+// Over throwing exceptions for expected failures
+```
+
+## Code Generation Guidelines
+
+- Generate types before implementation
+- Use `zod` for runtime validation + TypeScript type inference
+- Prefer `satisfies` over `as` for type checking
+- Use template literal types for string validation patterns

@@ -1,0 +1,56 @@
+---
+name: "Astro Rules"
+description: "Best practices for Astro projects — Islands architecture, Content Collections, performance, and component patterns."
+rule_type: "claude"
+category: ["astro"]
+tags: ["astro", "islands", "performance", "ssg", "ssr"]
+platform: ["claude-code"]
+file_name: "astro-rules.md"
+is_featured: true
+order: 3
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# Astro Rules
+
+## Architecture
+
+- Default to `.astro` components — they ship zero JS
+- Only use framework components (React, Preact, Svelte) when interactivity is needed
+- Use `client:load` sparingly — prefer `client:visible` or `client:idle`
+- Keep Islands as small and self-contained as possible
+- Data fetching belongs in `.astro` frontmatter, not in client components
+
+## Content Collections
+
+- Always define schemas with `z` from `astro:content`
+- Use `getCollection()` for type-safe data access
+- Keep content in `/src/content/` — never in `/public/`
+- Use MDX for content that needs components, `.md` for pure text
+
+## Performance
+
+- All images via `<Image>` component from `astro:assets` for optimization
+- Fonts via `preconnect` and `font-display: swap`
+- No unused JavaScript — use the Network tab to verify
+- Prefer static generation (`output: 'static'`) unless SSR is truly needed
+
+## Component Patterns
+
+- Props interface using TypeScript interface in frontmatter
+- Slot default content for optional slots
+- Use `Astro.props` — never destructure props in script tag
+- `define:vars` for passing server data to inline scripts
+
+## Routing
+
+- File-based routing — keep page files thin
+- Dynamic routes use `getStaticPaths()` for static generation
+- API routes in `/src/pages/api/` with proper HTTP method handling
+
+## Styling
+
+- Scoped styles by default in `.astro` components
+- Global styles only for reset, custom properties, and typography
+- Tailwind utility classes preferred over component-scoped CSS

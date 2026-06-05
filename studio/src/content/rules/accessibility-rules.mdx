@@ -1,0 +1,61 @@
+---
+name: "Accessibility Rules"
+description: "WCAG 2.1 AA compliance rules — semantic HTML, keyboard navigation, ARIA, color contrast, and screen reader support."
+rule_type: "claude"
+category: ["react", "astro"]
+tags: ["accessibility", "a11y", "wcag", "aria", "inclusive"]
+platform: ["claude-code"]
+file_name: "accessibility-rules.md"
+is_featured: false
+order: 19
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# Accessibility Rules
+
+## Semantic HTML
+
+- Use appropriate HTML elements — `<button>` not `<div onClick>`
+- Heading hierarchy: H1 → H2 → H3, never skip levels
+- `<main>`, `<nav>`, `<aside>`, `<footer>` landmarks
+- `<ul>`/`<ol>` for lists, not repeated `<div>`s
+- Form `<label>` associated with every input
+
+## Keyboard Navigation
+
+- All interactive elements keyboard accessible
+- Visible focus indicator on all focusable elements
+- Tab order follows visual reading order
+- Escape key closes modals and dropdowns
+- No keyboard traps (users can always tab out)
+
+## ARIA
+
+- ARIA only when semantic HTML can't solve it
+- `aria-label` for elements with no visible text
+- `aria-describedby` for additional context
+- `role="dialog"` with `aria-modal="true"` for modals
+- `aria-live` for dynamic content announcements
+- `aria-expanded` for toggleable content
+
+## Images & Media
+
+- Descriptive `alt` text for informative images
+- Empty `alt=""` for decorative images
+- Captions for all video content
+- Audio descriptions for video with visual-only information
+
+## Color & Contrast
+
+- Text contrast ratio: 4.5:1 minimum (7:1 for AAA)
+- Large text (18pt/14pt bold): 3:1 minimum
+- Never use color alone to convey information
+- Test in grayscale
+
+## Forms
+
+- Clear error messages that identify the field and the issue
+- Required fields indicated visually and programmatically
+- Group related fields with `<fieldset>` and `<legend>`
+- Autocomplete attributes on personal info fields

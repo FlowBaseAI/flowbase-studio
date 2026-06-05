@@ -1,0 +1,29 @@
+---
+name: "Memory MCP"
+description: "Give Claude persistent memory across conversations — store facts, preferences, and context that survive session resets."
+category: ["utility", "ai"]
+tags: ["memory", "persistence", "context", "knowledge-graph"]
+platform: ["claude-code"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-memory"
+config_snippet:
+  mcpServers:
+    memory:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-memory"]
+is_featured: false
+order: 8
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+The Memory MCP server provides Claude with a persistent knowledge graph that survives across sessions. Claude can store and retrieve facts, relationships, and preferences automatically.
+
+## Use Cases
+
+- **User Preferences**: Remember user settings and preferences
+- **Project Context**: Maintain context about long-running projects
+- **Knowledge Building**: Build up domain knowledge incrementally
+- **Personalization**: Make Claude's responses more personalized over time

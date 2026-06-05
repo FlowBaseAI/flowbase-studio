@@ -1,0 +1,29 @@
+---
+name: "Google Drive MCP"
+description: "Connect Claude to Google Drive — read documents, spreadsheets, and files from your Drive without downloading them."
+category: ["productivity", "storage"]
+tags: ["google", "drive", "docs", "sheets", "cloud"]
+platform: ["claude-code"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-gdrive"
+config_snippet:
+  mcpServers:
+    gdrive:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-gdrive"]
+is_featured: false
+order: 12
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+Google Drive MCP lets Claude read and search your Google Drive files including Docs, Sheets, and Slides. Claude can analyze documents, extract data from spreadsheets, and summarize files.
+
+## Use Cases
+
+- **Document Analysis**: Analyze and summarize Google Docs
+- **Spreadsheet Insights**: Extract insights from Google Sheets
+- **File Search**: Find files by content across your Drive
+- **Report Generation**: Generate reports based on Drive data

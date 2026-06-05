@@ -1,0 +1,44 @@
+---
+name: "PostgreSQL MCP"
+description: "Connect Claude Code to your PostgreSQL database — run queries, inspect schemas, and manage data with natural language."
+category: ["database"]
+tags: ["postgresql", "database", "sql", "postgres"]
+platform: ["claude-code", "codex"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-postgres"
+config_snippet:
+  mcpServers:
+    postgres:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-postgres", "postgresql://localhost/mydb"]
+is_featured: false
+order: 5
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+The PostgreSQL MCP server provides Claude with direct access to your PostgreSQL database. Claude can inspect table schemas, run read-only queries, and help you understand your data structure.
+
+## Use Cases
+
+- **Schema Exploration**: Understand database structure instantly
+- **Query Generation**: Generate complex SQL from natural language
+- **Data Analysis**: Analyze and summarize your data
+- **Migration Help**: Get Claude to review and suggest migrations
+
+## Configuration
+
+Provide your PostgreSQL connection string as an argument.
+
+```json
+{
+  "mcpServers": {
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://user:pass@localhost/dbname"]
+    }
+  }
+}
+```

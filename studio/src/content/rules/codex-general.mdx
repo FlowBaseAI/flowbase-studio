@@ -1,0 +1,55 @@
+---
+name: "Codex General Rules"
+description: "OpenAI Codex rules for consistent AI-assisted coding — code quality, completions, and best practices."
+rule_type: "codex"
+category: ["general"]
+tags: ["codex", "openai", "general", "coding"]
+platform: ["codex"]
+file_name: "codex-general.md"
+is_featured: false
+order: 13
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# Codex General Rules
+
+## Code Quality
+
+- Write clean, readable code over clever code
+- Self-documenting code: names explain intent
+- Functions should do one thing
+- Keep functions under 40 lines
+- Cyclomatic complexity under 10
+
+## Completions
+
+- Complete the task as specified — don't add unrequested features
+- Match the code style of the surrounding context
+- If the existing code uses a pattern, continue it
+- Don't change indentation or formatting of untouched code
+
+## Documentation
+
+- Docstrings for all public functions and classes
+- Inline comments only for non-obvious logic
+- Examples in docstrings for complex functions
+
+## Testing
+
+- Write tests alongside new code when requested
+- Unit test edge cases, not just happy path
+- Test names describe what they test
+
+## Security
+
+- Sanitize all inputs
+- Use environment variables for secrets
+- Never log sensitive data
+- Validate data types before processing
+
+## Dependencies
+
+- Prefer standard library over third-party when reasonable
+- Check license compatibility before adding dependencies
+- Pin dependency versions in production

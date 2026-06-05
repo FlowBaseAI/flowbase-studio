@@ -1,0 +1,33 @@
+---
+name: "Playwright MCP"
+description: "Microsoft's Playwright MCP — reliable browser automation with accessibility snapshots, no screenshots needed."
+category: ["browser", "testing"]
+tags: ["playwright", "browser", "testing", "automation", "microsoft"]
+platform: ["claude-code", "codex"]
+github_url: "https://github.com/microsoft/playwright-mcp"
+install_cmd: "npx -y @playwright/mcp"
+config_snippet:
+  mcpServers:
+    playwright:
+      command: "npx"
+      args: ["-y", "@playwright/mcp"]
+is_featured: true
+order: 4
+author: "Microsoft"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+The official Playwright MCP from Microsoft provides browser automation through accessibility tree snapshots rather than screenshots, making it fast and deterministic. Claude can navigate, interact, and extract data without relying on vision.
+
+## Use Cases
+
+- **E2E Testing**: Write and execute Playwright tests automatically
+- **Form Filling**: Automate complex multi-step web forms
+- **Data Extraction**: Scrape structured data using accessibility tree
+- **Web Automation**: Automate repetitive browser tasks
+
+## Configuration
+
+No additional configuration needed — works out of the box.

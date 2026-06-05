@@ -1,0 +1,50 @@
+---
+name: "FlowBase General Rules"
+description: "General-purpose Claude Code rules for professional software development — code quality, communication, and decision-making."
+rule_type: "claude"
+category: ["general"]
+tags: ["general", "best-practices", "quality", "professional"]
+platform: ["claude-code"]
+file_name: "flowbase-rules.md"
+is_featured: true
+order: 1
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# FlowBase General Rules
+
+## Code Quality
+
+- Write code that is correct first, then clear, then efficient
+- Prefer explicit over implicit
+- Don't add features, abstractions, or error handling beyond what was asked
+- Three similar lines is better than a premature abstraction
+- No half-finished implementations
+
+## Communication
+
+- Be direct and concise — no unnecessary preamble
+- State what you're doing before you do it
+- Report blockers immediately, don't work around them silently
+- When uncertain, ask a targeted question rather than guessing
+
+## Decision Making
+
+- Prefer the simplest solution that solves the problem
+- When choosing between approaches, state trade-offs explicitly
+- Default to established conventions in the codebase
+- Don't introduce new dependencies unless clearly justified
+
+## Comments
+
+- Default to no comments
+- Only add comments for non-obvious WHY, not obvious WHAT
+- Never write comments that describe what the code clearly shows
+
+## Security
+
+- Never hardcode secrets or credentials
+- Validate all user input at system boundaries
+- Use parameterized queries — never string concatenation for SQL
+- Never log sensitive data (passwords, tokens, PII)

@@ -1,0 +1,60 @@
+---
+name: "Git Workflow Rules"
+description: "Git workflow standards — branching, commits, PR processes, and version management for teams."
+rule_type: "claude"
+category: ["general"]
+tags: ["git", "workflow", "branching", "commits", "pr"]
+platform: ["claude-code"]
+file_name: "git-rules.md"
+is_featured: false
+order: 15
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# Git Workflow Rules
+
+## Branching
+
+- `main`: Always deployable — no direct pushes
+- `feat/description`: New features
+- `fix/description`: Bug fixes
+- `docs/description`: Documentation only
+- `refactor/description`: Code restructure
+- Branch names: lowercase, hyphen-separated, under 50 chars
+
+## Commits
+
+Follow Conventional Commits:
+```
+feat(scope): short description
+fix(scope): short description
+docs: update README
+```
+
+- One logical change per commit
+- Present tense, imperative mood: "Add feature" not "Added feature"
+- Reference issues: `Closes #123`
+- Breaking changes: `feat!:` or `BREAKING CHANGE:` footer
+
+## Pull Requests
+
+- PR title follows Conventional Commits format
+- Description: what changed, why, how to test
+- Link related issues
+- Self-review before requesting reviews
+- Keep PRs under 400 lines changed — split larger changes
+
+## Code Review
+
+- Review for correctness, not style (let linters handle style)
+- Approve means: I've read this, it's correct, I'd be comfortable maintaining it
+- Request changes for correctness issues
+- Leave suggestions for non-blocking improvements
+
+## Merging
+
+- Squash merge for feature branches (clean history)
+- Merge commit for long-lived branches
+- Rebase for keeping up with main on feature branches
+- Delete branches after merging

@@ -1,0 +1,62 @@
+---
+name: "FastAPI Rules"
+description: "Best practices for FastAPI projects — routing, validation, authentication, and async patterns."
+rule_type: "claude"
+category: ["python"]
+tags: ["fastapi", "python", "api", "async", "pydantic"]
+platform: ["claude-code"]
+file_name: "fastapi-rules.md"
+is_featured: false
+order: 11
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# FastAPI Rules
+
+## Project Structure
+
+```
+app/
+  main.py          # App factory
+  routers/         # Route handlers by domain
+  models/          # SQLAlchemy models
+  schemas/         # Pydantic schemas
+  services/        # Business logic
+  dependencies/    # FastAPI dependencies
+  core/            # Config, security, database
+```
+
+## Routing
+
+- Group related endpoints in routers with prefix and tags
+- Use proper HTTP methods — don't use POST for everything
+- Version APIs in the URL: `/v1/users`
+- Return appropriate status codes with `status_code` param
+
+## Pydantic Schemas
+
+- Separate request/response schemas (don't reuse)
+- `BaseModel` for all data transfer
+- Strict validation — never skip it
+- Use `model_validator` for cross-field validation
+
+## Async
+
+- Use `async def` for I/O-bound endpoints
+- Use `def` for CPU-bound operations (they run in thread pool)
+- Never use `time.sleep` in async — use `asyncio.sleep`
+- Database operations must be awaited
+
+## Security
+
+- Use `OAuth2PasswordBearer` for auth dependencies
+- Hash passwords with `bcrypt` — never store plain text
+- JWT tokens with expiration — check in dependency
+- Rate limit sensitive endpoints
+
+## Dependencies
+
+- Dependency injection for database sessions, auth users, pagination
+- `Depends()` for reusable logic — not copy-pasted code
+- Background tasks for fire-and-forget operations

@@ -1,0 +1,35 @@
+---
+name: "MySQL MCP"
+description: "Connect Claude to MySQL databases — inspect schemas, run queries, and analyze relational data with natural language."
+category: ["database"]
+tags: ["mysql", "database", "sql", "relational"]
+platform: ["claude-code"]
+github_url: "https://github.com/benborla/mcp-server-mysql"
+install_cmd: "npx -y mcp-server-mysql"
+config_snippet:
+  mcpServers:
+    mysql:
+      command: "npx"
+      args: ["-y", "mcp-server-mysql"]
+      env:
+        MYSQL_HOST: "localhost"
+        MYSQL_PORT: "3306"
+        MYSQL_USER: "root"
+        MYSQL_PASSWORD: "password"
+        MYSQL_DATABASE: "mydb"
+is_featured: false
+order: 19
+author: "Community"
+updated_at: "2025-01-01"
+---
+
+## Overview
+
+MySQL MCP server provides Claude with access to MySQL and MariaDB databases, enabling schema inspection, query generation, and data analysis.
+
+## Use Cases
+
+- **Database Documentation**: Auto-generate schema documentation
+- **Query Optimization**: Get query improvement suggestions
+- **Data Exploration**: Analyze and understand your data
+- **Migration Planning**: Plan and review schema migrations

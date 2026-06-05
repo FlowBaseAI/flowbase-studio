@@ -1,0 +1,59 @@
+---
+name: "Python Rules"
+description: "Pythonic code standards — PEP 8, type hints, modern patterns, and best practices for clean Python projects."
+rule_type: "claude"
+category: ["python"]
+tags: ["python", "pep8", "type-hints", "clean-code"]
+platform: ["claude-code", "codex"]
+file_name: "python-rules.md"
+is_featured: false
+order: 6
+author: "FlowBase"
+updated_at: "2025-01-01"
+---
+
+# Python Rules
+
+## Style (PEP 8)
+
+- 4 spaces indentation — never tabs
+- Max line length: 88 characters (Black default)
+- Two blank lines between top-level definitions
+- One blank line between methods
+- Use `black` for formatting, `ruff` for linting
+
+## Type Hints
+
+- Type all function signatures (parameters + return type)
+- Use `from __future__ import annotations` for forward references
+- Prefer `X | None` over `Optional[X]` (Python 3.10+)
+- Use `list[str]` not `List[str]` (Python 3.9+)
+- `Any` only as last resort with comment explaining why
+
+## Modern Patterns
+
+- f-strings over `.format()` or `%` formatting
+- Walrus operator `:=` for assignment expressions
+- Match statements over long if/elif chains (Python 3.10+)
+- `dataclasses` or `pydantic` over raw dicts for structured data
+- Context managers for all resource management
+
+## Functions
+
+- Small functions with single responsibility
+- Default arguments are evaluated once — never mutable defaults
+- `*args` and `**kwargs` only when truly variable
+- Prefer keyword arguments for clarity when > 3 params
+
+## Error Handling
+
+- Catch specific exceptions — never bare `except:`
+- Use `contextlib.suppress` for expected, ignorable errors
+- Custom exceptions inherit from appropriate base class
+- Include helpful error messages with context
+
+## Project Structure
+
+- `pyproject.toml` for all project metadata
+- `src/` layout for installable packages
+- `__init__.py` only when needed (not for namespace packages)

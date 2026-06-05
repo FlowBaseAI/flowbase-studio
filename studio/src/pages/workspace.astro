@@ -1,6 +1,6 @@
 ---
 import Layout from '../components/layout/Layout.astro'
-import { getCollection } from 'astro:content'
+import { getCollection, render } from 'astro:content'
 
 const mcps = await getCollection('mcp')
 const skills = await getCollection('skills')
@@ -10,7 +10,7 @@ const sortedMcps = mcps.sort((a, b) => a.data.order - b.data.order)
 const sortedSkills = skills.sort((a, b) => a.data.order - b.data.order)
 const sortedRules = rules.sort((a, b) => a.data.order - b.data.order)
 
-// Serialize all data for client-side use
+// Full data with body content for real export
 const mcpData = sortedMcps.map(m => ({
   slug: m.id,
   name: m.data.name,
@@ -22,6 +22,18 @@ const mcpData = sortedMcps.map(m => ({
   is_featured: m.data.is_featured,
 }))
 
+// Render skill/rule bodies for real file content export
+const skillBodies: Record<string, string> = {}
+for (const s of sortedSkills) {
+  const { body } = await render(s)
+  skillBodies[s.id] = body ?? ''
+}
+const ruleBodies: Record<string, string> = {}
+for (const r of sortedRules) {
+  const { body } = await render(r)
+  ruleBodies[r.id] = body ?? ''
+}
+
 const skillData = sortedSkills.map(s => ({
   slug: s.id,
   name: s.data.name,
@@ -29,6 +41,7 @@ const skillData = sortedSkills.map(s => ({
   category: s.data.category,
   difficulty: s.data.difficulty,
   file_name: s.data.file_name,
+  body: skillBodies[s.id] ?? '',
 }))
 
 const ruleData = sortedRules.map(r => ({
@@ -38,42 +51,144 @@ const ruleData = sortedRules.map(r => ({
   category: r.data.category,
   rule_type: r.data.rule_type,
   file_name: r.data.file_name,
+  body: ruleBodies[r.id] ?? '',
 }))
+
+// Presets definition
+const presets = [
+  {
+    id: 'astro-blog',
+    icon: '🚀',
+    name: 'Astro Blog',
+    desc: '静态博客站点，完整 SEO 优化',
+    mcps: ['filesystem', 'brave-search'],
+    skills: ['seo-writer', 'blog-writer', 'proofreader'],
+    rules: ['astro-rules', 'typescript-rules', 'seo-rules'],
+    platform: 'claude-code',
+  },
+  {
+    id: 'seo-content-factory',
+    icon: '📈',
+    name: 'SEO Content Factory',
+    desc: '高产内容矩阵，搜索 + 写作 + 发布',
+    mcps: ['github', 'filesystem', 'brave-search'],
+    skills: ['seo-writer', 'research-agent', 'content-factory'],
+    rules: ['seo-rules', 'content-rules'],
+    platform: 'claude-code',
+  },
+  {
+    id: 'telegram-bot',
+    icon: '🤖',
+    name: 'Telegram Bot',
+    desc: 'AI 驱动的 Telegram 机器人',
+    mcps: ['telegram', 'filesystem', 'fetch'],
+    skills: ['prompt-engineer', 'summarizer'],
+    rules: ['python-rules', 'security-rules'],
+    platform: 'claude-code',
+  },
+  {
+    id: 'saas-starter',
+    icon: '💻',
+    name: 'SaaS Starter',
+    desc: '全栈 SaaS 应用基础配置',
+    mcps: ['github', 'postgresql', 'filesystem'],
+    skills: ['code-reviewer', 'test-writer', 'database-designer'],
+    rules: ['typescript-rules', 'react-rules', 'security-rules', 'testing-rules'],
+    platform: 'claude-code',
+  },
+  {
+    id: 'research-agent',
+    icon: '🔍',
+    name: 'Research Agent',
+    desc: '深度研究 + 数据分析工作流',
+    mcps: ['brave-search', 'exa', 'fetch', 'filesystem'],
+    skills: ['research-agent', 'web-researcher', 'data-analyst', 'summarizer'],
+    rules: ['flowbase-rules', 'content-rules'],
+    platform: 'claude-code',
+  },
+  {
+    id: 'docs-project',
+    icon: '📚',
+    name: 'Documentation Project',
+    desc: '技术文档写作与维护',
+    mcps: ['github', 'filesystem'],
+    skills: ['doc-writer', 'proofreader', 'summarizer'],
+    rules: ['astro-rules', 'typescript-rules', 'git-rules'],
+    platform: 'claude-code',
+  },
+]
 ---
 <Layout
   title="Workspace"
   description="Build your Claude Code project visually — select MCP, Skills, and Rules, then generate and download."
 >
+<div style="max-width: 1280px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem;">
+
+  <!-- Page header -->
+  <div style="margin-bottom: 1.5rem;">
+    <h1 style="font-size: 1.5rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.25rem; letter-spacing: -0.02em;">
+      Workspace
+    </h1>
+    <p style="font-size: 0.875rem; color: var(--color-text-muted); margin: 0;">
+      选择 MCP、Skills、Rules，点击 Export ZIP 获得完整 Claude Code 项目。
+    </p>
+  </div>
+
+  <!-- Presets strip -->
+  <div style="margin-bottom: 1.75rem;">
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+      <span style="font-size: 0.75rem; font-weight: 600; color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.06em;">
+        Popular Presets
+      </span>
+      <span style="font-size: 0.75rem; color: var(--color-text-subtle);">点击立即配置</span>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.625rem;">
+      {presets.map(preset => (
+        <button
+          class="preset-btn"
+          data-preset-id={preset.id}
+          style="
+            background: var(--color-surface); border: 1px solid var(--color-border);
+            border-radius: var(--radius-md); padding: 0.875rem 1rem;
+            text-align: left; cursor: pointer; font-family: inherit;
+            transition: border-color 0.15s, background 0.15s;
+            display: flex; flex-direction: column; gap: 0.25rem;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 1.125rem; line-height: 1;">{preset.icon}</span>
+            <span style="font-size: 0.875rem; font-weight: 600; color: var(--color-text);">{preset.name}</span>
+          </div>
+          <span style="font-size: 0.75rem; color: var(--color-text-subtle); line-height: 1.4;">{preset.desc}</span>
+          <div style="display: flex; gap: 0.25rem; margin-top: 0.25rem; flex-wrap: wrap;">
+            <span style="font-size: 0.625rem; color: var(--color-accent); background: var(--color-accent-subtle); padding: 0.1rem 0.35rem; border-radius: 3px;">{preset.mcps.length} MCP</span>
+            <span style="font-size: 0.625rem; color: var(--color-success); background: rgba(34,197,94,0.1); padding: 0.1rem 0.35rem; border-radius: 3px;">{preset.skills.length} Skills</span>
+            <span style="font-size: 0.625rem; color: var(--color-warning); background: rgba(245,158,11,0.1); padding: 0.1rem 0.35rem; border-radius: 3px;">{preset.rules.length} Rules</span>
+          </div>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Main workspace grid -->
   <div id="workspace-app" style="
-    max-width: 1280px; margin: 0 auto; padding: 1.5rem;
     display: grid; grid-template-columns: 1fr 380px; gap: 1.5rem;
-    min-height: calc(100vh - 56px - 80px);
     align-items: start;
   ">
 
     <!-- Left: Config panel -->
     <div style="display: flex; flex-direction: column; gap: 1.25rem;">
 
-      <!-- Header -->
-      <div>
-        <h1 style="font-size: 1.5rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.25rem; letter-spacing: -0.02em;">
-          Workspace
-        </h1>
-        <p style="font-size: 0.875rem; color: var(--color-text-muted); margin: 0;">
-          选择 MCP、Skills、Rules，点击 Generate 获得完整项目配置。
-        </p>
-      </div>
-
       <!-- Project Settings -->
       <div style="
         background: var(--color-surface); border: 1px solid var(--color-border);
         border-radius: var(--radius-md); padding: 1.25rem;
       ">
-        <h2 style="font-size: 0.8125rem; font-weight: 600; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 1rem;">
+        <h2 style="font-size: 0.75rem; font-weight: 600; color: var(--color-text-subtle); text-transform: uppercase; letter-spacing: 0.06em; margin: 0 0 1rem;">
           Project
         </h2>
-        <div style="display: flex; flex-direction: column; gap: 0.875rem;">
-          <div>
+        <div style="display: flex; gap: 1.25rem; flex-wrap: wrap; align-items: flex-end;">
+          <div style="flex: 1; min-width: 160px;">
             <label style="display:block;font-size:0.8125rem;color:var(--color-text-muted);margin-bottom:0.375rem;" for="project-name">
               Project Name
             </label>
@@ -94,7 +209,7 @@ const ruleData = sortedRules.map(r => ({
             <label style="display:block;font-size:0.8125rem;color:var(--color-text-muted);margin-bottom:0.5rem;">
               Platform
             </label>
-            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <div style="display: flex; gap: 0.625rem; flex-wrap: wrap;">
               {['claude-code', 'codex', 'gemini-cli'].map(p => (
                 <label style="display:flex;align-items:center;gap:0.375rem;cursor:pointer;">
                   <input
@@ -104,7 +219,7 @@ const ruleData = sortedRules.map(r => ({
                     checked={p === 'claude-code'}
                     style="accent-color: var(--color-accent); cursor: pointer;"
                   />
-                  <span style="font-size:0.875rem;color:var(--color-text-muted);">{p}</span>
+                  <span style="font-size:0.8125rem;color:var(--color-text-muted);">{p}</span>
                 </label>
               ))}
             </div>
@@ -113,92 +228,39 @@ const ruleData = sortedRules.map(r => ({
       </div>
 
       <!-- MCP Section -->
-      <div style="
-        background: var(--color-surface); border: 1px solid var(--color-border);
-        border-radius: var(--radius-md); overflow: hidden;
-      ">
-        <div style="
-          padding: 0.875rem 1.25rem;
-          border-bottom: 1px solid var(--color-border);
-          display: flex; align-items: center; justify-content: space-between;
-        ">
+      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden;">
+        <div style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between;">
           <div style="display:flex;align-items:center;gap:0.5rem;">
-            <h2 style="font-size:0.8125rem;font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin:0;">MCP</h2>
-            <span id="mcp-count" style="font-size:0.75rem;background:var(--color-accent-subtle);color:var(--color-accent);padding:0.1rem 0.4rem;border-radius:3px;">0</span>
+            <h2 style="font-size:0.75rem;font-weight:600;color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.06em;margin:0;">MCP Servers</h2>
+            <span id="mcp-count" style="font-size:0.7rem;background:var(--color-accent-subtle);color:var(--color-accent);padding:0.1rem 0.4rem;border-radius:3px;min-width:16px;text-align:center;">0</span>
           </div>
-          <input
-            id="mcp-search"
-            type="text"
-            placeholder="搜索 MCP..."
-            style="
-              background: var(--color-surface-2); border: 1px solid var(--color-border);
-              border-radius: var(--radius-sm); padding: 0.3rem 0.625rem;
-              font-size: 0.8125rem; color: var(--color-text); font-family: inherit;
-              outline: none; width: 160px; transition: border-color 0.15s;
-            "
-          />
+          <input id="mcp-search" type="text" placeholder="搜索..." style="background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:0.3rem 0.625rem;font-size:0.8125rem;color:var(--color-text);font-family:inherit;outline:none;width:140px;" />
         </div>
-        <div id="mcp-list" style="max-height: 280px; overflow-y: auto; padding: 0.5rem;">
-          <!-- populated by JS -->
-        </div>
+        <div id="mcp-list" style="max-height: 260px; overflow-y: auto; padding: 0.375rem;"></div>
       </div>
 
       <!-- Skills Section -->
-      <div style="
-        background: var(--color-surface); border: 1px solid var(--color-border);
-        border-radius: var(--radius-md); overflow: hidden;
-      ">
-        <div style="
-          padding: 0.875rem 1.25rem; border-bottom: 1px solid var(--color-border);
-          display: flex; align-items: center; justify-content: space-between;
-        ">
+      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden;">
+        <div style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between;">
           <div style="display:flex;align-items:center;gap:0.5rem;">
-            <h2 style="font-size:0.8125rem;font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin:0;">Skills</h2>
-            <span id="skill-count" style="font-size:0.75rem;background:var(--color-accent-subtle);color:var(--color-accent);padding:0.1rem 0.4rem;border-radius:3px;">0</span>
+            <h2 style="font-size:0.75rem;font-weight:600;color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.06em;margin:0;">Skills</h2>
+            <span id="skill-count" style="font-size:0.7rem;background:rgba(34,197,94,0.15);color:var(--color-success);padding:0.1rem 0.4rem;border-radius:3px;min-width:16px;text-align:center;">0</span>
           </div>
-          <input
-            id="skill-search"
-            type="text"
-            placeholder="搜索 Skills..."
-            style="
-              background: var(--color-surface-2); border: 1px solid var(--color-border);
-              border-radius: var(--radius-sm); padding: 0.3rem 0.625rem;
-              font-size: 0.8125rem; color: var(--color-text); font-family: inherit;
-              outline: none; width: 160px; transition: border-color 0.15s;
-            "
-          />
+          <input id="skill-search" type="text" placeholder="搜索..." style="background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:0.3rem 0.625rem;font-size:0.8125rem;color:var(--color-text);font-family:inherit;outline:none;width:140px;" />
         </div>
-        <div id="skill-list" style="max-height: 280px; overflow-y: auto; padding: 0.5rem;">
-        </div>
+        <div id="skill-list" style="max-height: 260px; overflow-y: auto; padding: 0.375rem;"></div>
       </div>
 
       <!-- Rules Section -->
-      <div style="
-        background: var(--color-surface); border: 1px solid var(--color-border);
-        border-radius: var(--radius-md); overflow: hidden;
-      ">
-        <div style="
-          padding: 0.875rem 1.25rem; border-bottom: 1px solid var(--color-border);
-          display: flex; align-items: center; justify-content: space-between;
-        ">
+      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden;">
+        <div style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between;">
           <div style="display:flex;align-items:center;gap:0.5rem;">
-            <h2 style="font-size:0.8125rem;font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin:0;">Rules</h2>
-            <span id="rule-count" style="font-size:0.75rem;background:var(--color-accent-subtle);color:var(--color-accent);padding:0.1rem 0.4rem;border-radius:3px;">0</span>
+            <h2 style="font-size:0.75rem;font-weight:600;color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.06em;margin:0;">Rules</h2>
+            <span id="rule-count" style="font-size:0.7rem;background:rgba(245,158,11,0.15);color:var(--color-warning);padding:0.1rem 0.4rem;border-radius:3px;min-width:16px;text-align:center;">0</span>
           </div>
-          <input
-            id="rule-search"
-            type="text"
-            placeholder="搜索 Rules..."
-            style="
-              background: var(--color-surface-2); border: 1px solid var(--color-border);
-              border-radius: var(--radius-sm); padding: 0.3rem 0.625rem;
-              font-size: 0.8125rem; color: var(--color-text); font-family: inherit;
-              outline: none; width: 160px; transition: border-color 0.15s;
-            "
-          />
+          <input id="rule-search" type="text" placeholder="搜索..." style="background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:0.3rem 0.625rem;font-size:0.8125rem;color:var(--color-text);font-family:inherit;outline:none;width:140px;" />
         </div>
-        <div id="rule-list" style="max-height: 280px; overflow-y: auto; padding: 0.5rem;">
-        </div>
+        <div id="rule-list" style="max-height: 260px; overflow-y: auto; padding: 0.375rem;"></div>
       </div>
 
     </div>
@@ -206,168 +268,175 @@ const ruleData = sortedRules.map(r => ({
     <!-- Right: Output panel -->
     <div style="position: sticky; top: 72px; display: flex; flex-direction: column; gap: 1rem;">
 
-      <div style="
-        background: var(--color-surface); border: 1px solid var(--color-border);
-        border-radius: var(--radius-md); overflow: hidden;
-      ">
-        <div style="padding: 0.875rem 1.25rem; border-bottom: 1px solid var(--color-border);">
-          <h2 style="font-size:0.8125rem;font-weight:600;color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin:0;">Output</h2>
-        </div>
-
-        <!-- File tree preview -->
-        <div id="file-tree" style="padding: 0.875rem 1.25rem; font-family: var(--font-mono); font-size: 0.8125rem;">
-          <div style="color: var(--color-text-muted); line-height: 1.8;">
-            <div id="tree-root" style="color: var(--color-text);">📁 <span id="tree-project-name">my-project</span>/</div>
-            <div style="padding-left: 1rem;">
-              <div style="color: var(--color-text-muted);">├── CLAUDE.md</div>
-              <div style="color: var(--color-text-muted);">├── .claude/</div>
-              <div style="padding-left: 1rem; color: var(--color-text-subtle);">└── settings.json</div>
-              <div id="tree-skills" style="display:none;">
-                <div style="color: var(--color-text-muted);">├── skills/</div>
-                <div id="tree-skills-list" style="padding-left: 1rem; color: var(--color-text-subtle);"></div>
-              </div>
-              <div id="tree-rules" style="display:none;">
-                <div style="color: var(--color-text-muted);">└── rules/</div>
-                <div id="tree-rules-list" style="padding-left: 1rem; color: var(--color-text-subtle);"></div>
-              </div>
-            </div>
+      <!-- Selected Resources -->
+      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden;">
+        <div style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between;">
+          <h2 style="font-size:0.75rem;font-weight:600;color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.06em;margin:0;">Selected Resources</h2>
+          <div style="display:flex;gap:0.375rem;" id="selection-badges">
+            <span id="badge-mcp" style="display:none;font-size:0.7rem;background:var(--color-accent-subtle);color:var(--color-accent);padding:0.1rem 0.5rem;border-radius:3px;"></span>
+            <span id="badge-skill" style="display:none;font-size:0.7rem;background:rgba(34,197,94,0.15);color:var(--color-success);padding:0.1rem 0.5rem;border-radius:3px;"></span>
+            <span id="badge-rule" style="display:none;font-size:0.7rem;background:rgba(245,158,11,0.15);color:var(--color-warning);padding:0.1rem 0.5rem;border-radius:3px;"></span>
           </div>
         </div>
-
-        <!-- Selected summary -->
-        <div id="selection-summary" style="
-          border-top: 1px solid var(--color-border);
-          padding: 0.875rem 1.25rem;
-          font-size: 0.8125rem; color: var(--color-text-subtle);
-          line-height: 1.6;
-        ">
-          未选择任何资源。
+        <div id="selected-resources" style="padding: 0.5rem; min-height: 60px; max-height: 200px; overflow-y: auto;">
+          <div id="no-selection-msg" style="padding: 0.75rem; text-align: center; font-size: 0.8125rem; color: var(--color-text-subtle);">
+            从左侧选择资源，或点击预设快速配置
+          </div>
         </div>
+      </div>
 
-        <!-- Action buttons -->
-        <div style="border-top: 1px solid var(--color-border); padding: 0.875rem 1.25rem; display: flex; flex-direction: column; gap: 0.5rem;">
-          <button
-            id="btn-download"
-            style="
-              width: 100%; background: var(--color-accent); color: white; border: none;
-              padding: 0.75rem; border-radius: var(--radius-sm);
-              font-size: 0.9rem; font-weight: 600; cursor: pointer;
-              font-family: inherit; transition: background 0.15s;
-              display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-            "
-          >
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
-            </svg>
-            Export ZIP
-          </button>
-          <button
-            id="btn-copy"
-            style="
-              width: 100%; background: var(--color-surface-2); color: var(--color-text-muted);
-              border: 1px solid var(--color-border); padding: 0.625rem;
-              border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 500;
-              cursor: pointer; font-family: inherit; transition: all 0.15s;
-              display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-            "
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <!-- Project Structure Preview -->
+      <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden;">
+        <div style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-border);">
+          <h2 style="font-size:0.75rem;font-weight:600;color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.06em;margin:0;">Project Structure</h2>
+        </div>
+        <div id="file-tree" style="padding: 0.875rem 1rem; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.75; color: var(--color-text-muted);">
+          <div style="color: var(--color-text); font-weight: 500;">📁 <span id="tree-project-name">my-project</span>/</div>
+          <div id="tree-body" style="padding-left: 1.25rem;"></div>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <button id="btn-download" style="
+          width: 100%; background: var(--color-accent); color: white; border: none;
+          padding: 0.8rem; border-radius: var(--radius-md);
+          font-size: 0.9375rem; font-weight: 600; cursor: pointer;
+          font-family: inherit; transition: background 0.15s;
+          display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+        ">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+          </svg>
+          Export ZIP
+        </button>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+          <button id="btn-copy" style="
+            background: var(--color-surface-2); color: var(--color-text-muted);
+            border: 1px solid var(--color-border); padding: 0.625rem 0.5rem;
+            border-radius: var(--radius-sm); font-size: 0.8125rem; font-weight: 500;
+            cursor: pointer; font-family: inherit; transition: all 0.15s;
+            display: flex; align-items: center; justify-content: center; gap: 0.375rem;
+          ">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
             </svg>
-            <span id="copy-label">Copy settings.json</span>
+            <span id="copy-label">Copy Config</span>
           </button>
-          <button
-            id="btn-reset"
-            style="
-              width: 100%; background: transparent; color: var(--color-text-subtle);
-              border: 1px solid transparent; padding: 0.4rem;
-              border-radius: var(--radius-sm); font-size: 0.8125rem;
-              cursor: pointer; font-family: inherit; transition: all 0.15s;
-            "
-          >
-            清除选择
+          <button id="btn-reset" style="
+            background: transparent; color: var(--color-text-subtle);
+            border: 1px solid var(--color-border); padding: 0.625rem 0.5rem;
+            border-radius: var(--radius-sm); font-size: 0.8125rem;
+            cursor: pointer; font-family: inherit; transition: all 0.15s;
+          ">
+            清除全部
           </button>
         </div>
       </div>
 
       <!-- Toast -->
       <div id="toast" style="
-        display: none;
-        background: var(--color-surface-2); border: 1px solid var(--color-border);
+        display: none; background: var(--color-surface-2); border: 1px solid var(--color-border);
         border-radius: var(--radius-md); padding: 0.75rem 1rem;
         font-size: 0.875rem; color: var(--color-text);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.4); animation: slideIn 0.2s ease;
       "></div>
 
     </div>
   </div>
+</div>
 </Layout>
 
-<script define:vars={{ mcpData, skillData, ruleData }}>
+<style>
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.preset-btn:hover {
+  border-color: var(--color-border-2) !important;
+  background: var(--color-surface-2) !important;
+}
+.preset-btn.active {
+  border-color: var(--color-accent) !important;
+  background: var(--color-accent-subtle) !important;
+}
+#project-name:focus, #mcp-search:focus, #skill-search:focus, #rule-search:focus {
+  border-color: var(--color-accent);
+}
+</style>
+
+<script define:vars={{ mcpData, skillData, ruleData, presets }}>
   // ---- State ----
-  const STORAGE_KEY = 'fbs:workspace:'
+  const SK = 'fbs:workspace:'
   function loadState() {
     try {
       return {
-        projectName: localStorage.getItem(STORAGE_KEY + 'projectName') ?? 'my-project',
-        platform: localStorage.getItem(STORAGE_KEY + 'platform') ?? 'claude-code',
-        selectedMcps: JSON.parse(localStorage.getItem(STORAGE_KEY + 'selectedMcps') ?? '[]'),
-        selectedSkills: JSON.parse(localStorage.getItem(STORAGE_KEY + 'selectedSkills') ?? '[]'),
-        selectedRules: JSON.parse(localStorage.getItem(STORAGE_KEY + 'selectedRules') ?? '[]'),
+        projectName: localStorage.getItem(SK + 'projectName') ?? 'my-project',
+        platform: localStorage.getItem(SK + 'platform') ?? 'claude-code',
+        selectedMcps: JSON.parse(localStorage.getItem(SK + 'selectedMcps') ?? '[]'),
+        selectedSkills: JSON.parse(localStorage.getItem(SK + 'selectedSkills') ?? '[]'),
+        selectedRules: JSON.parse(localStorage.getItem(SK + 'selectedRules') ?? '[]'),
       }
     } catch {
       return { projectName: 'my-project', platform: 'claude-code', selectedMcps: [], selectedSkills: [], selectedRules: [] }
     }
   }
   function saveState() {
-    localStorage.setItem(STORAGE_KEY + 'projectName', state.projectName)
-    localStorage.setItem(STORAGE_KEY + 'platform', state.platform)
-    localStorage.setItem(STORAGE_KEY + 'selectedMcps', JSON.stringify(state.selectedMcps))
-    localStorage.setItem(STORAGE_KEY + 'selectedSkills', JSON.stringify(state.selectedSkills))
-    localStorage.setItem(STORAGE_KEY + 'selectedRules', JSON.stringify(state.selectedRules))
+    localStorage.setItem(SK + 'projectName', state.projectName)
+    localStorage.setItem(SK + 'platform', state.platform)
+    localStorage.setItem(SK + 'selectedMcps', JSON.stringify(state.selectedMcps))
+    localStorage.setItem(SK + 'selectedSkills', JSON.stringify(state.selectedSkills))
+    localStorage.setItem(SK + 'selectedRules', JSON.stringify(state.selectedRules))
   }
 
   const state = loadState()
 
-  // ---- DOM refs ----
+  // ---- Init form ----
   const projectNameInput = document.getElementById('project-name')
   const platformRadios = document.querySelectorAll('input[name="platform"]')
-  const mcpList = document.getElementById('mcp-list')
-  const skillList = document.getElementById('skill-list')
-  const ruleList = document.getElementById('rule-list')
-  const mcpSearch = document.getElementById('mcp-search')
-  const skillSearch = document.getElementById('skill-search')
-  const ruleSearch = document.getElementById('rule-search')
-  const mcpCount = document.getElementById('mcp-count')
-  const skillCount = document.getElementById('skill-count')
-  const ruleCount = document.getElementById('rule-count')
-  const treeProjectName = document.getElementById('tree-project-name')
-  const treeSkills = document.getElementById('tree-skills')
-  const treeRules = document.getElementById('tree-rules')
-  const treeSkillsList = document.getElementById('tree-skills-list')
-  const treeRulesList = document.getElementById('tree-rules-list')
-  const selectionSummary = document.getElementById('selection-summary')
-  const toast = document.getElementById('toast')
-  const btnDownload = document.getElementById('btn-download')
-  const btnCopy = document.getElementById('btn-copy')
-  const btnReset = document.getElementById('btn-reset')
-  const copyLabel = document.getElementById('copy-label')
-
-  // ---- Init form ----
   if (projectNameInput) projectNameInput.value = state.projectName
   platformRadios.forEach(r => { if (r.value === state.platform) r.checked = true })
 
-  // ---- Render list ----
+  // ---- Preset buttons ----
+  document.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.presetId
+      const preset = presets.find(p => p.id === id)
+      if (!preset) return
+
+      // Merge (don't replace existing selections)
+      preset.mcps.forEach(slug => { if (!state.selectedMcps.includes(slug)) state.selectedMcps.push(slug) })
+      preset.skills.forEach(slug => { if (!state.selectedSkills.includes(slug)) state.selectedSkills.push(slug) })
+      preset.rules.forEach(slug => { if (!state.selectedRules.includes(slug)) state.selectedRules.push(slug) })
+      state.platform = preset.platform
+
+      // Update platform radio
+      platformRadios.forEach(r => { r.checked = r.value === preset.platform })
+
+      saveState()
+      renderAllLists()
+
+      // Flash active state
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'))
+      btn.classList.add('active')
+      setTimeout(() => btn.classList.remove('active'), 1500)
+
+      showToast(`✓ ${preset.icon} ${preset.name} 预设已应用`)
+    })
+  })
+
+  // ---- Render checklist item ----
   function renderCheckItem(slug, name, description, isSelected, type) {
     const div = document.createElement('div')
+    div.dataset.slug = slug
+    div.dataset.type = type
     div.style.cssText = `
-      display: flex; align-items: flex-start; gap: 0.625rem;
-      padding: 0.5rem 0.625rem; border-radius: 6px; cursor: pointer;
-      transition: background 0.1s;
+      display: flex; align-items: flex-start; gap: 0.5rem;
+      padding: 0.4rem 0.5rem; border-radius: 5px; cursor: pointer; transition: background 0.1s;
       ${isSelected ? 'background: var(--color-accent-subtle);' : ''}
     `
-    div.onmouseenter = () => { if (!div.querySelector('input').checked) div.style.background = 'var(--color-surface-2)' }
-    div.onmouseleave = () => { if (!div.querySelector('input').checked) div.style.background = '' }
+    div.onmouseenter = () => { if (!cb.checked) div.style.background = 'var(--color-surface-2)' }
+    div.onmouseleave = () => { if (!cb.checked) div.style.background = '' }
 
     const cb = document.createElement('input')
     cb.type = 'checkbox'
@@ -376,27 +445,16 @@ const ruleData = sortedRules.map(r => ({
 
     const info = document.createElement('div')
     info.style.cssText = 'flex: 1; min-width: 0;'
-
     const nameEl = document.createElement('div')
-    nameEl.style.cssText = 'font-size: 0.875rem; font-weight: 500; color: var(--color-text); line-height: 1.3;'
+    nameEl.style.cssText = 'font-size: 0.8125rem; font-weight: 500; color: var(--color-text); line-height: 1.3;'
     nameEl.textContent = name
-
     const descEl = document.createElement('div')
-    descEl.style.cssText = 'font-size: 0.75rem; color: var(--color-text-subtle); line-height: 1.4; margin-top: 0.125rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'
+    descEl.style.cssText = 'font-size: 0.7rem; color: var(--color-text-subtle); line-height: 1.3; margin-top: 0.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;'
     descEl.textContent = description
+    info.append(nameEl, descEl)
+    div.append(cb, info)
 
-    info.appendChild(nameEl)
-    info.appendChild(descEl)
-    div.appendChild(cb)
-    div.appendChild(info)
-
-    div.addEventListener('click', (e) => {
-      if (e.target === cb) return
-      cb.checked = !cb.checked
-      cb.dispatchEvent(new Event('change'))
-    })
-
-    cb.addEventListener('change', () => {
+    const toggle = () => {
       if (cb.checked) {
         if (type === 'mcp' && !state.selectedMcps.includes(slug)) state.selectedMcps.push(slug)
         if (type === 'skill' && !state.selectedSkills.includes(slug)) state.selectedSkills.push(slug)
@@ -410,66 +468,123 @@ const ruleData = sortedRules.map(r => ({
       }
       saveState()
       updateOutput()
-    })
+    }
 
+    div.addEventListener('click', e => { if (e.target !== cb) { cb.checked = !cb.checked; toggle() } })
+    cb.addEventListener('change', toggle)
     return div
   }
 
-  function renderList(containerId, items, selectedSlugs, type, searchQuery = '') {
+  function renderList(containerId, items, selectedSlugs, type, q = '') {
     const container = document.getElementById(containerId)
     if (!container) return
     container.innerHTML = ''
-    const q = searchQuery.toLowerCase()
-    const filtered = q
-      ? items.filter(i => i.name.toLowerCase().includes(q) || i.description.toLowerCase().includes(q))
-      : items
-    if (filtered.length === 0) {
-      container.innerHTML = `<div style="padding: 1rem; text-align: center; font-size: 0.8125rem; color: var(--color-text-subtle);">无匹配结果</div>`
+    const ql = q.toLowerCase()
+    const filtered = ql ? items.filter(i => i.name.toLowerCase().includes(ql) || i.description.toLowerCase().includes(ql)) : items
+    if (!filtered.length) {
+      container.innerHTML = `<div style="padding:0.75rem;text-align:center;font-size:0.8rem;color:var(--color-text-subtle);">无匹配结果</div>`
       return
     }
-    filtered.forEach(item => {
-      container.appendChild(renderCheckItem(item.slug, item.name, item.description, selectedSlugs.includes(item.slug), type))
-    })
+    filtered.forEach(item => container.appendChild(renderCheckItem(item.slug, item.name, item.description, selectedSlugs.includes(item.slug), type)))
   }
 
+  // ---- Output update ----
   function updateOutput() {
-    // counts
-    if (mcpCount) mcpCount.textContent = state.selectedMcps.length.toString()
-    if (skillCount) skillCount.textContent = state.selectedSkills.length.toString()
-    if (ruleCount) ruleCount.textContent = state.selectedRules.length.toString()
+    const selMcps = mcpData.filter(m => state.selectedMcps.includes(m.slug))
+    const selSkills = skillData.filter(s => state.selectedSkills.includes(s.slug))
+    const selRules = ruleData.filter(r => state.selectedRules.includes(r.slug))
 
-    // tree
-    if (treeProjectName) treeProjectName.textContent = state.projectName || 'my-project'
+    // Counts
+    const mcpCount = document.getElementById('mcp-count')
+    const skillCount = document.getElementById('skill-count')
+    const ruleCount = document.getElementById('rule-count')
+    if (mcpCount) mcpCount.textContent = state.selectedMcps.length
+    if (skillCount) skillCount.textContent = state.selectedSkills.length
+    if (ruleCount) ruleCount.textContent = state.selectedRules.length
 
-    const selectedSkillObjs = skillData.filter(s => state.selectedSkills.includes(s.slug))
-    const selectedRuleObjs = ruleData.filter(r => state.selectedRules.includes(r.slug))
+    // Badges
+    const badgeMcp = document.getElementById('badge-mcp')
+    const badgeSkill = document.getElementById('badge-skill')
+    const badgeRule = document.getElementById('badge-rule')
+    if (badgeMcp) { badgeMcp.textContent = `${state.selectedMcps.length} MCP`; badgeMcp.style.display = state.selectedMcps.length ? '' : 'none' }
+    if (badgeSkill) { badgeSkill.textContent = `${state.selectedSkills.length} Skills`; badgeSkill.style.display = state.selectedSkills.length ? '' : 'none' }
+    if (badgeRule) { badgeRule.textContent = `${state.selectedRules.length} Rules`; badgeRule.style.display = state.selectedRules.length ? '' : 'none' }
 
-    if (treeSkills) treeSkills.style.display = selectedSkillObjs.length ? '' : 'none'
-    if (treeRules) treeRules.style.display = selectedRuleObjs.length ? '' : 'none'
-
-    if (treeSkillsList) {
-      treeSkillsList.innerHTML = selectedSkillObjs.map((s, i) =>
-        `<div style="color:var(--color-text-subtle);">${i < selectedSkillObjs.length - 1 ? '├' : '└'}── ${s.file_name}</div>`
-      ).join('')
-    }
-    if (treeRulesList) {
-      treeRulesList.innerHTML = selectedRuleObjs.map((r, i) =>
-        `<div style="color:var(--color-text-subtle);">${i < selectedRuleObjs.length - 1 ? '├' : '└'}── ${r.file_name}</div>`
-      ).join('')
-    }
-
-    // summary
+    // Selected resources chips
+    const selResContainer = document.getElementById('selected-resources')
+    const noSelMsg = document.getElementById('no-selection-msg')
     const total = state.selectedMcps.length + state.selectedSkills.length + state.selectedRules.length
-    if (selectionSummary) {
+    if (selResContainer) {
+      selResContainer.innerHTML = ''
       if (total === 0) {
-        selectionSummary.textContent = '未选择任何资源。'
+        if (noSelMsg) selResContainer.appendChild(noSelMsg)
+        noSelMsg && (noSelMsg.style.display = '')
       } else {
-        selectionSummary.innerHTML = [
-          state.selectedMcps.length ? `<span style="color:var(--color-text);">${state.selectedMcps.length}</span> MCP` : '',
-          state.selectedSkills.length ? `<span style="color:var(--color-text);">${state.selectedSkills.length}</span> Skills` : '',
-          state.selectedRules.length ? `<span style="color:var(--color-text);">${state.selectedRules.length}</span> Rules` : '',
-        ].filter(Boolean).join(' · ') + ' 已选择'
+        const makeSection = (label, color, bg, items, removeType) => {
+          if (!items.length) return
+          const sec = document.createElement('div')
+          sec.style.cssText = 'margin-bottom: 0.375rem;'
+          const lbl = document.createElement('div')
+          lbl.style.cssText = `font-size: 0.625rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: ${color}; margin-bottom: 0.25rem; padding: 0 0.375rem;`
+          lbl.textContent = label
+          sec.appendChild(lbl)
+          const chips = document.createElement('div')
+          chips.style.cssText = 'display: flex; flex-wrap: wrap; gap: 0.25rem; padding: 0 0.25rem;'
+          items.forEach(item => {
+            const chip = document.createElement('div')
+            chip.style.cssText = `display: inline-flex; align-items: center; gap: 0.25rem; background: ${bg}; border-radius: 4px; padding: 0.2rem 0.5rem; font-size: 0.75rem; color: ${color};`
+            chip.innerHTML = `<span>${item.name}</span><button style="background:none;border:none;cursor:pointer;color:${color};padding:0;line-height:1;font-size:0.875rem;opacity:0.7;" title="移除">×</button>`
+            chip.querySelector('button').addEventListener('click', () => {
+              if (removeType === 'mcp') state.selectedMcps = state.selectedMcps.filter(s => s !== item.slug)
+              if (removeType === 'skill') state.selectedSkills = state.selectedSkills.filter(s => s !== item.slug)
+              if (removeType === 'rule') state.selectedRules = state.selectedRules.filter(s => s !== item.slug)
+              saveState()
+              renderAllLists()
+            })
+            chips.appendChild(chip)
+          })
+          sec.appendChild(chips)
+          selResContainer.appendChild(sec)
+        }
+        makeSection('MCP', 'var(--color-accent)', 'var(--color-accent-subtle)', selMcps, 'mcp')
+        makeSection('Skills', 'var(--color-success)', 'rgba(34,197,94,0.12)', selSkills, 'skill')
+        makeSection('Rules', 'var(--color-warning)', 'rgba(245,158,11,0.12)', selRules, 'rule')
       }
+    }
+
+    // File tree
+    const treeProjectName = document.getElementById('tree-project-name')
+    const treeBody = document.getElementById('tree-body')
+    if (treeProjectName) treeProjectName.textContent = state.projectName || 'my-project'
+    if (treeBody) {
+      const lines = []
+      const hasMcp = selMcps.length > 0
+      const hasSkills = selSkills.length > 0
+      const hasRules = selRules.length > 0
+      const items = [
+        { label: 'CLAUDE.md', always: true },
+        { label: 'README.md', always: true },
+        { label: '.claude/', always: true, children: ['settings.json'] },
+        hasSkills && { label: 'skills/', children: selSkills.map(s => s.file_name) },
+        hasRules && { label: 'rules/', children: selRules.map(r => r.file_name) },
+      ].filter(Boolean)
+
+      const mkLine = (text, isLast, indent = '') => {
+        const pre = indent + (isLast ? '└── ' : '├── ')
+        return `<div style="color:var(--color-text-muted);">${pre}${text}</div>`
+      }
+      const mkChildLine = (text, isLast) => mkLine(text, isLast, '    ')
+
+      items.forEach((item, idx) => {
+        const isLast = idx === items.length - 1
+        lines.push(mkLine(item.label, isLast && !item.children?.length))
+        if (item.children) {
+          item.children.forEach((child, ci) => {
+            lines.push(mkChildLine(child, ci === item.children.length - 1))
+          })
+        }
+      })
+      treeBody.innerHTML = lines.join('')
     }
   }
 
@@ -480,102 +595,122 @@ const ruleData = sortedRules.map(r => ({
     updateOutput()
   }
 
-  // ---- Event listeners ----
-  projectNameInput?.addEventListener('input', (e) => {
-    state.projectName = e.target.value
-    saveState()
-    updateOutput()
-  })
+  // ---- Form events ----
+  projectNameInput?.addEventListener('input', e => { state.projectName = e.target.value; saveState(); updateOutput() })
+  platformRadios.forEach(r => r.addEventListener('change', () => { state.platform = r.value; saveState() }))
+  document.getElementById('mcp-search')?.addEventListener('input', e => renderList('mcp-list', mcpData, state.selectedMcps, 'mcp', e.target.value))
+  document.getElementById('skill-search')?.addEventListener('input', e => renderList('skill-list', skillData, state.selectedSkills, 'skill', e.target.value))
+  document.getElementById('rule-search')?.addEventListener('input', e => renderList('rule-list', ruleData, state.selectedRules, 'rule', e.target.value))
 
-  platformRadios.forEach(r => {
-    r.addEventListener('change', () => {
-      state.platform = r.value
-      saveState()
-    })
-  })
-
-  mcpSearch?.addEventListener('input', (e) => renderList('mcp-list', mcpData, state.selectedMcps, 'mcp', e.target.value))
-  skillSearch?.addEventListener('input', (e) => renderList('skill-list', skillData, state.selectedSkills, 'skill', e.target.value))
-  ruleSearch?.addEventListener('input', (e) => renderList('rule-list', ruleData, state.selectedRules, 'rule', e.target.value))
-
-  // ---- Generate / Export ----
-  function generateFiles() {
+  // ---- Generate helpers ----
+  function buildProjectData() {
     const projectName = state.projectName || 'my-project'
-    const selectedMcpObjs = mcpData.filter(m => state.selectedMcps.includes(m.slug))
-    const selectedSkillObjs = skillData.filter(s => state.selectedSkills.includes(s.slug))
-    const selectedRuleObjs = ruleData.filter(r => state.selectedRules.includes(r.slug))
+    const selMcps = mcpData.filter(m => state.selectedMcps.includes(m.slug))
+    const selSkills = skillData.filter(s => state.selectedSkills.includes(s.slug))
+    const selRules = ruleData.filter(r => state.selectedRules.includes(r.slug))
 
-    // CLAUDE.md
     const claudeMd = [
       `# ${projectName}`,
       '',
-      '## Project Setup',
+      `> Platform: **${state.platform}**`,
+      `> Generated by [FlowBase Studio](https://flowbase.studio)`,
       '',
-      `**Platform:** ${state.platform}`,
+      '## Setup',
       '',
-      ...(selectedMcpObjs.length ? [
+      '```bash',
+      '# 1. Install MCP servers',
+      ...selMcps.map(m => `${m.install_cmd}`),
+      '',
+      '# 2. Apply settings',
+      'cp .claude/settings.json ~/.claude/settings.json',
+      '```',
+      '',
+      ...(selMcps.length ? [
         '## MCP Servers', '',
-        ...selectedMcpObjs.map(m => `- **${m.name}**: ${m.description}`),
+        ...selMcps.map(m => `### ${m.name}\n${m.description}\n\n**Install:** \`${m.install_cmd}\``),
         '',
       ] : []),
-      ...(selectedSkillObjs.length ? [
+      ...(selSkills.length ? [
         '## Skills', '',
-        ...selectedSkillObjs.map(s => `- \`skills/${s.file_name}\``),
+        ...selSkills.map(s => `- [\`skills/${s.file_name}\`](skills/${s.file_name}) — ${s.description}`),
         '',
       ] : []),
-      ...(selectedRuleObjs.length ? [
+      ...(selRules.length ? [
         '## Rules', '',
-        ...selectedRuleObjs.map(r => `- \`rules/${r.file_name}\``),
+        ...selRules.map(r => `- [\`rules/${r.file_name}\`](rules/${r.file_name}) — ${r.description}`),
         '',
       ] : []),
-      '> Generated by [FlowBase Studio](https://flowbase.studio)',
-      '',
     ].join('\n')
 
-    // settings.json
     const mcpServers = {}
-    for (const mcp of selectedMcpObjs) {
-      const snippet = mcp.config_snippet
-      if (snippet && snippet.mcpServers) {
-        Object.assign(mcpServers, snippet.mcpServers)
-      }
+    for (const mcp of selMcps) {
+      if (mcp.config_snippet?.mcpServers) Object.assign(mcpServers, mcp.config_snippet.mcpServers)
     }
-    const settings = { model: 'claude-opus-4-5', ...(Object.keys(mcpServers).length ? { mcpServers } : {}) }
+    const settings = {
+      model: 'claude-opus-4-5',
+      ...(Object.keys(mcpServers).length ? { mcpServers } : {}),
+    }
 
-    return { claudeMd, settings, selectedSkillObjs, selectedRuleObjs, projectName }
+    const readme = [
+      `# ${projectName}`,
+      '',
+      `> Built with [FlowBase Studio](https://flowbase.studio) — The Visual Workspace for Claude Code`,
+      '',
+      '## Quick Start',
+      '',
+      '1. Install MCP servers (see CLAUDE.md)',
+      '2. Copy `.claude/settings.json` to your Claude Code config directory',
+      '3. Place `skills/` and `rules/` folders in your project root',
+      '4. Open Claude Code — your configuration is ready',
+      '',
+      `## Stack`,
+      `- Platform: ${state.platform}`,
+      `- MCP: ${selMcps.map(m => m.name).join(', ') || 'none'}`,
+      `- Skills: ${selSkills.map(s => s.name).join(', ') || 'none'}`,
+      `- Rules: ${selRules.map(r => r.name).join(', ') || 'none'}`,
+    ].join('\n')
+
+    return { projectName, selMcps, selSkills, selRules, claudeMd, settings, readme }
   }
 
-  function showToast(msg, color = 'var(--color-success)') {
-    if (!toast) return
-    toast.textContent = msg
-    toast.style.display = 'block'
-    toast.style.borderColor = color === 'var(--color-success)' ? 'rgba(34,197,94,0.3)' : 'var(--color-border)'
-    toast.style.color = color
-    setTimeout(() => { toast.style.display = 'none' }, 3000)
+  function showToast(msg, success = true) {
+    const t = document.getElementById('toast')
+    if (!t) return
+    t.textContent = msg
+    t.style.display = 'block'
+    t.style.color = success ? 'var(--color-success)' : 'var(--color-text)'
+    t.style.borderColor = success ? 'rgba(34,197,94,0.3)' : 'var(--color-border)'
+    t.style.animation = 'none'
+    requestAnimationFrame(() => { t.style.animation = 'slideIn 0.2s ease' })
+    clearTimeout(t._timer)
+    t._timer = setTimeout(() => { t.style.display = 'none' }, 3000)
   }
 
-  btnDownload?.addEventListener('click', async () => {
+  // ---- Export ZIP ----
+  document.getElementById('btn-download')?.addEventListener('click', async () => {
     const { default: JSZip } = await import('jszip')
-    const { claudeMd, settings, selectedSkillObjs, selectedRuleObjs, projectName } = generateFiles()
+    const { projectName, selMcps, selSkills, selRules, claudeMd, settings, readme } = buildProjectData()
 
     const zip = new JSZip()
-    const folder = zip.folder(projectName)!
-    folder.file('CLAUDE.md', claudeMd)
+    const root = zip.folder(projectName)
 
-    const claudeDir = folder.folder('.claude')!
+    root.file('CLAUDE.md', claudeMd)
+    root.file('README.md', readme)
+
+    const claudeDir = root.folder('.claude')
     claudeDir.file('settings.json', JSON.stringify(settings, null, 2))
 
-    if (selectedSkillObjs.length) {
-      const skillsDir = folder.folder('skills')!
-      for (const s of selectedSkillObjs) {
-        skillsDir.file(s.file_name, `# ${s.name}\n\n${s.description}\n\n[See full skill at FlowBase Studio]`)
+    if (selSkills.length) {
+      const skillsDir = root.folder('skills')
+      for (const s of selSkills) {
+        skillsDir.file(s.file_name, s.body || `# ${s.name}\n\n${s.description}\n`)
       }
     }
 
-    if (selectedRuleObjs.length) {
-      const rulesDir = folder.folder('rules')!
-      for (const r of selectedRuleObjs) {
-        rulesDir.file(r.file_name, `# ${r.name}\n\n${r.description}\n\n[See full rule at FlowBase Studio]`)
+    if (selRules.length) {
+      const rulesDir = root.folder('rules')
+      for (const r of selRules) {
+        rulesDir.file(r.file_name, r.body || `# ${r.name}\n\n${r.description}\n`)
       }
     }
 
@@ -585,18 +720,20 @@ const ruleData = sortedRules.map(r => ({
     a.href = url; a.download = `${projectName}.zip`
     document.body.appendChild(a); a.click()
     document.body.removeChild(a); URL.revokeObjectURL(url)
-    showToast(`✓ ${projectName}.zip 下载成功`)
+    showToast(`✓ ${projectName}.zip 已下载 (${selMcps.length} MCP · ${selSkills.length} Skills · ${selRules.length} Rules)`)
   })
 
-  btnCopy?.addEventListener('click', async () => {
-    const { settings } = generateFiles()
+  // ---- Copy Config ----
+  document.getElementById('btn-copy')?.addEventListener('click', async () => {
+    const { settings } = buildProjectData()
     await navigator.clipboard.writeText(JSON.stringify(settings, null, 2))
-    if (copyLabel) copyLabel.textContent = '✓ 已复制'
-    setTimeout(() => { if (copyLabel) copyLabel.textContent = 'Copy settings.json' }, 2000)
+    const lbl = document.getElementById('copy-label')
+    if (lbl) { lbl.textContent = '✓ Copied!'; setTimeout(() => lbl.textContent = 'Copy Config', 2000) }
     showToast('✓ settings.json 已复制到剪贴板')
   })
 
-  btnReset?.addEventListener('click', () => {
+  // ---- Reset ----
+  document.getElementById('btn-reset')?.addEventListener('click', () => {
     state.selectedMcps = []
     state.selectedSkills = []
     state.selectedRules = []

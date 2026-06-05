@@ -1,0 +1,113 @@
+---
+import Layout from '../../components/layout/Layout.astro'
+import ResourceCard from '../../components/library/ResourceCard.astro'
+import { getCollection } from 'astro:content'
+
+const allMcps = await getCollection('mcp')
+const sorted = allMcps.sort((a, b) => a.data.order - b.data.order)
+
+const categories = [...new Set(sorted.flatMap(m => m.data.category))].sort()
+---
+<Layout title="MCP Library" description="Browse 20+ MCP servers for Claude Code — GitHub, Browser, Database, and more.">
+
+  <div style="max-width: 1280px; margin: 0 auto; padding: 3rem 1.5rem;">
+
+    <!-- Header -->
+    <div style="margin-bottom: 2.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+        <a href="/" style="color: var(--color-text-subtle); font-size: 0.8125rem; text-decoration: none;">Home</a>
+        <span style="color: var(--color-text-subtle);">/</span>
+        <span style="color: var(--color-text-muted); font-size: 0.8125rem;">MCP</span>
+      </div>
+      <h1 style="font-size: 1.875rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.5rem; letter-spacing: -0.02em;">
+        MCP Library
+      </h1>
+      <p style="color: var(--color-text-muted); margin: 0; font-size: 0.9375rem;">
+        {sorted.length} 个精选 MCP 服务 — 即选即用，一键添加到 Workspace。
+      </p>
+    </div>
+
+    <!-- Filter bar -->
+    <div style="
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    ">
+      <button
+        class="filter-btn active"
+        data-filter="all"
+        style="
+          padding: 0.3rem 0.75rem;
+          border-radius: 100px;
+          font-size: 0.8125rem;
+          cursor: pointer;
+          font-family: inherit;
+          transition: all 0.15s;
+          background: var(--color-accent); color: white; border: 1px solid var(--color-accent);
+        "
+      >全部</button>
+      {categories.map(cat => (
+        <button
+          class="filter-btn"
+          data-filter={cat}
+          style="
+            padding: 0.3rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.8125rem;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.15s;
+            background: transparent; color: var(--color-text-muted); border: 1px solid var(--color-border);
+          "
+        >{cat}</button>
+      ))}
+    </div>
+
+    <!-- Grid -->
+    <div id="mcp-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;">
+      {sorted.map(mcp => (
+        <div data-categories={mcp.data.category.join(',')}>
+          <ResourceCard
+            name={mcp.data.name}
+            description={mcp.data.description}
+            slug={mcp.id}
+            href={`/mcp/${mcp.id}`}
+            tags={mcp.data.tags.slice(0, 3)}
+            badge={mcp.data.is_featured ? 'Featured' : undefined}
+            badgeVariant="accent"
+            meta={mcp.data.author}
+          />
+        </div>
+      ))}
+    </div>
+
+  </div>
+</Layout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn')
+  const items = document.querySelectorAll<HTMLElement>('#mcp-grid > div[data-categories]')
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter!
+
+      buttons.forEach(b => {
+        if (b === btn) {
+          b.style.background = 'var(--color-accent)'
+          b.style.color = 'white'
+          b.style.borderColor = 'var(--color-accent)'
+        } else {
+          b.style.background = 'transparent'
+          b.style.color = 'var(--color-text-muted)'
+          b.style.borderColor = 'var(--color-border)'
+        }
+      })
+
+      items.forEach(item => {
+        const cats = item.dataset.categories?.split(',') ?? []
+        item.style.display = (filter === 'all' || cats.includes(filter)) ? '' : 'none'
+      })
+    })
+  })
+</script>

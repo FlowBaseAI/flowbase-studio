@@ -1,0 +1,135 @@
+---
+import Layout from '../../components/layout/Layout.astro'
+import ResourceCard from '../../components/library/ResourceCard.astro'
+import { getCollection } from 'astro:content'
+
+const allSkills = await getCollection('skills')
+const sorted = allSkills.sort((a, b) => a.data.order - b.data.order)
+
+const difficulties = ['beginner', 'intermediate', 'advanced']
+const categories = [...new Set(sorted.flatMap(s => s.data.category))].sort()
+
+const difficultyLabel: Record<string, string> = {
+  beginner: '入门',
+  intermediate: '进阶',
+  advanced: '高级',
+}
+
+const difficultyVariant: Record<string, 'success' | 'warning' | 'accent'> = {
+  beginner: 'success',
+  intermediate: 'warning',
+  advanced: 'accent',
+}
+---
+<Layout title="Skills Library" description="Browse 30+ Claude Code skills — SEO Writer, Research Agent, Code Reviewer, and more.">
+
+  <div style="max-width: 1280px; margin: 0 auto; padding: 3rem 1.5rem;">
+
+    <div style="margin-bottom: 2.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+        <a href="/" style="color: var(--color-text-subtle); font-size: 0.8125rem; text-decoration: none;">Home</a>
+        <span style="color: var(--color-text-subtle);">/</span>
+        <span style="color: var(--color-text-muted); font-size: 0.8125rem;">Skills</span>
+      </div>
+      <h1 style="font-size: 1.875rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.5rem; letter-spacing: -0.02em;">
+        Skills Library
+      </h1>
+      <p style="color: var(--color-text-muted); margin: 0; font-size: 0.9375rem;">
+        {sorted.length} 个精选 AI Agent Skills — 选配即可赋予 Claude 专业能力。
+      </p>
+    </div>
+
+    <!-- Filters -->
+    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
+      <span style="font-size: 0.75rem; color: var(--color-text-subtle); margin-right: 0.25rem;">难度：</span>
+      <button class="diff-btn active" data-diff="all" style="padding:0.3rem 0.75rem;border-radius:100px;font-size:0.8125rem;cursor:pointer;font-family:inherit;transition:all 0.15s;background:var(--color-accent);color:white;border:1px solid var(--color-accent);">全部</button>
+      {difficulties.map(d => (
+        <button class="diff-btn" data-diff={d} style="padding:0.3rem 0.75rem;border-radius:100px;font-size:0.8125rem;cursor:pointer;font-family:inherit;transition:all 0.15s;background:transparent;color:var(--color-text-muted);border:1px solid var(--color-border);">{difficultyLabel[d]}</button>
+      ))}
+    </div>
+    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap;">
+      <span style="font-size: 0.75rem; color: var(--color-text-subtle); margin-right: 0.25rem;">分类：</span>
+      <button class="cat-btn active" data-cat="all" style="padding:0.3rem 0.75rem;border-radius:100px;font-size:0.8125rem;cursor:pointer;font-family:inherit;transition:all 0.15s;background:var(--color-accent);color:white;border:1px solid var(--color-accent);">全部</button>
+      {categories.map(cat => (
+        <button class="cat-btn" data-cat={cat} style="padding:0.3rem 0.75rem;border-radius:100px;font-size:0.8125rem;cursor:pointer;font-family:inherit;transition:all 0.15s;background:transparent;color:var(--color-text-muted);border:1px solid var(--color-border);">{cat}</button>
+      ))}
+    </div>
+
+    <!-- Grid -->
+    <div id="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;">
+      {sorted.map(skill => (
+        <div data-difficulty={skill.data.difficulty} data-categories={skill.data.category.join(',')}>
+          <ResourceCard
+            name={skill.data.name}
+            description={skill.data.description}
+            slug={skill.id}
+            href={`/skills/${skill.id}`}
+            tags={skill.data.tags.slice(0, 3)}
+            badge={difficultyLabel[skill.data.difficulty]}
+            badgeVariant={difficultyVariant[skill.data.difficulty]}
+            meta={skill.data.author}
+          />
+        </div>
+      ))}
+    </div>
+
+  </div>
+</Layout>
+
+<script>
+  function setupFilter(
+    btnClass: string,
+    attrName: string,
+    gridId: string,
+    siblingAttr?: string,
+    siblingValue?: string,
+  ) {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(`.${btnClass}`)
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const value = btn.dataset[attrName === 'data-diff' ? 'diff' : 'cat']!
+        buttons.forEach(b => {
+          if (b === btn) {
+            b.style.background = 'var(--color-accent)'
+            b.style.color = 'white'
+            b.style.borderColor = 'var(--color-accent)'
+          } else {
+            b.style.background = 'transparent'
+            b.style.color = 'var(--color-text-muted)'
+            b.style.borderColor = 'var(--color-border)'
+          }
+        })
+        const grid = document.getElementById(gridId)!
+        const items = grid.querySelectorAll<HTMLElement>('div[data-difficulty]')
+        const activeDiff = document.querySelector<HTMLButtonElement>('.diff-btn.active-filter')?.dataset.diff ?? 'all'
+        const activeCat = document.querySelector<HTMLButtonElement>('.cat-btn.active-filter')?.dataset.cat ?? 'all'
+
+        // track active
+        if (btnClass === 'diff-btn') {
+          document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active-filter'))
+          btn.classList.add('active-filter')
+        } else {
+          document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active-filter'))
+          btn.classList.add('active-filter')
+        }
+
+        const currentDiff = btnClass === 'diff-btn' ? value : (document.querySelector<HTMLButtonElement>('.diff-btn.active-filter')?.dataset.diff ?? 'all')
+        const currentCat = btnClass === 'cat-btn' ? value : (document.querySelector<HTMLButtonElement>('.cat-btn.active-filter')?.dataset.cat ?? 'all')
+
+        items.forEach(item => {
+          const matchDiff = currentDiff === 'all' || item.dataset.difficulty === currentDiff
+          const cats = item.dataset.categories?.split(',') ?? []
+          const matchCat = currentCat === 'all' || cats.includes(currentCat)
+          item.style.display = (matchDiff && matchCat) ? '' : 'none'
+        })
+      })
+    })
+  }
+
+  // init active-filter class on "all" buttons
+  document.querySelectorAll('.diff-btn.active').forEach(b => b.classList.add('active-filter'))
+  document.querySelectorAll('.cat-btn.active').forEach(b => b.classList.add('active-filter'))
+
+  setupFilter('diff-btn', 'data-diff', 'skills-grid')
+  setupFilter('cat-btn', 'data-cat', 'skills-grid')
+</script>

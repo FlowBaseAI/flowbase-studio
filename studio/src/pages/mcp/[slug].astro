@@ -1,0 +1,218 @@
+---
+import Layout from '../../components/layout/Layout.astro'
+import CopyButton from '../../components/ui/CopyButton.astro'
+import Badge from '../../components/ui/Badge.astro'
+import { getCollection, render } from 'astro:content'
+
+export async function getStaticPaths() {
+  const mcps = await getCollection('mcp')
+  return mcps.map(mcp => ({ params: { slug: mcp.id } }))
+}
+
+const { slug } = Astro.params
+const mcps = await getCollection('mcp')
+const mcp = mcps.find(m => m.id === slug)
+
+if (!mcp) return Astro.redirect('/mcp')
+
+const { Content } = await render(mcp)
+
+const configJson = JSON.stringify(mcp.data.config_snippet, null, 2)
+---
+<Layout title={mcp.data.name} description={mcp.data.description}>
+
+  <div style="max-width: 1280px; margin: 0 auto; padding: 3rem 1.5rem;">
+
+    <!-- Breadcrumb -->
+    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem;">
+      <a href="/" style="color: var(--color-text-subtle); font-size: 0.8125rem; text-decoration: none;">Home</a>
+      <span style="color: var(--color-text-subtle);">/</span>
+      <a href="/mcp" style="color: var(--color-text-subtle); font-size: 0.8125rem; text-decoration: none;">MCP</a>
+      <span style="color: var(--color-text-subtle);">/</span>
+      <span style="color: var(--color-text-muted); font-size: 0.8125rem;">{mcp.data.name}</span>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: start;">
+
+      <!-- Main content -->
+      <div>
+        <div style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 200px;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+              <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--color-text); margin: 0; letter-spacing: -0.02em;">
+                {mcp.data.name}
+              </h1>
+              {mcp.data.is_featured && <Badge variant="accent">Featured</Badge>}
+            </div>
+            <p style="color: var(--color-text-muted); font-size: 0.9375rem; margin: 0; line-height: 1.5;">
+              {mcp.data.description}
+            </p>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div style="display: flex; flex-wrap: wrap; gap: 0.375rem; margin-bottom: 2rem;">
+          {mcp.data.tags.map(tag => (
+            <span style="
+              font-size: 0.75rem; color: var(--color-text-subtle);
+              background: var(--color-surface-2);
+              border: 1px solid var(--color-border);
+              border-radius: 3px; padding: 0.125rem 0.5rem;
+            ">{tag}</span>
+          ))}
+        </div>
+
+        <!-- MDX Content -->
+        <div class="prose">
+          <Content />
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div style="position: sticky; top: 80px; display: flex; flex-direction: column; gap: 1rem;">
+
+        <!-- Add to Workspace button -->
+        <button
+          id="add-to-ws"
+          data-slug={mcp.id}
+          data-type="mcp"
+          style="
+            width: 100%;
+            background: var(--color-accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.15s;
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+          "
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12h14"/>
+          </svg>
+          <span id="btn-label">添加到 Workspace</span>
+        </button>
+
+        <!-- Install Command -->
+        <div style="
+          background: var(--color-surface);
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-md);
+          overflow: hidden;
+        ">
+          <div style="
+            padding: 0.625rem 0.875rem;
+            border-bottom: 1px solid var(--color-border);
+            display: flex; align-items: center; justify-content: space-between;
+          ">
+            <span style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: 500;">安装命令</span>
+            <CopyButton text={mcp.data.install_cmd} label="复制" />
+          </div>
+          <pre style="
+            margin: 0; padding: 0.875rem;
+            font-size: 0.8125rem;
+            white-space: pre-wrap; word-break: break-all;
+            background: transparent; border: none;
+          ">{mcp.data.install_cmd}</pre>
+        </div>
+
+        <!-- Config Snippet -->
+        <div style="
+          background: var(--color-surface);
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-md);
+          overflow: hidden;
+        ">
+          <div style="
+            padding: 0.625rem 0.875rem;
+            border-bottom: 1px solid var(--color-border);
+            display: flex; align-items: center; justify-content: space-between;
+          ">
+            <span style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: 500;">settings.json 配置</span>
+            <CopyButton text={configJson} label="复制" />
+          </div>
+          <pre style="
+            margin: 0; padding: 0.875rem;
+            font-size: 0.75rem; max-height: 280px; overflow-y: auto;
+            background: transparent; border: none;
+          ">{configJson}</pre>
+        </div>
+
+        <!-- Meta -->
+        <div style="
+          background: var(--color-surface);
+          border: 1px solid var(--color-border);
+          border-radius: var(--radius-md);
+          padding: 0.875rem;
+          display: flex; flex-direction: column; gap: 0.625rem;
+        ">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.75rem; color: var(--color-text-subtle);">作者</span>
+            <span style="font-size: 0.8125rem; color: var(--color-text-muted);">{mcp.data.author}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.75rem; color: var(--color-text-subtle);">平台支持</span>
+            <div style="display: flex; gap: 0.25rem; flex-wrap: wrap; justify-content: flex-end;">
+              {mcp.data.platform.map(p => (
+                <span style="
+                  font-size: 0.6875rem; color: var(--color-text-subtle);
+                  background: var(--color-surface-2);
+                  border: 1px solid var(--color-border);
+                  border-radius: 3px; padding: 0.1rem 0.35rem;
+                ">{p}</span>
+              ))}
+            </div>
+          </div>
+          <div style="border-top: 1px solid var(--color-border); padding-top: 0.625rem;">
+            <a
+              href={mcp.data.github_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                display: flex; align-items: center; gap: 0.5rem;
+                color: var(--color-text-muted); text-decoration: none; font-size: 0.8125rem;
+                transition: color 0.15s;
+              "
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              查看 GitHub
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-left: auto;">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { addMcp, isInWorkspace } from '../../stores/workspace'
+
+  const btn = document.getElementById('add-to-ws') as HTMLButtonElement
+  const label = document.getElementById('btn-label')
+  if (btn && label) {
+    const slug = btn.dataset.slug!
+    function updateBtn() {
+      if (isInWorkspace('mcp', slug)) {
+        label!.textContent = '✓ 已添加到 Workspace'
+        btn!.style.background = 'var(--color-surface-2)'
+        btn!.style.color = 'var(--color-success)'
+        btn!.style.border = '1px solid rgba(34,197,94,0.3)'
+      }
+    }
+    updateBtn()
+    btn.addEventListener('click', () => {
+      addMcp(slug)
+      updateBtn()
+    })
+  }
+</script>

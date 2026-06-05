@@ -1,0 +1,104 @@
+---
+import Layout from '../../components/layout/Layout.astro'
+import ResourceCard from '../../components/library/ResourceCard.astro'
+import { getCollection } from 'astro:content'
+
+const allRules = await getCollection('rules')
+const sorted = allRules.sort((a, b) => a.data.order - b.data.order)
+
+const categories = [...new Set(sorted.flatMap(r => r.data.category))].sort()
+
+const typeLabel: Record<string, string> = { claude: 'Claude Rules', cursor: 'Cursor Rules', codex: 'Codex Rules' }
+const typeVariant: Record<string, 'accent' | 'warning' | 'default'> = {
+  claude: 'accent', cursor: 'warning', codex: 'default',
+}
+---
+<Layout title="Rules Library" description="Browse 20+ coding rules for Claude Code, Cursor, and Codex — TypeScript, Astro, React, Python, SEO, and more.">
+
+  <div style="max-width: 1280px; margin: 0 auto; padding: 3rem 1.5rem;">
+
+    <div style="margin-bottom: 2.5rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+        <a href="/" style="color: var(--color-text-subtle); font-size: 0.8125rem; text-decoration: none;">Home</a>
+        <span style="color: var(--color-text-subtle);">/</span>
+        <span style="color: var(--color-text-muted); font-size: 0.8125rem;">Rules</span>
+      </div>
+      <h1 style="font-size: 1.875rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.5rem; letter-spacing: -0.02em;">
+        Rules Library
+      </h1>
+      <p style="color: var(--color-text-muted); margin: 0; font-size: 0.9375rem;">
+        {sorted.length} 条精选 Rules — 让 AI 严格遵循你的编码规范和内容标准。
+      </p>
+    </div>
+
+    <!-- Type tabs -->
+    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
+      <span style="font-size: 0.75rem; color: var(--color-text-subtle); margin-right: 0.25rem;">类型：</span>
+      <button class="type-btn active-filter" data-type="all" style="padding:0.3rem 0.75rem;border-radius:100px;font-size:0.8125rem;cursor:pointer;font-family:inherit;transition:all 0.15s;background:var(--color-accent);color:white;border:1px solid var(--color-accent);">全部</button>
+      {['claude', 'cursor', 'codex'].map(t => (
+        <button class="type-btn" data-type={t} style="padding:0.3rem 0.75rem;border-radius:100px;font-size:0.8125rem;cursor:pointer;font-family:inherit;transition:all 0.15s;background:transparent;color:var(--color-text-muted);border:1px solid var(--color-border);">{typeLabel[t]}</button>
+      ))}
+    </div>
+
+    <!-- Category filter -->
+    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap;">
+      <span style="font-size: 0.75rem; color: var(--color-text-subtle); margin-right: 0.25rem;">分类：</span>
+      <button class="cat-btn active-filter" data-cat="all" style="padding:0.3rem 0.75rem;border-radius:100px;font-size:0.8125rem;cursor:pointer;font-family:inherit;transition:all 0.15s;background:var(--color-accent);color:white;border:1px solid var(--color-accent);">全部</button>
+      {categories.map(cat => (
+        <button class="cat-btn" data-cat={cat} style="padding:0.3rem 0.75rem;border-radius:100px;font-size:0.8125rem;cursor:pointer;font-family:inherit;transition:all 0.15s;background:transparent;color:var(--color-text-muted);border:1px solid var(--color-border);">{cat}</button>
+      ))}
+    </div>
+
+    <!-- Grid -->
+    <div id="rules-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;">
+      {sorted.map(rule => (
+        <div data-type={rule.data.rule_type} data-categories={rule.data.category.join(',')}>
+          <ResourceCard
+            name={rule.data.name}
+            description={rule.data.description}
+            slug={rule.id}
+            href={`/rules/${rule.id}`}
+            tags={rule.data.tags.slice(0, 3)}
+            badge={typeLabel[rule.data.rule_type]}
+            badgeVariant={typeVariant[rule.data.rule_type]}
+            meta={rule.data.author}
+          />
+        </div>
+      ))}
+    </div>
+
+  </div>
+</Layout>
+
+<script>
+  function activateBtn(btn: HTMLButtonElement, btnClass: string) {
+    document.querySelectorAll<HTMLButtonElement>(`.${btnClass}`).forEach(b => {
+      if (b === btn) {
+        b.style.background = 'var(--color-accent)'; b.style.color = 'white'; b.style.borderColor = 'var(--color-accent)'
+        b.classList.add('active-filter')
+      } else {
+        b.style.background = 'transparent'; b.style.color = 'var(--color-text-muted)'; b.style.borderColor = 'var(--color-border)'
+        b.classList.remove('active-filter')
+      }
+    })
+  }
+
+  function applyFilters() {
+    const currentType = document.querySelector<HTMLButtonElement>('.type-btn.active-filter')?.dataset.type ?? 'all'
+    const currentCat = document.querySelector<HTMLButtonElement>('.cat-btn.active-filter')?.dataset.cat ?? 'all'
+    const items = document.querySelectorAll<HTMLElement>('#rules-grid > div[data-type]')
+    items.forEach(item => {
+      const matchType = currentType === 'all' || item.dataset.type === currentType
+      const cats = item.dataset.categories?.split(',') ?? []
+      const matchCat = currentCat === 'all' || cats.includes(currentCat)
+      item.style.display = (matchType && matchCat) ? '' : 'none'
+    })
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.type-btn').forEach(btn => {
+    btn.addEventListener('click', () => { activateBtn(btn, 'type-btn'); applyFilters() })
+  })
+  document.querySelectorAll<HTMLButtonElement>('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => { activateBtn(btn, 'cat-btn'); applyFilters() })
+  })
+</script>

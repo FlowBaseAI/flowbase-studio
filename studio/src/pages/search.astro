@@ -1,0 +1,155 @@
+---
+import Layout from '../components/layout/Layout.astro'
+---
+<Layout title="Search" description="Search across MCP, Skills, Rules, and more on FlowBase Studio.">
+
+  <div style="max-width: 880px; margin: 0 auto; padding: 3rem 1.5rem;">
+
+    <div style="margin-bottom: 2.5rem;">
+      <h1 style="font-size: 1.875rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.5rem; letter-spacing: -0.02em;">
+        Search
+      </h1>
+      <p style="color: var(--color-text-muted); margin: 0; font-size: 0.9375rem;">
+        搜索全部 MCP、Skills、Rules 资源。
+      </p>
+    </div>
+
+    <!-- Search input -->
+    <div style="position: relative; margin-bottom: 2rem;">
+      <svg
+        style="position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--color-text-subtle);"
+        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+      >
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input
+        id="search-input"
+        type="text"
+        placeholder="搜索 MCP、Skills、Rules..."
+        autofocus
+        style="
+          width: 100%; padding: 0.875rem 1rem 0.875rem 2.75rem;
+          background: var(--color-surface); border: 1px solid var(--color-border);
+          border-radius: var(--radius-md); font-size: 1rem; color: var(--color-text);
+          font-family: inherit; outline: none; transition: border-color 0.15s;
+          box-sizing: border-box;
+        "
+      />
+    </div>
+
+    <!-- Results -->
+    <div id="search-results">
+      <div id="search-empty" style="text-align: center; padding: 4rem 1rem; color: var(--color-text-subtle); font-size: 0.9375rem;">
+        输入关键词开始搜索
+      </div>
+    </div>
+
+  </div>
+</Layout>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+
+<script>
+  let pagefind: any = null
+
+  async function initPagefind() {
+    if (pagefind) return pagefind
+    try {
+      // @ts-ignore
+      pagefind = await import('/pagefind/pagefind.js')
+      await pagefind.init()
+      return pagefind
+    } catch {
+      return null
+    }
+  }
+
+  const input = document.getElementById('search-input') as HTMLInputElement
+  const resultsContainer = document.getElementById('search-results')!
+  const emptyEl = document.getElementById('search-empty')!
+
+  let debounceTimer: ReturnType<typeof setTimeout>
+
+  function renderResult(result: any) {
+    const div = document.createElement('a')
+    div.href = result.url
+    div.style.cssText = `
+      display: block; text-decoration: none;
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: var(--radius-md); padding: 1rem 1.25rem; margin-bottom: 0.625rem;
+      transition: border-color 0.15s, background 0.15s;
+    `
+    div.onmouseenter = () => { div.style.borderColor = 'var(--color-border-2)'; div.style.background = 'var(--color-surface-2)' }
+    div.onmouseleave = () => { div.style.borderColor = 'var(--color-border)'; div.style.background = 'var(--color-surface)' }
+
+    const meta = result.meta ?? {}
+    const title = meta.title ?? result.url
+
+    // Detect type from URL
+    let typeLabel = ''
+    let typeColor = ''
+    if (result.url.includes('/mcp/')) { typeLabel = 'MCP'; typeColor = 'var(--color-accent)' }
+    else if (result.url.includes('/skills/')) { typeLabel = 'Skill'; typeColor = 'var(--color-success)' }
+    else if (result.url.includes('/rules/')) { typeLabel = 'Rule'; typeColor = 'var(--color-warning)' }
+
+    div.innerHTML = `
+      <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.375rem;">
+        ${typeLabel ? `<span style="font-size:0.6875rem;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:${typeColor};background:${typeColor}22;padding:0.1rem 0.4rem;border-radius:3px;">${typeLabel}</span>` : ''}
+        <span style="font-size:0.9375rem;font-weight:600;color:var(--color-text);">${title}</span>
+      </div>
+      ${result.excerpt ? `<div style="font-size:0.8125rem;color:var(--color-text-muted);line-height:1.5;">${result.excerpt}</div>` : ''}
+    `
+    return div
+  }
+
+  async function doSearch(query: string) {
+    if (!query.trim()) {
+      resultsContainer.innerHTML = ''
+      resultsContainer.appendChild(emptyEl)
+      emptyEl.textContent = '输入关键词开始搜索'
+      return
+    }
+
+    const pf = await initPagefind()
+    if (!pf) {
+      resultsContainer.innerHTML = `<div style="text-align:center;padding:3rem;color:var(--color-text-subtle);">搜索索引尚未构建。请运行 npm run build 后再使用搜索功能。</div>`
+      return
+    }
+
+    const search = await pf.search(query)
+    resultsContainer.innerHTML = ''
+
+    if (search.results.length === 0) {
+      const noResults = document.createElement('div')
+      noResults.style.cssText = 'text-align:center;padding:3rem;color:var(--color-text-subtle);font-size:0.9375rem;'
+      noResults.textContent = `没有找到与 "${query}" 相关的结果`
+      resultsContainer.appendChild(noResults)
+      return
+    }
+
+    const countEl = document.createElement('div')
+    countEl.style.cssText = 'font-size:0.8125rem;color:var(--color-text-subtle);margin-bottom:1rem;'
+    countEl.textContent = `找到 ${search.results.length} 个结果`
+    resultsContainer.appendChild(countEl)
+
+    // Render first 20 results, load data lazily
+    const toShow = search.results.slice(0, 20)
+    for (const result of toShow) {
+      const data = await result.data()
+      resultsContainer.appendChild(renderResult(data))
+    }
+  }
+
+  input?.addEventListener('input', (e) => {
+    clearTimeout(debounceTimer)
+    debounceTimer = setTimeout(() => doSearch((e.target as HTMLInputElement).value), 200)
+  })
+
+  // Check for ?q= param
+  const params = new URLSearchParams(window.location.search)
+  const q = params.get('q')
+  if (q && input) {
+    input.value = q
+    doSearch(q)
+  }
+</script>

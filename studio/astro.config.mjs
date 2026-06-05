@@ -10,6 +10,11 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ['pagefind'],
     },
+    build: {
+      rollupOptions: {
+        external: ['/pagefind/pagefind.js'],
+      },
+    },
   },
   integrations: [mdx()],
 })

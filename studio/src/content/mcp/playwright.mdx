@@ -1,6 +1,8 @@
 ---
 name: "Playwright MCP"
-description: "Microsoft's Playwright MCP — reliable browser automation with accessibility snapshots, no screenshots needed."
+name_zh: "浏览器自动化"
+description: "微软官方出品的浏览器自动化 MCP —— 让 Claude 控制真实浏览器，访问网页、点击按钮、提取内容。"
+source: "Microsoft 官方"
 category: ["browser", "testing"]
 tags: ["playwright", "browser", "testing", "automation", "microsoft"]
 platform: ["claude-code", "codex"]
@@ -12,22 +14,40 @@ config_snippet:
       command: "npx"
       args: ["-y", "@playwright/mcp"]
 is_featured: true
-order: 4
+order: 3
 author: "Microsoft"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-The official Playwright MCP from Microsoft provides browser automation through accessibility tree snapshots rather than screenshots, making it fast and deterministic. Claude can navigate, interact, and extract data without relying on vision.
+Playwright MCP 是微软官方发布的浏览器自动化工具。它让 Claude 能够控制真实的 Chrome 浏览器，不依赖截图，而是通过页面的无障碍树（Accessibility Tree）来理解和操作网页，更快更稳定。
 
-## Use Cases
+## 典型用途
 
-- **E2E Testing**: Write and execute Playwright tests automatically
-- **Form Filling**: Automate complex multi-step web forms
-- **Data Extraction**: Scrape structured data using accessibility tree
-- **Web Automation**: Automate repetitive browser tasks
+**网页抓取**：「帮我抓取这个网站的所有产品信息，整理成表格」
 
-## Configuration
+**自动填表**：「打开这个网页，自动填写并提交表单」
 
-No additional configuration needed — works out of the box.
+**端到端测试**：「测试这个功能是否正常工作」
+
+**网页截图**：「截取这个页面的内容」
+
+## 配置说明
+
+开箱即用，无需额外配置：
+
+```json
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp"]
+    }
+  }
+}
+```
+
+## 来源
+
+Microsoft 官方发布，Playwright 团队维护。

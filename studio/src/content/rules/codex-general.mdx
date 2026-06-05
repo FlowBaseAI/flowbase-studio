@@ -1,55 +1,57 @@
 ---
 name: "Codex General Rules"
-description: "OpenAI Codex rules for consistent AI-assisted coding — code quality, completions, and best practices."
+name_zh: "Codex 通用规范"
+description: "OpenAI Codex 编程助手通用规范 —— 代码质量标准、补全行为约束、文档要求，确保 AI 生成代码的一致性。"
 rule_type: "codex"
+source: "社区 / OpenAI Codex 最佳实践"
 category: ["general"]
 tags: ["codex", "openai", "general", "coding"]
 platform: ["codex"]
 file_name: "codex-general.md"
 is_featured: false
 order: 13
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# Codex General Rules
+# Codex 通用规范
 
-## Code Quality
+## 代码质量
 
-- Write clean, readable code over clever code
-- Self-documenting code: names explain intent
-- Functions should do one thing
-- Keep functions under 40 lines
-- Cyclomatic complexity under 10
+- 可读代码优先于聪明代码
+- 自文档化代码：命名要表达意图
+- 函数职责单一
+- 函数保持在 40 行以内
+- 圈复杂度不超过 10
 
-## Completions
+## 补全行为
 
-- Complete the task as specified — don't add unrequested features
-- Match the code style of the surrounding context
-- If the existing code uses a pattern, continue it
-- Don't change indentation or formatting of untouched code
+- 只完成指定的任务——不添加未要求的功能
+- 匹配周围代码的风格
+- 如果已有模式，继续使用该模式
+- 不改变未涉及代码的缩进或格式
 
-## Documentation
+## 文档规范
 
-- Docstrings for all public functions and classes
-- Inline comments only for non-obvious logic
-- Examples in docstrings for complex functions
+- 所有公开函数和类有 Docstring
+- 只对非显而易见的逻辑加行内注释
+- 复杂函数在 Docstring 中包含使用示例
 
-## Testing
+## 测试要求
 
-- Write tests alongside new code when requested
-- Unit test edge cases, not just happy path
-- Test names describe what they test
+- 有需求时与新代码一起编写测试
+- 单元测试覆盖边界情况，而非只有成功路径
+- 测试名称描述所测试的行为
 
-## Security
+## 安全规范
 
-- Sanitize all inputs
-- Use environment variables for secrets
-- Never log sensitive data
-- Validate data types before processing
+- 所有输入都要做校验
+- 敏感信息使用环境变量
+- 禁止在日志中记录敏感数据
+- 处理数据前先验证类型
 
-## Dependencies
+## 依赖规范
 
-- Prefer standard library over third-party when reasonable
-- Check license compatibility before adding dependencies
-- Pin dependency versions in production
+- 合理时优先使用标准库而非第三方包
+- 添加新依赖前检查许可证兼容性
+- 生产环境依赖版本必须固定

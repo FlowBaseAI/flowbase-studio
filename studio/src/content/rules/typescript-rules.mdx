@@ -1,55 +1,52 @@
 ---
 name: "TypeScript Rules"
-description: "Strict TypeScript rules for type safety, clean code, and modern patterns that prevent runtime errors."
+name_zh: "TypeScript 规范"
+description: "严格的 TypeScript 编码规范 —— 类型安全、现代模式、禁止 any，让你的代码在编译阶段就杜绝运行时错误。"
 rule_type: "claude"
+source: "社区 / TypeScript 官方 / Cursor Directory"
 category: ["typescript"]
 tags: ["typescript", "types", "strict", "javascript"]
 platform: ["claude-code", "codex"]
 file_name: "typescript-rules.md"
 is_featured: true
 order: 2
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# TypeScript Rules
+# TypeScript 规范
 
-## Type Safety
+## 类型安全
 
-- Enable `strict: true` in tsconfig — no exceptions
-- Never use `any` — use `unknown` and narrow it
-- No type assertions (`as`) unless absolutely necessary with comment explaining why
-- Prefer `interface` for object shapes, `type` for unions/intersections
-- Use `readonly` for data that shouldn't mutate
-- Use `const` assertions for literal types: `as const`
+- `tsconfig.json` 必须启用 `strict: true`，不允许例外
+- 禁止使用 `any`——使用 `unknown` 并做类型收窄
+- 非必要不使用类型断言（`as`），必须使用时加注释说明原因
+- 对象形状使用 `interface`，联合/交叉类型使用 `type`
+- 不应修改的数据使用 `readonly`
+- 字面量类型使用 `const` 断言：`as const`
 
-## Functions
+## 函数规范
 
-- Always type function parameters and return values explicitly
-- Prefer function declarations over arrow functions for top-level functions
-- Use overloads for functions with multiple signatures
-- Avoid optional parameters at the start of parameter lists
+- 明确标注函数参数和返回值类型
+- 顶层函数优先使用函数声明而非箭头函数
+- 多签名函数使用重载
+- 避免可选参数放在参数列表开头
 
-## Nullability
+## 空值处理
 
-- Use optional chaining (`?.`) instead of null checks when appropriate
-- Use nullish coalescing (`??`) not `||` for default values (avoids falsy pitfalls)
-- Explicitly handle `null` and `undefined` — don't hide them
-- Prefer early returns over nested if-else chains
+- 合适时使用可选链（`?.`）而非 null 检查
+- 默认值使用空值合并（`??`）而非 `||`（避免 falsy 陷阱）
+- 明确处理 `null` 和 `undefined`，不要隐藏它们
+- 优先使用早返回而非嵌套 if-else
 
-## Imports
+## 导入规范
 
-- Use `import type` for type-only imports
-- Group imports: external → internal → types
-- No default exports from library files (use named exports)
+- 仅类型导入使用 `import type`
+- 导入分组：外部依赖 → 内部模块 → 类型
+- 库文件禁止使用默认导出（使用命名导出）
 
-## Enums
+## 现代语法
 
-- Prefer `const` objects with `as const` over `enum`
-- If using enum, use string enums for debugging clarity
-
-## Modern Patterns
-
-- Use template literal types for string validation
-- Use `satisfies` operator for type checking without widening
-- Use `infer` for extracting types from generics
+- 使用模板字面量类型进行字符串验证
+- 使用 `satisfies` 操作符进行类型检查而不扩宽类型
+- 使用 `infer` 从泛型中提取类型

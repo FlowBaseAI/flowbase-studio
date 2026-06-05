@@ -1,6 +1,8 @@
 ---
 name: "Fetch MCP"
-description: "Let Claude fetch any URL and convert web pages to Markdown — extract content from articles, documentation, and APIs."
+name_zh: "网页内容抓取"
+description: "让 Claude 抓取任意网页内容并转换为可读文本 —— 读取文章、文档、API 响应，一步到位。"
+source: "Anthropic 官方"
 category: ["web", "utility"]
 tags: ["fetch", "http", "web", "scraping", "markdown"]
 platform: ["claude-code", "codex", "gemini-cli"]
@@ -12,18 +14,30 @@ config_snippet:
       command: "npx"
       args: ["-y", "@modelcontextprotocol/server-fetch"]
 is_featured: false
-order: 9
+order: 10
 author: "Anthropic"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-The Fetch MCP server allows Claude to retrieve and convert web content to Markdown. It handles HTML-to-text conversion, handles pagination, and respects robots.txt.
+Fetch MCP 让 Claude 可以直接访问任意 URL，将网页内容转换为 Markdown 文本格式，方便进一步分析和处理。
 
-## Use Cases
+## 典型用途
 
-- **Documentation Fetching**: Pull in API docs or library references
-- **Article Summarization**: Fetch and summarize web articles
-- **API Testing**: Make HTTP requests and process responses
-- **Research**: Gather information from multiple web sources
+**文档读取**：「帮我读取这个 API 文档，告诉我怎么用」
+
+**文章摘要**：「抓取这篇文章，用中文总结要点」
+
+**内容对比**：「分别抓取这两个页面，对比它们的差异」
+
+**数据提取**：「从这个页面提取所有表格数据」
+
+## 与浏览器 MCP 的区别
+
+- Fetch MCP：只读，速度快，适合静态内容
+- Playwright/Browser Use：可交互，适合动态页面和需要操作的场景
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

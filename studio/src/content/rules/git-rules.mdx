@@ -1,60 +1,67 @@
 ---
 name: "Git Workflow Rules"
-description: "Git workflow standards — branching, commits, PR processes, and version management for teams."
+name_zh: "Git 工作流规范"
+description: "团队 Git 工作流规范 —— 分支策略、提交规范、PR 流程、版本管理，让代码历史清晰可追溯。"
 rule_type: "claude"
+source: "社区 / Conventional Commits / GitHub Flow"
 category: ["general"]
 tags: ["git", "workflow", "branching", "commits", "pr"]
 platform: ["claude-code"]
 file_name: "git-rules.md"
 is_featured: false
 order: 15
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# Git Workflow Rules
+# Git 工作流规范
 
-## Branching
+## 分支策略
 
-- `main`: Always deployable — no direct pushes
-- `feat/description`: New features
-- `fix/description`: Bug fixes
-- `docs/description`: Documentation only
-- `refactor/description`: Code restructure
-- Branch names: lowercase, hyphen-separated, under 50 chars
+- `main`：始终可部署——禁止直接推送
+- `feat/描述`：新功能
+- `fix/描述`：Bug 修复
+- `docs/描述`：仅文档变更
+- `refactor/描述`：代码重构
+- 分支名：小写、连字符分隔、不超过 50 个字符
 
-## Commits
+## 提交规范（Conventional Commits）
 
-Follow Conventional Commits:
 ```
-feat(scope): short description
-fix(scope): short description
-docs: update README
+<类型>(<范围>): <简短描述>
 ```
 
-- One logical change per commit
-- Present tense, imperative mood: "Add feature" not "Added feature"
-- Reference issues: `Closes #123`
-- Breaking changes: `feat!:` or `BREAKING CHANGE:` footer
+- `feat`：新功能
+- `fix`：Bug 修复
+- `docs`：文档更新
+- `style`：格式调整（不涉及逻辑）
+- `refactor`：重构
+- `test`：测试相关
+- `chore`：其他维护
 
-## Pull Requests
+规范要求：
+- 每次提交只包含一个逻辑变更
+- 使用祈使语态，小写，不加句号：「添加功能」而非「添加了功能」
+- 引用 Issue：`Closes #123`
 
-- PR title follows Conventional Commits format
-- Description: what changed, why, how to test
-- Link related issues
-- Self-review before requesting reviews
-- Keep PRs under 400 lines changed — split larger changes
+## Pull Request 规范
 
-## Code Review
+- PR 标题遵循 Conventional Commits 格式
+- 描述包含：改了什么、为什么改、如何测试
+- 关联相关 Issue
+- 提交 Review 前先自我审查
+- PR 变更行数不超过 400 行——更大的改动要拆分
 
-- Review for correctness, not style (let linters handle style)
-- Approve means: I've read this, it's correct, I'd be comfortable maintaining it
-- Request changes for correctness issues
-- Leave suggestions for non-blocking improvements
+## 代码 Review
 
-## Merging
+- Review 代码的正确性，不要 Review 风格（风格交给 Linter）
+- Approve 意味着：我读过这段代码，它是正确的，我愿意维护它
+- Request Changes 针对正确性问题
+- 非阻塞的改进建议用 Suggestion 标注
 
-- Squash merge for feature branches (clean history)
-- Merge commit for long-lived branches
-- Rebase for keeping up with main on feature branches
-- Delete branches after merging
+## 合并规范
+
+- Feature 分支使用 Squash Merge（保持历史干净）
+- 长期维护分支使用 Merge Commit
+- Feature 分支同步 main 时使用 Rebase
+- 合并后删除分支

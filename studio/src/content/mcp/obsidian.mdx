@@ -1,6 +1,8 @@
 ---
 name: "Obsidian MCP"
-description: "Connect Claude to your Obsidian vault — read notes, create content, search knowledge, and manage your second brain."
+name_zh: "Obsidian 笔记库"
+description: "连接你的 Obsidian 知识库 —— 让 Claude 读写笔记、检索知识、在你的第二大脑里工作。"
+source: "社区 · 热门插件"
 category: ["knowledge", "productivity"]
 tags: ["obsidian", "notes", "knowledge-base", "markdown", "pkm"]
 platform: ["claude-code"]
@@ -12,18 +14,40 @@ config_snippet:
       command: "npx"
       args: ["-y", "mcp-obsidian", "/path/to/your/vault"]
 is_featured: false
-order: 14
-author: "Community"
+order: 15
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-Obsidian MCP connects Claude to your Obsidian vault, enabling reading, writing, and searching through your notes and knowledge base.
+Obsidian MCP 让 Claude 直接连接到你的 Obsidian 笔记库，可以读取、搜索和写入笔记，帮你更好地利用已有的知识积累。
 
-## Use Cases
+## 典型用途
 
-- **Note Summarization**: Summarize vault notes on demand
-- **Knowledge Retrieval**: Search and retrieve related notes
-- **Content Creation**: Write new notes based on your existing knowledge
-- **Zettelkasten**: Help build connections between notes
+**知识检索**：「在我的笔记里找关于这个话题的所有记录」
+
+**笔记生成**：「根据今天的学习内容，写一篇笔记保存到我的 Obsidian」
+
+**知识连接**：「找出我的笔记中和这个主题相关的内容，建立联系」
+
+**内容整理**：「整理我关于这个项目的散乱笔记，生成结构化文档」
+
+## 配置说明
+
+将你的 Obsidian Vault 路径传入：
+
+```json
+{
+  "mcpServers": {
+    "obsidian": {
+      "command": "npx",
+      "args": ["-y", "mcp-obsidian", "/你的Vault路径"]
+    }
+  }
+}
+```
+
+## 来源
+
+社区开源项目，Obsidian 用户群体广泛使用。

@@ -1,6 +1,8 @@
 ---
 name: "Slack MCP"
-description: "Connect Claude to Slack — read channels, post messages, search conversations, and automate team communication workflows."
+name_zh: "Slack 团队沟通"
+description: "让 Claude 接入 Slack —— 读取频道消息、发送通知、搜索对话历史，实现团队沟通自动化。"
+source: "Anthropic 官方"
 category: ["comms", "productivity"]
 tags: ["slack", "messaging", "team", "communication"]
 platform: ["claude-code"]
@@ -15,18 +17,29 @@ config_snippet:
         SLACK_BOT_TOKEN: "xoxb-your-bot-token"
         SLACK_TEAM_ID: "T0XXXXXXXXX"
 is_featured: false
-order: 10
+order: 11
 author: "Anthropic"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-The Slack MCP server lets Claude interact with your Slack workspace. Read channel history, post messages, search conversations, and build automated team workflows.
+Slack MCP 让 Claude 直接与 Slack 工作区交互，可以读取消息历史、发送通知、搜索内容，适合团队自动化工作流场景。
 
-## Use Cases
+## 典型用途
 
-- **Daily Summaries**: Summarize channel activity overnight
-- **Auto Responses**: Draft responses to common questions
-- **Incident Reports**: Post structured incident updates automatically
-- **Team Notifications**: Send formatted notifications from your code
+**每日摘要**：「整理今天各频道的重要讨论，生成日报」
+
+**自动通知**：「当构建完成时，自动发消息到 #deploy 频道」
+
+**历史搜索**：「帮我在对话历史里找关于这个功能的讨论」
+
+**周报生成**：「根据本周的频道内容，生成项目周报」
+
+## 配置说明
+
+需要在 Slack API 网站创建 App，获取 Bot Token，并邀请 Bot 加入相关频道。
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

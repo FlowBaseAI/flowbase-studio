@@ -1,6 +1,8 @@
 ---
 name: "Linear MCP"
-description: "Connect Claude to Linear — manage issues, sprints, and projects programmatically from your AI-powered development workflow."
+name_zh: "Linear 项目管理"
+description: "将 Claude 连接到 Linear —— AI 自动管理任务、生成 Issue、更新项目进度，适合现代工程团队。"
+source: "社区 · 官方支持"
 category: ["devtools", "productivity"]
 tags: ["linear", "issues", "project-management", "sprint"]
 platform: ["claude-code"]
@@ -15,17 +17,28 @@ config_snippet:
         LINEAR_API_KEY: "lin_api_your_key"
 is_featured: false
 order: 20
-author: "Community"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-Linear MCP lets Claude interact with your Linear workspace — read issues, create tasks, update sprint status, and manage your engineering team's workflow.
+Linear MCP 让 Claude 直接与你的 Linear 工作区交互，自动化项目管理中的重复工作。
 
-## Use Cases
+## 典型用途
 
-- **Issue Triage**: Automatically categorize and label incoming issues
-- **Sprint Planning**: Generate sprint summaries and capacity analysis
-- **Bug Reports**: Create well-structured bug reports from error logs
-- **Progress Reports**: Generate weekly engineering progress summaries
+**Issue 创建**：「根据这个 bug 报告，在 Linear 里创建一个详细的 Issue」
+
+**Sprint 摘要**：「总结本 Sprint 的完成情况和剩余工作」
+
+**任务分配**：「把这些待办事项整理成 Linear 任务，分配给相关人员」
+
+**进度报告**：「生成本周的工程进度报告」
+
+## 获取 API Key
+
+在 Linear Settings → API 页面创建 Personal API Key。
+
+## 来源
+
+社区开源项目，Linear 官方 API 支持。

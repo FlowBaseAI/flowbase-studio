@@ -1,62 +1,64 @@
 ---
 name: "FastAPI Rules"
-description: "Best practices for FastAPI projects — routing, validation, authentication, and async patterns."
+name_zh: "FastAPI 开发规范"
+description: "FastAPI 项目最佳实践 —— 路由组织、Pydantic 数据验证、异步编程、安全认证，构建专业级 Python API。"
 rule_type: "claude"
+source: "社区 / FastAPI 官方文档"
 category: ["python"]
 tags: ["fastapi", "python", "api", "async", "pydantic"]
 platform: ["claude-code"]
 file_name: "fastapi-rules.md"
 is_featured: false
 order: 11
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# FastAPI Rules
+# FastAPI 开发规范
 
-## Project Structure
+## 项目结构
 
 ```
 app/
-  main.py          # App factory
-  routers/         # Route handlers by domain
-  models/          # SQLAlchemy models
-  schemas/         # Pydantic schemas
-  services/        # Business logic
-  dependencies/    # FastAPI dependencies
-  core/            # Config, security, database
+  main.py          # 应用工厂
+  routers/         # 按业务领域分组的路由处理器
+  models/          # SQLAlchemy 数据模型
+  schemas/         # Pydantic Schema
+  services/        # 业务逻辑
+  dependencies/    # FastAPI 依赖注入
+  core/            # 配置、安全、数据库连接
 ```
 
-## Routing
+## 路由规范
 
-- Group related endpoints in routers with prefix and tags
-- Use proper HTTP methods — don't use POST for everything
-- Version APIs in the URL: `/v1/users`
-- Return appropriate status codes with `status_code` param
+- 用 Router 的前缀和标签将相关端点分组
+- 使用正确的 HTTP 方法——禁止什么都用 POST
+- URL 中包含版本：`/v1/users`
+- 用 `status_code` 参数返回合适的状态码
 
-## Pydantic Schemas
+## Pydantic Schema
 
-- Separate request/response schemas (don't reuse)
-- `BaseModel` for all data transfer
-- Strict validation — never skip it
-- Use `model_validator` for cross-field validation
+- 请求和响应 Schema 分开（不要复用）
+- 所有数据传输使用 `BaseModel`
+- 严格进行数据验证——禁止跳过
+- 跨字段验证使用 `model_validator`
 
-## Async
+## 异步编程
 
-- Use `async def` for I/O-bound endpoints
-- Use `def` for CPU-bound operations (they run in thread pool)
-- Never use `time.sleep` in async — use `asyncio.sleep`
-- Database operations must be awaited
+- I/O 密集型端点使用 `async def`
+- CPU 密集型操作使用 `def`（会在线程池中运行）
+- 异步函数中禁止使用 `time.sleep`——使用 `asyncio.sleep`
+- 数据库操作必须 await
 
-## Security
+## 安全规范
 
-- Use `OAuth2PasswordBearer` for auth dependencies
-- Hash passwords with `bcrypt` — never store plain text
-- JWT tokens with expiration — check in dependency
-- Rate limit sensitive endpoints
+- 认证依赖使用 `OAuth2PasswordBearer`
+- 密码使用 `bcrypt` 加密——禁止明文存储
+- JWT Token 必须有过期时间——在依赖中验证
+- 敏感端点加速率限制
 
-## Dependencies
+## 依赖注入
 
-- Dependency injection for database sessions, auth users, pagination
-- `Depends()` for reusable logic — not copy-pasted code
-- Background tasks for fire-and-forget operations
+- 数据库 Session、认证用户、分页等使用依赖注入
+- 可复用逻辑使用 `Depends()`——禁止复制粘贴
+- 触发即忘操作使用后台任务（Background Tasks）

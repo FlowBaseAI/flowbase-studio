@@ -1,59 +1,60 @@
 ---
 name: "Security Rules"
-description: "Security-first development rules — OWASP protections, secrets management, input validation, and defensive coding."
+name_zh: "安全开发规范"
+description: "安全优先的开发规范 —— OWASP 防护要点、密钥管理、输入验证、防御性编程，保护你的应用和用户。"
 rule_type: "claude"
+source: "社区 / OWASP / Anthropic 安全指南"
 category: ["general"]
 tags: ["security", "owasp", "secrets", "validation", "defense"]
 platform: ["claude-code"]
 file_name: "security-rules.md"
 is_featured: false
 order: 16
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# Security Rules
+# 安全开发规范
 
-## Secrets Management
+## 密钥管理
 
-- Never hardcode secrets, API keys, or credentials in source code
-- Use environment variables — never commit `.env` files
-- Rotate secrets that have been exposed immediately
-- Use a secrets manager (Vault, AWS Secrets Manager) for production
+- 禁止在源代码中硬编码密钥、API Key 或凭证
+- 使用环境变量——禁止提交 `.env` 文件
+- 密钥一旦泄露必须立即轮换
+- 生产环境使用专业密钥管理工具（Vault、AWS Secrets Manager）
 
-## Input Validation
+## 输入验证
 
-- Validate all user input at system boundaries — never trust client data
-- Whitelist acceptable values; reject everything else
-- Sanitize before rendering to prevent XSS
-- Use parameterized queries — never string concatenation for SQL
+- 在系统边界验证所有用户输入——永远不要信任客户端数据
+- 使用白名单允许可接受的值，拒绝其他所有值
+- 渲染前做数据净化以防止 XSS
+- SQL 使用参数化查询——禁止字符串拼接
 
-## Authentication & Authorization
+## 认证与授权
 
-- Hash passwords with bcrypt (cost factor 12+) or Argon2
-- Implement rate limiting on auth endpoints
-- Use short-lived JWTs with refresh tokens
-- Check authorization on every sensitive operation — don't rely on UI hiding
+- 密码使用 bcrypt（cost 12+）或 Argon2 加密——禁止明文存储
+- 认证端点加速率限制
+- JWT 使用短有效期 + Refresh Token
+- 每个敏感操作都要检查授权——不能只靠 UI 隐藏来防护
 
-## HTTP Security Headers
+## HTTP 安全头
 
 ```
 Content-Security-Policy: default-src 'self'
 X-Frame-Options: DENY
 X-Content-Type-Options: nosniff
 Referrer-Policy: strict-origin-when-cross-origin
-Permissions-Policy: camera=(), microphone=()
 ```
 
-## Data Protection
+## 数据保护
 
-- Encrypt sensitive data at rest
-- Use HTTPS everywhere — no mixed content
-- Minimize data collection — don't store what you don't need
-- Log access to sensitive data for audit trails
+- 敏感数据静态加密
+- 全站使用 HTTPS——禁止混合内容
+- 数据最小化原则——不收集不需要的数据
+- 敏感数据访问记录审计日志
 
-## Dependencies
+## 依赖项安全
 
-- Run `npm audit` / `pip-audit` in CI
-- Update dependencies with security patches promptly
-- Review new dependencies before adding (supply chain risk)
+- CI 流程中运行 `npm audit` / `pip-audit`
+- 及时更新有安全补丁的依赖
+- 添加新依赖前检查供应链风险

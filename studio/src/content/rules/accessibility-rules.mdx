@@ -1,61 +1,62 @@
 ---
 name: "Accessibility Rules"
-description: "WCAG 2.1 AA compliance rules — semantic HTML, keyboard navigation, ARIA, color contrast, and screen reader support."
+name_zh: "无障碍开发规范"
+description: "WCAG 2.1 AA 无障碍合规规范 —— 语义化 HTML、键盘导航、ARIA、颜色对比度，让你的产品面向更多用户。"
 rule_type: "claude"
+source: "社区 / WCAG 2.1 官方标准"
 category: ["react", "astro"]
 tags: ["accessibility", "a11y", "wcag", "aria", "inclusive"]
 platform: ["claude-code"]
 file_name: "accessibility-rules.md"
 is_featured: false
 order: 19
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# Accessibility Rules
+# 无障碍开发规范
 
-## Semantic HTML
+## 语义化 HTML
 
-- Use appropriate HTML elements — `<button>` not `<div onClick>`
-- Heading hierarchy: H1 → H2 → H3, never skip levels
-- `<main>`, `<nav>`, `<aside>`, `<footer>` landmarks
-- `<ul>`/`<ol>` for lists, not repeated `<div>`s
-- Form `<label>` associated with every input
+- 使用合适的 HTML 元素——`<button>` 而非 `<div onClick>`
+- 标题层级：H1 → H2 → H3，禁止跳级
+- 使用地标元素：`<main>`、`<nav>`、`<aside>`、`<footer>`
+- 列表使用 `<ul>`/`<ol>`，而非重复的 `<div>`
+- 每个输入框必须有关联的 `<label>`
 
-## Keyboard Navigation
+## 键盘导航
 
-- All interactive elements keyboard accessible
-- Visible focus indicator on all focusable elements
-- Tab order follows visual reading order
-- Escape key closes modals and dropdowns
-- No keyboard traps (users can always tab out)
+- 所有交互元素必须键盘可访问
+- 所有可聚焦元素有可见的焦点指示器
+- Tab 顺序符合视觉阅读顺序
+- Esc 键关闭弹窗和下拉菜单
+- 禁止键盘陷阱（用户可以随时 Tab 离开）
 
-## ARIA
+## ARIA 规范
 
-- ARIA only when semantic HTML can't solve it
-- `aria-label` for elements with no visible text
-- `aria-describedby` for additional context
-- `role="dialog"` with `aria-modal="true"` for modals
-- `aria-live` for dynamic content announcements
-- `aria-expanded` for toggleable content
+- 只在语义 HTML 解决不了时才使用 ARIA
+- 无可见文字的元素使用 `aria-label`
+- 补充说明使用 `aria-describedby`
+- 弹窗使用 `role="dialog"` 和 `aria-modal="true"`
+- 动态内容更新使用 `aria-live`
+- 可展开内容使用 `aria-expanded`
 
-## Images & Media
+## 图片与媒体
 
-- Descriptive `alt` text for informative images
-- Empty `alt=""` for decorative images
-- Captions for all video content
-- Audio descriptions for video with visual-only information
+- 有意义的图片提供描述性 `alt` 文字
+- 装饰性图片使用 `alt=""`（空字符串）
+- 所有视频内容提供字幕
+- 仅有视觉信息的视频提供音频描述
 
-## Color & Contrast
+## 颜色与对比度
 
-- Text contrast ratio: 4.5:1 minimum (7:1 for AAA)
-- Large text (18pt/14pt bold): 3:1 minimum
-- Never use color alone to convey information
-- Test in grayscale
+- 文字对比度：最低 4.5:1（大字体 3:1）
+- 禁止只用颜色传递信息
+- 灰度测试（去掉颜色后功能还能理解吗？）
 
-## Forms
+## 表单规范
 
-- Clear error messages that identify the field and the issue
-- Required fields indicated visually and programmatically
-- Group related fields with `<fieldset>` and `<legend>`
-- Autocomplete attributes on personal info fields
+- 明确标识必填字段（视觉 + 程序化）
+- 错误信息要指出是哪个字段、问题是什么
+- 相关字段用 `<fieldset>` 和 `<legend>` 分组
+- 个人信息字段使用 autocomplete 属性

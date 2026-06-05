@@ -1,59 +1,61 @@
 ---
 name: "Python Rules"
-description: "Pythonic code standards — PEP 8, type hints, modern patterns, and best practices for clean Python projects."
+name_zh: "Python 编码规范"
+description: "Pythonic 代码风格规范 —— PEP 8、类型注解、现代语法，让你的 Python 代码清晰、专业、易维护。"
 rule_type: "claude"
+source: "社区 / PEP 8 / Cursor Directory"
 category: ["python"]
 tags: ["python", "pep8", "type-hints", "clean-code"]
 platform: ["claude-code", "codex"]
 file_name: "python-rules.md"
 is_featured: false
 order: 6
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# Python Rules
+# Python 编码规范
 
-## Style (PEP 8)
+## 代码风格（PEP 8）
 
-- 4 spaces indentation — never tabs
-- Max line length: 88 characters (Black default)
-- Two blank lines between top-level definitions
-- One blank line between methods
-- Use `black` for formatting, `ruff` for linting
+- 缩进使用 4 个空格——禁止 Tab
+- 最大行长度 88 字符（Black 默认值）
+- 顶层定义之间两个空行
+- 方法之间一个空行
+- 格式化使用 `black`，代码检查使用 `ruff`
 
-## Type Hints
+## 类型注解
 
-- Type all function signatures (parameters + return type)
-- Use `from __future__ import annotations` for forward references
-- Prefer `X | None` over `Optional[X]` (Python 3.10+)
-- Use `list[str]` not `List[str]` (Python 3.9+)
-- `Any` only as last resort with comment explaining why
+- 所有函数签名必须有类型注解（参数 + 返回值）
+- 前向引用使用 `from __future__ import annotations`
+- Python 3.10+ 使用 `X | None` 而非 `Optional[X]`
+- Python 3.9+ 使用 `list[str]` 而非 `List[str]`
+- `Any` 只作最后手段，必须加注释说明原因
 
-## Modern Patterns
+## 现代语法
 
-- f-strings over `.format()` or `%` formatting
-- Walrus operator `:=` for assignment expressions
-- Match statements over long if/elif chains (Python 3.10+)
-- `dataclasses` or `pydantic` over raw dicts for structured data
-- Context managers for all resource management
+- 字符串格式化使用 f-strings，而非 `.format()` 或 `%`
+- 赋值表达式使用海象运算符 `:=`（Python 3.10+）
+- 长 if/elif 链使用 `match` 语句（Python 3.10+）
+- 结构化数据使用 `dataclasses` 或 `pydantic`，而非裸字典
+- 所有资源管理使用上下文管理器
 
-## Functions
+## 函数规范
 
-- Small functions with single responsibility
-- Default arguments are evaluated once — never mutable defaults
-- `*args` and `**kwargs` only when truly variable
-- Prefer keyword arguments for clarity when > 3 params
+- 函数职责单一，保持精短
+- 默认参数只求值一次——禁止可变默认值
+- 真正可变参数才用 `*args` 和 `**kwargs`
+- 超过 3 个参数时优先使用关键字参数以提高可读性
 
-## Error Handling
+## 错误处理
 
-- Catch specific exceptions — never bare `except:`
-- Use `contextlib.suppress` for expected, ignorable errors
-- Custom exceptions inherit from appropriate base class
-- Include helpful error messages with context
+- 捕获具体异常——禁止裸 `except:`
+- 预期中可忽略的错误使用 `contextlib.suppress`
+- 自定义异常继承自合适的基类
+- 错误信息要包含有用的上下文
 
-## Project Structure
+## 项目结构
 
-- `pyproject.toml` for all project metadata
-- `src/` layout for installable packages
-- `__init__.py` only when needed (not for namespace packages)
+- 项目元数据全部放在 `pyproject.toml`
+- 可安装包使用 `src/` 布局
+- 只在必要时加 `__init__.py`（命名空间包不需要）

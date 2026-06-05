@@ -1,8 +1,10 @@
 ---
 name: "Browser Use MCP"
-description: "Let Claude control a real browser — navigate pages, click elements, fill forms, extract content, and automate web workflows."
+name_zh: "AI 浏览器控制"
+description: "热门开源项目 browser-use 的 MCP 版本 —— 让 AI 像人一样操控浏览器，支持复杂的多步骤网页任务。"
+source: "社区 · GitHub 热门"
 category: ["browser", "automation"]
-tags: ["browser", "web", "automation", "scraping", "playwright"]
+tags: ["browser", "web", "automation", "scraping"]
 platform: ["claude-code"]
 github_url: "https://github.com/browser-use/browser-use"
 install_cmd: "pip install browser-use && python -m browser_use.mcp"
@@ -12,22 +14,34 @@ config_snippet:
       command: "python"
       args: ["-m", "browser_use.mcp"]
 is_featured: true
-order: 3
+order: 4
 author: "browser-use"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-Browser Use MCP gives Claude the ability to control a real Chromium browser. It can navigate URLs, interact with UI elements, extract structured data from pages, and automate complex web tasks.
+browser-use 是 GitHub 上广受好评的 AI 浏览器自动化项目（数万 Star），其 MCP 版本让 Claude 能够像真人一样使用浏览器，完成复杂的多步骤任务。
 
-## Use Cases
+## 典型用途
 
-- **Web Scraping**: Extract structured data from any website
-- **Form Automation**: Fill and submit forms automatically
-- **Web Research**: Browse and summarize information from multiple sites
-- **UI Testing**: Verify your web app's behavior end-to-end
+**信息搜集**：「帮我搜索并整理这个话题的最新资讯」
 
-## Requirements
+**竞品分析**：「访问这几个网站，对比它们的定价方案」
 
-Python 3.11+ and `pip install browser-use` required.
+**自动化操作**：「登录这个平台，下载上个月的数据报告」
+
+**内容提取**：「从这个网站提取所有联系方式」
+
+## 环境要求
+
+需要 Python 3.11+ 和 Chromium 浏览器：
+
+```bash
+pip install browser-use
+playwright install chromium
+```
+
+## 来源
+
+社区开源项目，GitHub 高 Star。

@@ -69,13 +69,14 @@ const categories = [...new Set(sorted.flatMap(m => m.data.category))].sort()
         <div data-categories={mcp.data.category.join(',')}>
           <ResourceCard
             name={mcp.data.name}
+            name_zh={mcp.data.name_zh}
             description={mcp.data.description}
             slug={mcp.id}
             href={`/mcp/${mcp.id}`}
             tags={mcp.data.tags.slice(0, 3)}
             badge={mcp.data.is_featured ? 'Featured' : undefined}
             badgeVariant="accent"
-            meta={mcp.data.author}
+            source={mcp.data.source}
           />
         </div>
       ))}

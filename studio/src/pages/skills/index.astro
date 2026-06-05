@@ -61,13 +61,14 @@ const difficultyVariant: Record<string, 'success' | 'warning' | 'accent'> = {
         <div data-difficulty={skill.data.difficulty} data-categories={skill.data.category.join(',')}>
           <ResourceCard
             name={skill.data.name}
+            name_zh={skill.data.name_zh}
             description={skill.data.description}
             slug={skill.id}
             href={`/skills/${skill.id}`}
             tags={skill.data.tags.slice(0, 3)}
             badge={difficultyLabel[skill.data.difficulty]}
             badgeVariant={difficultyVariant[skill.data.difficulty]}
-            meta={skill.data.author}
+            source={skill.data.source ?? skill.data.author}
           />
         </div>
       ))}

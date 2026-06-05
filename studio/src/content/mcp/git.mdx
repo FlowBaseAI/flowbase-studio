@@ -1,6 +1,8 @@
 ---
 name: "Git MCP"
-description: "Give Claude access to local Git repositories — read history, diffs, branches, and manage commits without leaving your AI workflow."
+name_zh: "Git 版本控制"
+description: "让 Claude 读取本地 Git 仓库 —— 查看提交历史、分析代码变更、生成 Commit 信息。"
+source: "Anthropic 官方"
 category: ["devtools", "git"]
 tags: ["git", "version-control", "commits", "branches", "diff"]
 platform: ["claude-code", "codex"]
@@ -12,18 +14,25 @@ config_snippet:
       command: "npx"
       args: ["-y", "@modelcontextprotocol/server-git", "--repository", "/path/to/repo"]
 is_featured: false
-order: 15
+order: 13
 author: "Anthropic"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-The Git MCP server gives Claude direct access to your local Git repositories. It can read commits, diffs, branches, tags, and history to provide deep codebase context.
+Git MCP 让 Claude 直接读取本地 Git 仓库的历史记录、变更内容和分支信息，为代码分析和版本管理提供深度上下文。
 
-## Use Cases
+## 典型用途
 
-- **Commit Message Generation**: Generate meaningful commit messages from diffs
-- **Change Analysis**: Understand what changed between any two commits
-- **Code History**: Trace the evolution of specific functions or files
-- **Branch Management**: Get summaries of branch differences
+**Commit 信息生成**：「根据这次改动，帮我写一条规范的 Commit 信息」
+
+**变更分析**：「这两个版本之间改了什么，有没有风险点」
+
+**代码溯源**：「这个函数是什么时候加的，当时为什么改」
+
+**分支对比**：「对比 main 和 dev 分支的差异，做个总结」
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

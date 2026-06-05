@@ -1,6 +1,8 @@
 ---
 name: "MySQL MCP"
-description: "Connect Claude to MySQL databases — inspect schemas, run queries, and analyze relational data with natural language."
+name_zh: "MySQL 数据库"
+description: "让 Claude 连接 MySQL 数据库 —— 自然语言查询数据、分析表结构、生成 SQL 语句。"
+source: "社区"
 category: ["database"]
 tags: ["mysql", "database", "sql", "relational"]
 platform: ["claude-code"]
@@ -19,17 +21,28 @@ config_snippet:
         MYSQL_DATABASE: "mydb"
 is_featured: false
 order: 19
-author: "Community"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-MySQL MCP server provides Claude with access to MySQL and MariaDB databases, enabling schema inspection, query generation, and data analysis.
+MySQL MCP 让 Claude 直接连接 MySQL/MariaDB 数据库，适合使用 MySQL 的 PHP/Laravel/WordPress 等项目开发者。
 
-## Use Cases
+## 典型用途
 
-- **Database Documentation**: Auto-generate schema documentation
-- **Query Optimization**: Get query improvement suggestions
-- **Data Exploration**: Analyze and understand your data
-- **Migration Planning**: Plan and review schema migrations
+**数据查询**：「查询这个月注册的新用户数量和来源分布」
+
+**SQL 辅助**：「帮我写一个复杂的 JOIN 查询」
+
+**性能分析**：「分析这个慢查询，告诉我怎么优化」
+
+**数据库文档**：「根据表结构自动生成数据字典」
+
+## 配置说明
+
+通过环境变量配置数据库连接信息，支持 MySQL 5.7+ 和 MariaDB。
+
+## 来源
+
+社区开源项目。

@@ -1,6 +1,8 @@
 ---
 name: "Notion MCP"
-description: "Connect Claude to your Notion workspace — read pages, create content, manage databases, and automate your knowledge base."
+name_zh: "Notion 知识库"
+description: "Notion 官方发布的 MCP —— 让 Claude 读写你的 Notion 工作区，自动整理笔记、更新数据库。"
+source: "Notion 官方"
 category: ["productivity", "knowledge"]
 tags: ["notion", "knowledge-base", "docs", "database"]
 platform: ["claude-code"]
@@ -19,13 +21,24 @@ author: "Notion"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-The official Notion MCP server lets Claude interact with your Notion workspace. Read pages, create new content, query databases, and keep your knowledge base up to date automatically.
+Notion 官方发布的 MCP 服务器，让 Claude 可以直接操作你的 Notion 工作区，包括读取页面、写入内容、查询数据库等。
 
-## Use Cases
+## 典型用途
 
-- **Meeting Notes**: Auto-generate and save meeting summaries to Notion
-- **Content Planning**: Manage editorial calendars and content databases
-- **Knowledge Base**: Search and retrieve information from your Notion docs
-- **Task Management**: Create and update tasks in Notion databases
+**会议记录**：「把这次会议的要点整理成 Notion 页面」
+
+**内容管理**：「在我的内容日历数据库里添加这篇文章的计划」
+
+**知识检索**：「在我的 Notion 笔记里找和这个问题相关的内容」
+
+**日报生成**：「根据今天的工作内容，生成一篇日报保存到 Notion」
+
+## 获取 Token
+
+在 Notion 设置 → Integrations 创建 API 集成，获取 Integration Token。
+
+## 来源
+
+Notion 官方发布并维护。

@@ -1,65 +1,67 @@
 ---
 name: "Performance Rules"
-description: "Web performance rules — Core Web Vitals, loading optimization, runtime performance, and measurement standards."
+name_zh: "Web 性能规范"
+description: "Web 性能优化规范 —— Core Web Vitals 目标、加载优化、运行时性能，让你的页面对所有用户都快速响应。"
 rule_type: "claude"
+source: "社区 / Google Web Performance / Core Web Vitals"
 category: ["astro", "react"]
 tags: ["performance", "core-web-vitals", "loading", "optimization"]
 platform: ["claude-code"]
 file_name: "performance-rules.md"
 is_featured: false
 order: 20
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# Performance Rules
+# Web 性能规范
 
-## Core Web Vitals Targets
+## Core Web Vitals 目标
 
-- **LCP** (Largest Contentful Paint): < 2.5s
-- **INP** (Interaction to Next Paint): < 200ms
-- **CLS** (Cumulative Layout Shift): < 0.1
+- **LCP**（最大内容绘制）：`<2.5秒`
+- **INP**（交互响应时间）：`<200ms`
+- **CLS**（累积布局偏移）：`<0.1`
 
-## Loading Performance
+## 加载性能
 
-- Preload LCP resource (hero image or font)
-- `loading="lazy"` for below-fold images
-- `fetchpriority="high"` for LCP image
-- Inline critical CSS (above-fold styles)
-- Defer non-critical JavaScript
-- Preconnect to third-party origins
+- 预加载 LCP 资源（Hero 图片或字体）
+- 折叠线以下图片使用 `loading="lazy"`
+- LCP 图片使用 `fetchpriority="high"`
+- 内联关键 CSS（首屏样式）
+- 非关键 JavaScript 延迟加载（defer/lazy）
+- 对第三方源使用 preconnect
 
-## Images
+## 图片规范
 
-- Use modern formats: WebP or AVIF
-- Specify `width` and `height` to prevent CLS
-- Serve responsive images with `srcset`
-- Compress images: WebP `<100KB` for hero, `<30KB` for thumbnails
+- 使用现代格式：WebP 或 AVIF
+- 指定 `width` 和 `height` 防止 CLS
+- 使用 `srcset` 提供响应式图片
+- 图片压缩目标：Hero 图 WebP `<100KB`，缩略图 `<30KB`
 
-## JavaScript
+## JavaScript 规范
 
-- Bundle size budget: < 150KB gzipped per route
-- Code split at route level — no monolithic bundles
-- Tree shake unused exports
-- Avoid importing entire libraries for one function
+- 每个路由 Bundle 大小预算：gzip 后 `<150KB`
+- 路由级别代码分割——不要单一巨型 Bundle
+- Tree shaking 去除未使用的导出
+- 避免为一个函数引入整个库
 
-## Fonts
+## 字体规范
 
-- System font stack for body text when possible
-- Subset custom fonts to used characters
-- `font-display: swap` to prevent FOIT
-- Preload fonts used above the fold
+- 正文字体优先使用系统字体栈
+- 自定义字体子集化（只包含实际使用的字符）
+- 使用 `font-display: swap` 防止 FOIT
+- 折叠线以上使用的字体做 preload
 
-## Measurement
+## 性能监控
 
-- Lighthouse CI in every PR pipeline
-- Test on slow 3G, not just fast WiFi
-- Real User Monitoring (RUM) in production
-- Performance budget alerts when regression detected
+- 每个 PR 的 CI 流程中跑 Lighthouse
+- 在慢速 3G 网络下测试，而非只在 WiFi 下
+- 生产环境部署真实用户监控（RUM）
+- 性能回退时触发预算告警
 
-## Runtime Performance
+## 运行时性能
 
-- Avoid forced layout (read then write DOM, never interleave)
-- Use `requestAnimationFrame` for animations
-- Debounce scroll/resize handlers
-- Virtualize long lists (> 100 items)
+- 避免强制布局（读取后再写入 DOM，禁止交替读写）
+- 动画使用 `requestAnimationFrame`
+- scroll/resize 事件处理函数做防抖
+- 超过 100 条记录的列表使用虚拟滚动

@@ -55,13 +55,14 @@ const typeVariant: Record<string, 'accent' | 'warning' | 'default'> = {
         <div data-type={rule.data.rule_type} data-categories={rule.data.category.join(',')}>
           <ResourceCard
             name={rule.data.name}
+            name_zh={rule.data.name_zh}
             description={rule.data.description}
             slug={rule.id}
             href={`/rules/${rule.id}`}
             tags={rule.data.tags.slice(0, 3)}
             badge={typeLabel[rule.data.rule_type]}
             badgeVariant={typeVariant[rule.data.rule_type]}
-            meta={rule.data.author}
+            source={rule.data.source ?? rule.data.author}
           />
         </div>
       ))}

@@ -1,6 +1,8 @@
 ---
 name: "Telegram MCP"
-description: "Connect Claude to Telegram — send messages, manage bots, read chats, and build Telegram-powered AI automation."
+name_zh: "Telegram 机器人"
+description: "让 Claude 通过 Telegram Bot API 发送消息和通知 —— 构建 AI 驱动的 Telegram 机器人或自动化通知系统。"
+source: "社区"
 category: ["comms", "automation"]
 tags: ["telegram", "bot", "messaging", "automation"]
 platform: ["claude-code"]
@@ -15,17 +17,28 @@ config_snippet:
         TELEGRAM_BOT_TOKEN: "your_bot_token"
 is_featured: false
 order: 16
-author: "Community"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-Telegram MCP lets Claude interact with Telegram — perfect for building notification bots, AI assistants, and automated messaging workflows.
+Telegram MCP 让 Claude 通过 Telegram Bot 发送消息、通知和内容，适合构建个人 AI 助手或自动化通知系统。
 
-## Use Cases
+## 典型用途
 
-- **Notification Bot**: Send automated notifications to Telegram channels
-- **AI Bot**: Build a Telegram bot powered by Claude
-- **Alert System**: Route system alerts to Telegram
-- **Daily Briefings**: Send daily summaries to personal Telegram chats
+**个人 AI 助手**：构建一个 Telegram 机器人，随时与 Claude 对话
+
+**系统通知**：服务器状态、任务完成等事件自动推送到 Telegram
+
+**每日简报**：定时生成并发送每日资讯摘要
+
+**告警系统**：监控异常时发送 Telegram 告警
+
+## 创建 Bot
+
+在 Telegram 中与 @BotFather 对话，用 `/newbot` 命令创建一个 Bot，获取 Token。
+
+## 来源
+
+社区开源项目。

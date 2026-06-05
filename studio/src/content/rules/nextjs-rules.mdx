@@ -1,56 +1,58 @@
 ---
-name: "Next.js Rules"
-description: "Next.js App Router best practices — Server Components, data fetching, routing, and performance optimization."
+name: "Next.js App Router Rules"
+name_zh: "Next.js App Router 规范"
+description: "Next.js 13+ App Router 最佳实践 —— Server Components、数据获取、路由组织，充分发挥新架构的性能优势。"
 rule_type: "claude"
+source: "社区 / Next.js 官方 / Cursor Directory 高 Star 规则"
 category: ["react"]
 tags: ["nextjs", "app-router", "server-components", "react"]
 platform: ["claude-code", "codex"]
 file_name: "nextjs-rules.md"
 is_featured: false
 order: 5
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# Next.js App Router Rules
+# Next.js App Router 规范
 
-## Server vs Client Components
+## Server vs Client 组件
 
-- Default to Server Components — they're faster and have zero bundle cost
-- Add `'use client'` only when you need: browser APIs, event handlers, state, or effects
-- Keep `'use client'` boundary as low in the tree as possible
-- Never import Server Components into Client Components
+- 默认使用 Server Components——更快，零 Bundle 成本
+- 只有在需要浏览器 API、事件处理、状态或副作用时才加 `'use client'`
+- `'use client'` 边界尽量靠近组件树底部
+- 禁止在 Client 组件中导入 Server 组件
 
-## Data Fetching
+## 数据获取
 
-- Fetch data in Server Components using `async/await` directly
-- Use `cache()` to deduplicate fetch calls across the request
-- `revalidate` for ISR: `export const revalidate = 60`
-- `unstable_cache` for caching database queries
+- 在 Server 组件中直接 `async/await` 获取数据
+- 用 `cache()` 在请求间去重 fetch 调用
+- ISR 使用 `revalidate`：`export const revalidate = 60`
+- 数据库查询缓存使用 `unstable_cache`
 
-## Routing
+## 路由规范
 
-- `page.tsx` for routes, `layout.tsx` for shared UI
-- `loading.tsx` for instant loading UI (React Suspense)
-- `error.tsx` for error boundaries
-- Route Groups `(group)` for organizing without affecting URL
-- Parallel Routes `@slot` for complex layouts
+- `page.tsx` 用于路由，`layout.tsx` 用于共享 UI
+- `loading.tsx` 提供即时加载 UI（React Suspense）
+- `error.tsx` 用于错误边界
+- 路由分组 `(group)` 用于组织，不影响 URL
+- 平行路由 `@slot` 用于复杂布局
 
-## Performance
+## 性能规范
 
-- Use `next/image` for all images — never `<img>`
-- Use `next/font` for fonts — never external `<link>`
-- `next/link` for all internal navigation
-- Dynamic imports for heavy client-side components
+- 所有图片使用 `next/image`——禁止 `<img>`
+- 所有字体使用 `next/font`——禁止外部 `<link>`
+- 所有内部导航使用 `next/link`
+- 重型客户端组件使用动态导入
 
 ## Server Actions
 
-- Validate all inputs server-side in Server Actions
-- Use `revalidatePath` or `revalidateTag` after mutations
-- Handle errors and return typed responses
+- Server Actions 中必须进行服务端输入验证
+- 数据变更后使用 `revalidatePath` 或 `revalidateTag`
+- 处理错误并返回类型化的响应
 
-## Environment Variables
+## 环境变量
 
-- Public vars: `NEXT_PUBLIC_` prefix
-- Server-only vars: never expose to client
-- Use `env.ts` with Zod validation for type-safe env vars
+- 公开变量使用 `NEXT_PUBLIC_` 前缀
+- 服务端专用变量禁止暴露给客户端
+- 使用带 Zod 验证的 `env.ts` 实现类型安全的环境变量

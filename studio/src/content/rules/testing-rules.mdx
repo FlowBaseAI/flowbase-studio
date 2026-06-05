@@ -1,68 +1,70 @@
 ---
 name: "Testing Rules"
-description: "Testing standards for quality software — test pyramid, naming conventions, coverage requirements, and what to test."
+name_zh: "测试规范"
+description: "高质量软件测试规范 —— 测试金字塔、命名约定、覆盖率要求，写出真正能捕捉 Bug 的测试。"
 rule_type: "claude"
+source: "社区 / Testing 最佳实践"
 category: ["general"]
 tags: ["testing", "unit-tests", "integration", "coverage", "quality"]
 platform: ["claude-code", "codex"]
 file_name: "testing-rules.md"
 is_featured: false
 order: 18
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# Testing Rules
+# 测试规范
 
-## Test Pyramid
+## 测试金字塔
 
-- **Unit Tests** (70%): Fast, isolated, test one thing
-- **Integration Tests** (20%): Test component interactions
-- **E2E Tests** (10%): Critical user journeys only
+- **单元测试**（70%）：快速、隔离、只测一件事
+- **集成测试**（20%）：测试组件间的交互
+- **E2E 测试**（10%）：只测关键用户路径
 
-## What to Test
+## 什么值得测
 
-Always test:
-- Happy path (normal usage)
-- Edge cases (empty, null, zero, max values)
-- Error paths (invalid input, failures)
-- Security boundaries (auth, authorization)
+必须测试：
+- 正常路径（常规使用场景）
+- 边界情况（空值、null、零、最大值）
+- 错误路径（无效输入、失败场景）
+- 安全边界（认证、授权）
 
-Don't test:
-- Third-party library internals
-- Implementation details (that change with refactoring)
-- Code that's trivially correct (getters/setters)
+不需要测试：
+- 第三方库的内部实现
+- 实现细节（重构时会变的东西）
+- 显而易见正确的简单代码（Getter/Setter）
 
-## Test Quality
+## 测试质量要求
 
-- One assertion per test (focus on one behavior)
-- Descriptive test names: `it('returns 404 when user not found')`
-- Independent tests — no shared mutable state
-- Deterministic — same result every run
-- Fast — unit tests under 50ms each
+- 每个测试只有一个断言焦点
+- 测试名称描述行为：`it('当用户不存在时应该返回 404')`
+- 测试之间相互独立，无共享可变状态
+- 可确定性——每次运行结果相同
+- 快速——单元测试每个不超过 50ms
 
-## Test Structure (AAA)
+## 测试结构（AAA 模式）
 
 ```
-// Arrange
+// Arrange（准备）
 const user = buildUser({ role: 'admin' })
 
-// Act
+// Act（执行）
 const result = canAccessDashboard(user)
 
-// Assert
+// Assert（断言）
 expect(result).toBe(true)
 ```
 
-## Coverage
+## 覆盖率要求
 
-- 80%+ line coverage for business logic
-- 100% for security-critical code
-- Coverage is a metric, not a goal — don't write tests just for coverage
+- 业务逻辑：80% 以上行覆盖率
+- 安全关键代码：100%
+- 覆盖率是指标，不是目标——不要为了数字写无意义的测试
 
-## Test Data
+## 测试数据规范
 
-- Use factory functions, not hardcoded objects
-- Randomize what you can (use faker for realistic data)
-- Test with realistic data volumes (not just 1 item)
-- Clean up test data after each test
+- 使用工厂函数，而非硬编码对象
+- 可以的话用随机数据（使用 faker 生成真实数据）
+- 用真实数量级的数据测试（不要只测 1 条记录）
+- 每个测试结束后清理测试数据

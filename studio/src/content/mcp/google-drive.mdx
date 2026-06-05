@@ -1,6 +1,8 @@
 ---
 name: "Google Drive MCP"
-description: "Connect Claude to Google Drive — read documents, spreadsheets, and files from your Drive without downloading them."
+name_zh: "Google Drive 云盘"
+description: "让 Claude 读取 Google Drive 文件 —— 直接分析 Docs 文档、Sheets 表格，不需要手动下载。"
+source: "Anthropic 官方"
 category: ["productivity", "storage"]
 tags: ["google", "drive", "docs", "sheets", "cloud"]
 platform: ["claude-code"]
@@ -12,18 +14,29 @@ config_snippet:
       command: "npx"
       args: ["-y", "@modelcontextprotocol/server-gdrive"]
 is_featured: false
-order: 12
+order: 14
 author: "Anthropic"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-Google Drive MCP lets Claude read and search your Google Drive files including Docs, Sheets, and Slides. Claude can analyze documents, extract data from spreadsheets, and summarize files.
+Google Drive MCP 让 Claude 直接读取你 Google Drive 中的文件，包括 Google Docs 文档和 Google Sheets 表格，无需手动下载再上传。
 
-## Use Cases
+## 典型用途
 
-- **Document Analysis**: Analyze and summarize Google Docs
-- **Spreadsheet Insights**: Extract insights from Google Sheets
-- **File Search**: Find files by content across your Drive
-- **Report Generation**: Generate reports based on Drive data
+**文档分析**：「分析这份 Google Doc 里的产品方案，提出改进建议」
+
+**表格数据**：「读取这个 Google Sheet，告诉我数据里的关键趋势」
+
+**跨文件搜索**：「在我的 Drive 里找所有提到这个项目名的文件」
+
+**内容提取**：「把这个 Google Doc 的重要内容整理成摘要」
+
+## 首次使用
+
+需要配置 Google OAuth 认证，首次运行会打开浏览器让你授权。
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

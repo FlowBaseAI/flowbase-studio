@@ -1,41 +1,43 @@
 ---
 name: "API Development Rules"
-description: "Rules for building consistent, well-designed APIs — REST conventions, error handling, versioning, and documentation."
+name_zh: "API 开发规范"
+description: "构建一致、设计良好的 API —— REST 规范、错误处理、版本管理、文档要求，让 API 易用且可维护。"
 rule_type: "claude"
+source: "社区 / REST API 设计最佳实践"
 category: ["general"]
 tags: ["api", "rest", "http", "design", "documentation"]
 platform: ["claude-code", "codex"]
 file_name: "api-rules.md"
 is_featured: false
 order: 17
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# API Development Rules
+# API 开发规范
 
-## URL Design
+## URL 设计
 
-- Plural nouns for collections: `/users`, `/posts`
-- Nested for owned resources: `/users/{id}/posts`
-- Lowercase, hyphen-separated: `/blog-posts`
-- No verbs in URLs — use HTTP methods
-- Version in URL: `/v1/`, `/v2/`
+- 集合使用复数名词：`/users`、`/posts`
+- 归属资源使用嵌套路由：`/users/{id}/posts`
+- 小写 + 连字符：`/blog-posts`
+- URL 中禁止出现动词——用 HTTP 方法表达动作
+- URL 包含版本号：`/v1/`、`/v2/`
 
-## HTTP Methods & Status Codes
+## HTTP 方法与状态码
 
-| Action | Method | Success Code |
-|--------|--------|--------------|
-| Read collection | GET | 200 |
-| Read single | GET | 200 |
-| Create | POST | 201 |
-| Replace | PUT | 200 |
-| Update | PATCH | 200 |
-| Delete | DELETE | 204 |
+| 操作 | 方法 | 成功状态码 |
+|------|------|-----------|
+| 读取集合 | GET | 200 |
+| 读取单条 | GET | 200 |
+| 创建 | POST | 201 |
+| 替换 | PUT | 200 |
+| 更新 | PATCH | 200 |
+| 删除 | DELETE | 204 |
 
-Error codes: 400 (bad request), 401 (unauthenticated), 403 (forbidden), 404 (not found), 409 (conflict), 422 (validation), 429 (rate limited), 500 (server error)
+错误码：400（请求错误）、401（未认证）、403（无权限）、404（不存在）、409（冲突）、422（数据验证失败）、429（限流）、500（服务器错误）
 
-## Response Format
+## 响应格式
 
 ```json
 {
@@ -45,27 +47,27 @@ Error codes: 400 (bad request), 401 (unauthenticated), 403 (forbidden), 404 (not
 }
 ```
 
-## Error Format
+## 错误格式
 
 ```json
 {
   "errors": [{
     "code": "VALIDATION_ERROR",
-    "message": "Email is invalid",
+    "message": "邮箱格式不正确",
     "field": "email"
   }]
 }
 ```
 
-## Documentation
+## 文档规范
 
-- Every endpoint documented in OpenAPI 3.0
-- Request/response examples for all endpoints
-- Error codes and their meanings documented
-- Authentication method clearly documented
+- 所有端点必须有 OpenAPI 3.0 文档
+- 所有端点提供请求/响应示例
+- 记录所有错误码及其含义
+- 清晰说明认证方式
 
-## Rate Limiting
+## 速率限制
 
-- Include `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` headers
-- Return 429 when limit exceeded
-- Stricter limits on auth endpoints
+- 响应头包含 `X-RateLimit-Limit`、`X-RateLimit-Remaining`、`X-RateLimit-Reset`
+- 超限时返回 429
+- 认证端点设置更严格的限制

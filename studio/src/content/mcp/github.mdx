@@ -1,6 +1,8 @@
 ---
 name: "GitHub MCP"
-description: "Connect Claude Code to GitHub — read repos, manage issues, create PRs, and automate workflows directly from your AI agent."
+name_zh: "GitHub 连接器"
+description: "让 Claude 直接操作 GitHub —— 读取仓库代码、创建 Issue、提交 PR、搜索代码，无需离开对话。"
+source: "Anthropic 官方"
 category: ["devtools", "git"]
 tags: ["github", "git", "repository", "issues", "pr"]
 platform: ["claude-code", "codex"]
@@ -19,20 +21,23 @@ author: "Anthropic"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-The GitHub MCP server lets Claude Code interact with GitHub repositories programmatically. You can search code, read files, manage issues, create pull requests, and automate your entire GitHub workflow.
+GitHub MCP 让 Claude 拥有直接操作 GitHub 的能力。你可以用自然语言描述需求，Claude 会自动完成对应的 GitHub 操作。
 
-## Use Cases
+## 典型用途
 
-- **Code Review Automation**: Ask Claude to review PRs and post inline comments
-- **Issue Management**: Auto-triage issues, assign labels, and suggest fixes
-- **Repository Analysis**: Analyze code quality, find vulnerabilities, summarize changes
-- **PR Creation**: Generate commit messages and create PRs from local changes
+**代码搜索**：「帮我在这个仓库里找所有处理用户认证的文件」
 
-## Configuration
+**Issue 管理**：「给这个 bug 创建一个详细的 Issue，包括复现步骤」
 
-Set your `GITHUB_TOKEN` environment variable with a personal access token that has `repo` scope.
+**PR 审查**：「分析这个 PR 的改动，找出潜在问题」
+
+**仓库分析**：「分析这个开源项目的代码结构，告诉我从哪里开始读」
+
+## 环境配置
+
+需要 GitHub Personal Access Token，在 GitHub Settings → Developer Settings → Personal Access Tokens 创建，选择 `repo` 权限。
 
 ```json
 {
@@ -41,9 +46,13 @@ Set your `GITHUB_TOKEN` environment variable with a personal access token that h
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-github"],
       "env": {
-        "GITHUB_TOKEN": "ghp_your_token_here"
+        "GITHUB_TOKEN": "ghp_你的token"
       }
     }
   }
 }
 ```
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合，持续维护更新。

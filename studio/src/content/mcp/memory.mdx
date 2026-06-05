@@ -1,6 +1,8 @@
 ---
 name: "Memory MCP"
-description: "Give Claude persistent memory across conversations — store facts, preferences, and context that survive session resets."
+name_zh: "持久记忆"
+description: "给 Claude 持久记忆能力 —— 跨对话保存重要信息，让 Claude 记住你的偏好、项目背景和关键知识。"
+source: "Anthropic 官方"
 category: ["utility", "ai"]
 tags: ["memory", "persistence", "context", "knowledge-graph"]
 platform: ["claude-code"]
@@ -12,18 +14,29 @@ config_snippet:
       command: "npx"
       args: ["-y", "@modelcontextprotocol/server-memory"]
 is_featured: false
-order: 8
+order: 9
 author: "Anthropic"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-The Memory MCP server provides Claude with a persistent knowledge graph that survives across sessions. Claude can store and retrieve facts, relationships, and preferences automatically.
+Memory MCP 通过知识图谱技术，让 Claude 在对话之间保持记忆。Claude 可以主动存储和检索重要信息，不再每次都需要重新介绍背景。
 
-## Use Cases
+## 典型用途
 
-- **User Preferences**: Remember user settings and preferences
-- **Project Context**: Maintain context about long-running projects
-- **Knowledge Building**: Build up domain knowledge incrementally
-- **Personalization**: Make Claude's responses more personalized over time
+**个人偏好**：「记住我喜欢简洁的代码风格，以后都按这个要求」
+
+**项目背景**：「记录这个项目的技术选型决策，以后参考」
+
+**知识积累**：「把这次研究的结论存起来，以后可以调用」
+
+**个性化助手**：「记住我的团队成员和各自职责」
+
+## 使用方式
+
+Claude 会根据对话内容主动决定存储哪些信息，你也可以明确告诉它「记住这件事」。
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

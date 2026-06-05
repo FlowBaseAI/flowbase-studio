@@ -1,56 +1,58 @@
 ---
 name: "React Rules"
-description: "Modern React best practices — hooks, performance, component design, and patterns for maintainable React applications."
+name_zh: "React 开发规范"
+description: "现代 React 最佳实践 —— Hooks 用法、性能优化、组件设计模式，构建可维护的 React 应用。"
 rule_type: "claude"
+source: "社区 / React 官方 / Cursor Directory 热门规则"
 category: ["react"]
 tags: ["react", "hooks", "components", "performance", "jsx"]
 platform: ["claude-code", "codex"]
 file_name: "react-rules.md"
 is_featured: false
 order: 4
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# React Rules
+# React 开发规范
 
-## Components
+## 组件规范
 
-- One component per file
-- Function components only — no class components
-- Component names in PascalCase
-- Keep components under 200 lines — extract if larger
-- Separate presentation from logic (custom hooks for logic)
+- 每个文件一个组件
+- 只使用函数组件——禁止类组件
+- 组件名使用 PascalCase
+- 组件超过 200 行就提取
+- 逻辑和展示分离（业务逻辑放自定义 Hooks）
 
-## Hooks
+## Hooks 规范
 
-- Never call hooks conditionally or in loops
-- Custom hooks start with `use` prefix
-- `useEffect` dependencies must be complete and accurate
-- Prefer `useReducer` over multiple related `useState` calls
-- `useMemo` and `useCallback` only when profiling shows a benefit
+- 禁止在条件语句或循环中调用 Hook
+- 自定义 Hook 以 `use` 为前缀
+- `useEffect` 依赖数组必须完整且准确
+- 多个相关 `useState` 时优先使用 `useReducer`
+- `useMemo` 和 `useCallback` 只在性能分析证明有必要时使用
 
-## State Management
+## 状态管理
 
-- Lift state to the lowest common ancestor
-- Prefer local state — don't reach for global state first
-- Colocate state with the component that owns it
-- Avoid prop drilling beyond 2 levels — use context or composition
+- 将状态提升到最近的公共祖先
+- 优先本地状态——不要一上来就用全局状态
+- 状态与使用它的组件放在一起
+- 超过 2 层的 prop drilling 考虑使用 Context 或组合
 
-## Performance
+## 性能规范
 
-- Key prop on list items must be stable and unique (not index)
-- `React.memo` for components that render frequently with same props
-- Avoid creating objects/functions in render — they cause re-renders
-- Lazy load heavy components with `React.lazy`
+- 列表 key 必须稳定且唯一（禁止使用 index）
+- `React.memo` 用于频繁渲染且 props 不变的组件
+- 避免在渲染中创建对象/函数——会导致不必要的重渲染
+- 大型客户端组件使用 `React.lazy` 懒加载
 
-## Event Handling
+## 事件处理
 
-- Name handlers `handle{Event}`: `handleClick`, `handleSubmit`
-- Never inline arrow functions in JSX for performance-sensitive lists
+- 事件处理函数命名 `handle{Event}`：`handleClick`、`handleSubmit`
+- 性能敏感的列表中禁止在 JSX 中内联箭头函数
 
-## TypeScript
+## TypeScript 集成
 
-- Type component props explicitly — no implicit any
-- Use `React.FC` sparingly — just type the function directly
-- `ReactNode` for children prop type
+- 明确为组件 props 声明类型——禁止隐式 any
+- 谨慎使用 `React.FC`——直接为函数标注类型
+- children prop 类型使用 `ReactNode`

@@ -1,6 +1,8 @@
 ---
 name: "SQLite MCP"
-description: "Give Claude access to local SQLite databases — run queries, inspect schemas, and analyze data without a server."
+name_zh: "SQLite 本地数据库"
+description: "让 Claude 操作本地 SQLite 数据库文件 —— 无需数据库服务器，适合个人项目和数据分析。"
+source: "Anthropic 官方"
 category: ["database"]
 tags: ["sqlite", "database", "sql", "local"]
 platform: ["claude-code", "codex", "gemini-cli"]
@@ -12,18 +14,40 @@ config_snippet:
       command: "npx"
       args: ["-y", "@modelcontextprotocol/server-sqlite", "--db-path", "/path/to/database.db"]
 is_featured: false
-order: 11
+order: 12
 author: "Anthropic"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-SQLite MCP gives Claude direct access to SQLite database files on your local filesystem. Perfect for local development, data analysis, and projects that don't need a full database server.
+SQLite MCP 让 Claude 直接访问你的 SQLite 数据库文件，无需配置数据库服务器，适合独立开发者的本地数据分析场景。
 
-## Use Cases
+## 典型用途
 
-- **Local Data Analysis**: Query and analyze local SQLite databases
-- **App Development**: Inspect your app's SQLite data during development
-- **Data Migration**: Help plan and execute data migrations
-- **Prototyping**: Quickly build data models and test queries
+**App 数据查询**：「帮我查询应用数据库里的用户数据分布」
+
+**数据分析**：「分析这个 SQLite 文件里的销售数据趋势」
+
+**数据库调试**：「检查这个表的数据是否有异常」
+
+**迁移辅助**：「分析这个数据库结构，帮我规划迁移方案」
+
+## 配置说明
+
+指定 SQLite 数据库文件路径：
+
+```json
+{
+  "mcpServers": {
+    "sqlite": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite", "--db-path", "/你的数据库.db"]
+    }
+  }
+}
+```
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

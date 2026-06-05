@@ -1,56 +1,58 @@
 ---
 name: "Astro Rules"
-description: "Best practices for Astro projects — Islands architecture, Content Collections, performance, and component patterns."
+name_zh: "Astro 开发规范"
+description: "Astro 项目最佳实践 —— Islands 架构、Content Collections、性能优化，让你的 Astro 站点快速且可维护。"
 rule_type: "claude"
+source: "社区 / Astro 官方文档 / Cursor Directory"
 category: ["astro"]
 tags: ["astro", "islands", "performance", "ssg", "ssr"]
 platform: ["claude-code"]
 file_name: "astro-rules.md"
 is_featured: true
 order: 3
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# Astro Rules
+# Astro 开发规范
 
-## Architecture
+## 架构原则
 
-- Default to `.astro` components — they ship zero JS
-- Only use framework components (React, Preact, Svelte) when interactivity is needed
-- Use `client:load` sparingly — prefer `client:visible` or `client:idle`
-- Keep Islands as small and self-contained as possible
-- Data fetching belongs in `.astro` frontmatter, not in client components
+- 默认使用 `.astro` 组件——它们不输出 JS
+- 只有在需要交互时才使用框架组件（React、Preact、Svelte）
+- 谨慎使用 `client:load`——优先 `client:visible` 或 `client:idle`
+- Island 组件尽量小且自包含
+- 数据获取在 `.astro` frontmatter 中完成，不在客户端组件中
 
 ## Content Collections
 
-- Always define schemas with `z` from `astro:content`
-- Use `getCollection()` for type-safe data access
-- Keep content in `/src/content/` — never in `/public/`
-- Use MDX for content that needs components, `.md` for pure text
+- 始终用 `z` 定义 Schema 进行 frontmatter 类型验证
+- 使用 `getCollection()` 进行类型安全的数据访问
+- 内容存放在 `/src/content/`——禁止放在 `/public/`
+- 需要组件的内容用 MDX，纯文本用 `.md`
 
-## Performance
+## 性能规范
 
-- All images via `<Image>` component from `astro:assets` for optimization
-- Fonts via `preconnect` and `font-display: swap`
-- No unused JavaScript — use the Network tab to verify
-- Prefer static generation (`output: 'static'`) unless SSR is truly needed
+- 所有图片通过 `astro:assets` 的 `<Image>` 组件优化
+- 字体通过 `preconnect` 和 `font-display: swap` 处理
+- 不要有未使用的 JavaScript——用 Network 标签验证
+- 非必要 SSR 时优先使用静态生成（`output: 'static'`）
 
-## Component Patterns
+## 组件模式
 
-- Props interface using TypeScript interface in frontmatter
-- Slot default content for optional slots
-- Use `Astro.props` — never destructure props in script tag
-- `define:vars` for passing server data to inline scripts
+- 在 frontmatter 中用 TypeScript interface 定义 Props
+- 为可选 Slot 提供默认内容
+- 使用 `Astro.props`——不要在 script 标签中解构 props
+- 用 `define:vars` 将服务端数据传给内联脚本
 
-## Routing
+## 路由规范
 
-- File-based routing — keep page files thin
-- Dynamic routes use `getStaticPaths()` for static generation
-- API routes in `/src/pages/api/` with proper HTTP method handling
+- 页面文件保持精简
+- 动态路由静态生成使用 `getStaticPaths()`
+- API 路由放在 `/src/pages/api/`，处理正确的 HTTP 方法
 
-## Styling
+## 样式规范
 
-- Scoped styles by default in `.astro` components
-- Global styles only for reset, custom properties, and typography
-- Tailwind utility classes preferred over component-scoped CSS
+- `.astro` 组件默认使用 Scoped Styles
+- 全局样式只用于 reset、CSS 变量和排版
+- 优先使用 Tailwind 工具类而非组件级 CSS

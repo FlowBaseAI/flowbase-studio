@@ -1,6 +1,8 @@
 ---
 name: "OpenAI MCP"
-description: "Access OpenAI models from within Claude workflows — use GPT-4, DALL-E, Whisper, and embeddings as tools in your agent."
+name_zh: "OpenAI 模型接入"
+description: "在 Claude 工作流中使用 OpenAI 的模型能力 —— DALL-E 图像生成、Whisper 语音转写、文本嵌入等。"
+source: "OpenAI 官方"
 category: ["ai", "utility"]
 tags: ["openai", "gpt", "dall-e", "embeddings", "ai"]
 platform: ["claude-code"]
@@ -19,13 +21,20 @@ author: "OpenAI"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-The OpenAI MCP gives Claude access to OpenAI's suite of models and APIs, enabling multi-model workflows where each AI does what it's best at.
+OpenAI MCP 让 Claude 在工作中调用 OpenAI 的其他 AI 服务，构建多模型协作的工作流。
 
-## Use Cases
+## 典型用途
 
-- **Image Generation**: Generate images with DALL-E from within Claude
-- **Transcription**: Use Whisper to transcribe audio files
-- **Embeddings**: Generate text embeddings for semantic search
-- **Multi-model Reasoning**: Route specialized tasks to optimal models
+**图像生成**：「用 DALL-E 生成这篇文章的配图」
+
+**语音转写**：「用 Whisper 把这段音频转成文字」
+
+**语义搜索**：「用 Embeddings 为这批文档建立向量索引」
+
+**多模型协作**：让 Claude 负责推理，OpenAI 负责多媒体处理
+
+## 来源
+
+OpenAI 官方 MCP 服务器。

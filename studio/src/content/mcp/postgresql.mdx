@@ -1,6 +1,8 @@
 ---
 name: "PostgreSQL MCP"
-description: "Connect Claude Code to your PostgreSQL database — run queries, inspect schemas, and manage data with natural language."
+name_zh: "PostgreSQL 数据库"
+description: "让 Claude 直接查询 PostgreSQL 数据库 —— 用自然语言提问，Claude 自动生成 SQL 并返回结果。"
+source: "Anthropic 官方"
 category: ["database"]
 tags: ["postgresql", "database", "sql", "postgres"]
 platform: ["claude-code", "codex"]
@@ -17,28 +19,35 @@ author: "Anthropic"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-The PostgreSQL MCP server provides Claude with direct access to your PostgreSQL database. Claude can inspect table schemas, run read-only queries, and help you understand your data structure.
+PostgreSQL MCP 让 Claude 直接连接到你的数据库。你可以用中文提问，Claude 会自动生成 SQL 查询并返回结果，不需要自己写 SQL。
 
-## Use Cases
+## 典型用途
 
-- **Schema Exploration**: Understand database structure instantly
-- **Query Generation**: Generate complex SQL from natural language
-- **Data Analysis**: Analyze and summarize your data
-- **Migration Help**: Get Claude to review and suggest migrations
+**数据查询**：「查询上个月销售额最高的10个产品」
 
-## Configuration
+**数据库理解**：「帮我解释这个数据库的表结构和关系」
 
-Provide your PostgreSQL connection string as an argument.
+**SQL 生成**：「帮我写一个统计用户留存率的 SQL 查询」
+
+**数据分析**：「分析这张表的数据分布，找出异常值」
+
+## 配置说明
+
+提供 PostgreSQL 连接字符串：
 
 ```json
 {
   "mcpServers": {
     "postgres": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://user:pass@localhost/dbname"]
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://用户名:密码@localhost/数据库名"]
     }
   }
 }
 ```
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

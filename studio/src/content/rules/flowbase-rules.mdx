@@ -1,50 +1,52 @@
 ---
-name: "FlowBase General Rules"
-description: "General-purpose Claude Code rules for professional software development — code quality, communication, and decision-making."
+name: "General Development Rules"
+name_zh: "通用开发规范"
+description: "Claude Code 通用开发规范 —— 代码质量、沟通方式、决策原则，适用于所有项目类型的基础规则集。"
 rule_type: "claude"
+source: "Anthropic 官方 / Claude Code 最佳实践"
 category: ["general"]
 tags: ["general", "best-practices", "quality", "professional"]
 platform: ["claude-code"]
-file_name: "flowbase-rules.md"
+file_name: "general-rules.md"
 is_featured: true
 order: 1
-author: "FlowBase"
+author: "Anthropic"
 updated_at: "2025-01-01"
 ---
 
-# FlowBase General Rules
+# 通用开发规范
 
-## Code Quality
+## 代码质量
 
-- Write code that is correct first, then clear, then efficient
-- Prefer explicit over implicit
-- Don't add features, abstractions, or error handling beyond what was asked
-- Three similar lines is better than a premature abstraction
-- No half-finished implementations
+- 代码正确性第一，可读性第二，性能第三
+- 明确优于隐式
+- 不要添加超出需求的功能、抽象或错误处理
+- 三行相似代码比过早抽象更好
+- 禁止提交未完成的实现
 
-## Communication
+## 沟通规范
 
-- Be direct and concise — no unnecessary preamble
-- State what you're doing before you do it
-- Report blockers immediately, don't work around them silently
-- When uncertain, ask a targeted question rather than guessing
+- 直接、简洁——不要不必要的开场白
+- 做事前先说明要做什么
+- 遇到阻碍立即报告，不要悄悄绕过
+- 不确定时提出针对性问题，而不是猜测
 
-## Decision Making
+## 决策原则
 
-- Prefer the simplest solution that solves the problem
-- When choosing between approaches, state trade-offs explicitly
-- Default to established conventions in the codebase
-- Don't introduce new dependencies unless clearly justified
+- 优先选择解决问题的最简方案
+- 在不同方案中明确说明权衡取舍
+- 默认遵循代码库中的现有规范
+- 引入新依赖需要明确理由
 
-## Comments
+## 注释原则
 
-- Default to no comments
-- Only add comments for non-obvious WHY, not obvious WHAT
-- Never write comments that describe what the code clearly shows
+- 默认不加注释
+- 只对非显而易见的「为什么」加注释，不注释显而易见的「是什么」
+- 禁止描述代码已经清楚表达的内容的注释
 
-## Security
+## 安全原则
 
-- Never hardcode secrets or credentials
-- Validate all user input at system boundaries
-- Use parameterized queries — never string concatenation for SQL
-- Never log sensitive data (passwords, tokens, PII)
+- 禁止硬编码密钥或凭证
+- 在系统边界验证所有用户输入
+- SQL 使用参数化查询，禁止字符串拼接
+- 禁止在日志中记录敏感数据（密码、Token、个人信息）

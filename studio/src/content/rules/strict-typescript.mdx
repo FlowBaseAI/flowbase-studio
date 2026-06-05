@@ -1,20 +1,22 @@
 ---
 name: "Strict TypeScript Rules"
-description: "Maximum TypeScript strictness — exhaustive type checking, no escape hatches, and type-driven development."
+name_zh: "TypeScript 极严格规范"
+description: "TypeScript 最高严格级别规范 —— 穷举类型检查、零逃生舱口、Result 类型模式，彻底消除运行时类型错误。"
 rule_type: "claude"
+source: "社区 / TypeScript 高级实践"
 category: ["typescript"]
 tags: ["typescript", "strict", "advanced", "type-safety"]
 platform: ["claude-code", "codex"]
 file_name: "strict-typescript.md"
 is_featured: false
 order: 12
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# Strict TypeScript Rules
+# TypeScript 极严格规范
 
-## tsconfig.json Requirements
+## tsconfig.json 要求
 
 ```json
 {
@@ -29,30 +31,30 @@ updated_at: "2025-01-01"
 }
 ```
 
-## Zero Escape Hatches
+## 零逃生舱口原则
 
-- `any` is banned — use `unknown` + type narrowing
-- `as` casts require comment with justification
-- `!` non-null assertions require comment with proof
-- `@ts-ignore` is forbidden
-- `// eslint-disable` requires ticket number in comment
+- 禁止 `any`——使用 `unknown` + 类型收窄
+- `as` 类型转换必须有说明理由的注释
+- `!` 非空断言必须有证明安全的注释
+- 禁止 `@ts-ignore`
+- `// eslint-disable` 必须附上 Issue 编号
 
-## Exhaustive Pattern Matching
+## 穷举模式匹配
 
 ```typescript
-// Always handle all union cases
+// 所有联合类型分支必须处理
 function assertNever(x: never): never {
-  throw new Error(`Unhandled case: ${x}`)
+  throw new Error(`未处理的情况: ${x}`)
 }
 
 switch (action.type) {
   case 'ADD': return handleAdd(action)
   case 'REMOVE': return handleRemove(action)
-  default: return assertNever(action.type) // compile error if case missing
+  default: return assertNever(action.type) // 缺少分支时编译报错
 }
 ```
 
-## Result Types (No throw)
+## Result 类型（不抛出异常）
 
 ```typescript
 type Result<T, E = Error> =
@@ -60,10 +62,10 @@ type Result<T, E = Error> =
   | { success: false; error: E }
 ```
 
-Use Result types for operations that can fail. Reserve `throw` for truly exceptional, unrecoverable errors.
+对可能失败的操作使用 Result 类型。真正意外的、无法恢复的错误才使用 `throw`。
 
-## Generic Constraints
+## 泛型约束规范
 
-- All generics must have meaningful constraints
-- Document what T is in JSDoc when non-obvious
-- Avoid unconstrained `T` when you know the shape
+- 所有泛型必须有有意义的约束
+- 泛型含义不明显时使用 JSDoc 注释
+- 当知道具体形状时，避免使用无约束的 `T`

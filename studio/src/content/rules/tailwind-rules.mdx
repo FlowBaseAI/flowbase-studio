@@ -1,57 +1,59 @@
 ---
 name: "Tailwind CSS Rules"
-description: "Tailwind CSS best practices — utility organization, custom components, responsive design, and avoiding common pitfalls."
+name_zh: "Tailwind CSS 规范"
+description: "Tailwind CSS 使用规范 —— 类名组织顺序、组件提取时机、响应式设计、深色模式，避免常见反模式。"
 rule_type: "claude"
+source: "社区 / Tailwind CSS 官方 / Cursor Directory"
 category: ["astro", "react"]
 tags: ["tailwind", "css", "styling", "responsive", "design"]
 platform: ["claude-code"]
 file_name: "tailwind-rules.md"
 is_featured: false
 order: 14
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# Tailwind CSS Rules
+# Tailwind CSS 规范
 
-## Utility Organization
+## 类名组织顺序
 
-Order utilities consistently:
-1. Layout (display, position, float)
-2. Sizing (width, height, padding, margin)
-3. Typography (font, text, leading)
-4. Visual (background, border, shadow, opacity)
-5. Interactive (cursor, pointer-events, transitions)
-6. Responsive variants last
+按以下顺序排列工具类：
+1. 布局（display、position、float）
+2. 尺寸（width、height、padding、margin）
+3. 排版（font、text、leading）
+4. 视觉（background、border、shadow、opacity）
+5. 交互（cursor、pointer-events、transitions）
+6. 响应式变体放在最后
 
-## Component Extraction
+## 组件提取时机
 
-Extract to a component when:
-- Same utility combination appears 3+ times
-- The combination is logically meaningful
-- It's used across multiple files
+在以下情况下提取为组件：
+- 相同的工具类组合出现 3 次以上
+- 这个组合有明确的语义意义
+- 在多个文件中使用
 
-Don't extract just to be DRY — repetition in utility classes is acceptable.
+不要只为了 DRY 而提取——工具类中适度重复是可以接受的。
 
-## Responsive Design
+## 响应式设计
 
-- Mobile-first: base styles are mobile, add `sm:`, `md:`, `lg:` for larger screens
-- Test at 320px, 768px, 1024px, 1280px breakpoints
-- Don't use `max-sm:` or `max-md:` — use min-width breakpoints
+- 移动优先：基础样式适配移动端，用 `sm:`、`md:`、`lg:` 适配更大屏幕
+- 测试断点：320px、768px、1024px、1280px
+- 禁止使用 `max-sm:` 或 `max-md:`——使用 min-width 断点
 
-## Dark Mode
+## 深色模式
 
-- Use CSS variables for theme colors, not `dark:` prefix in every class
-- Define design tokens in `@theme` or `:root`
+- 使用 CSS 变量定义主题色，而非在每个类上使用 `dark:` 前缀
+- 在 `@theme` 或 `:root` 中定义设计 Token
 
-## Custom Values
+## 自定义值
 
-- Use `[]` arbitrary values sparingly: `w-[137px]` is a red flag
-- If you need it more than once, add it to `theme.extend`
-- Prefer named spacing steps over magic numbers
+- 谨慎使用 `[]` 任意值：`w-[137px]` 是一个警告信号
+- 如果某个值需要使用超过一次，加到 `theme.extend` 中
+- 优先使用命名间距步骤，而非魔法数字
 
-## Performance
+## 性能注意
 
-- PurgeCSS (built into Tailwind v3+) removes unused classes automatically
-- Don't use string concatenation for class names — they won't be purged
-- Safe pattern: `cn('base-class', condition && 'conditional-class')`
+- PurgeCSS（Tailwind v3+ 内置）会自动移除未使用的类
+- 禁止用字符串拼接构造类名——会导致 PurgeCSS 无法识别
+- 安全模式：`cn('base-class', condition && 'conditional-class')`

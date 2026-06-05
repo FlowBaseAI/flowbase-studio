@@ -39,12 +39,30 @@ const configJson = JSON.stringify(mcp.data.config_snippet, null, 2)
         <div style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
           <div style="flex: 1; min-width: 200px;">
             <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
-              <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--color-text); margin: 0; letter-spacing: -0.02em;">
-                {mcp.data.name}
-              </h1>
+              <div>
+                {mcp.data.name_zh ? (
+                  <div>
+                    <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.125rem; letter-spacing: -0.02em;">
+                      {mcp.data.name_zh}
+                    </h1>
+                    <div style="font-size: 0.875rem; color: var(--color-text-subtle); font-family: var(--font-mono); margin-bottom: 0.25rem;">
+                      {mcp.data.name}
+                    </div>
+                  </div>
+                ) : (
+                  <h1 style="font-size: 1.75rem; font-weight: 700; color: var(--color-text); margin: 0; letter-spacing: -0.02em;">
+                    {mcp.data.name}
+                  </h1>
+                )}
+                {mcp.data.source && (
+                  <div style="font-size: 0.75rem; color: var(--color-accent); background: var(--color-accent-subtle); display: inline-flex; align-items: center; padding: 0.125rem 0.5rem; border-radius: 3px; margin-top: 0.25rem;">
+                    {mcp.data.source}
+                  </div>
+                )}
+              </div>
               {mcp.data.is_featured && <Badge variant="accent">Featured</Badge>}
             </div>
-            <p style="color: var(--color-text-muted); font-size: 0.9375rem; margin: 0; line-height: 1.5;">
+            <p style="color: var(--color-text-muted); font-size: 0.9375rem; margin: 0.75rem 0 0; line-height: 1.5;">
               {mcp.data.description}
             </p>
           </div>

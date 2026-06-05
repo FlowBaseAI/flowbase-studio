@@ -1,54 +1,56 @@
 ---
 name: "Cursor TypeScript Rules"
-description: "TypeScript-specific Cursor Rules — strict typing, modern patterns, and TypeScript best practices for Cursor users."
+name_zh: "Cursor TypeScript 规范"
+description: "专为 Cursor 用户准备的 TypeScript 严格规范 —— 零逃生舱口，类型驱动开发，最大化编译期安全。"
 rule_type: "cursor"
+source: "Cursor Directory / TypeScript 社区规范"
 category: ["typescript"]
 tags: ["cursor", "typescript", "types", "strict"]
 platform: ["codex"]
 file_name: "cursor-typescript.md"
 is_featured: false
 order: 10
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# Cursor TypeScript Rules
+# Cursor TypeScript 规范
 
-## Strictness
+## 严格模式
 
-- Always work with `strict: true` — never weaken it
-- Resolve all TypeScript errors before completing a task
-- No `@ts-ignore` or `@ts-expect-error` without comment explaining why
-- Prefer compile-time errors over runtime errors
+- 始终在 `strict: true` 环境下工作——禁止降级
+- 完成任务前必须解决所有 TypeScript 错误
+- 禁止 `@ts-ignore` 或 `@ts-expect-error`（除非有注释说明原因）
+- 优先编译时错误，而非运行时错误
 
-## Type Definitions
+## 类型定义
 
-- Export types that are used across files
-- Co-locate types with their primary usage
-- Use descriptive type names: `UserId` not `id`, `ApiResponse<T>` not `Response`
-- Document complex generic types with JSDoc
+- 跨文件使用的类型必须导出
+- 类型与其主要使用场景放在一起
+- 使用描述性类型名：`UserId` 而非 `id`，`ApiResponse<T>` 而非 `Response`
+- 复杂泛型类型用 JSDoc 注释说明
 
-## Patterns to Follow
+## 推荐模式
 
 ```typescript
-// Prefer
+// 优先使用
 const config = { port: 3000 } as const
 type Config = typeof config
 
-// Over
+// 而非
 const config: { port: number } = { port: 3000 }
 ```
 
 ```typescript
-// Prefer discriminated unions
+// 优先使用可辨别联合类型
 type Result<T> = { ok: true; data: T } | { ok: false; error: string }
 
-// Over throwing exceptions for expected failures
+// 而非为预期失败抛出异常
 ```
 
-## Code Generation Guidelines
+## 代码生成规范
 
-- Generate types before implementation
-- Use `zod` for runtime validation + TypeScript type inference
-- Prefer `satisfies` over `as` for type checking
-- Use template literal types for string validation patterns
+- 先定义类型，再写实现
+- 运行时验证 + TypeScript 类型推断使用 `zod`
+- 类型检查优先使用 `satisfies` 而非 `as`
+- 字符串模式验证使用模板字面量类型

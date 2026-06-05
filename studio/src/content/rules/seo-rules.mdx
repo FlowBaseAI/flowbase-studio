@@ -1,64 +1,66 @@
 ---
 name: "SEO Content Rules"
-description: "Rules for creating SEO-optimized content — keyword usage, structure, meta tags, and technical SEO requirements."
+name_zh: "SEO 内容规范"
+description: "搜索引擎优化内容创作规范 —— 关键词策略、页面结构、Meta 标签、Core Web Vitals，让内容被更多人发现。"
 rule_type: "claude"
+source: "社区 / Google SEO 官方指南"
 category: ["seo", "content"]
 tags: ["seo", "content", "keywords", "meta", "search"]
 platform: ["claude-code"]
 file_name: "seo-rules.md"
 is_featured: false
 order: 7
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# SEO Content Rules
+# SEO 内容规范
 
-## On-Page SEO
+## 页面 On-Page SEO
 
-### Title Tags
-- 50-60 characters maximum
-- Include primary keyword near the beginning
-- Each page must have a unique title
-- Format: `Primary Keyword — Brand Name`
+### Title Tag
+- 最多 50-60 字符
+- 主关键词放在标题开头
+- 每个页面必须有唯一标题
+- 格式：`主关键词 — 品牌名`
 
-### Meta Descriptions
-- 150-160 characters
-- Include primary keyword naturally
-- End with a compelling CTA
-- Unique per page — no duplicates
+### Meta 描述
+- 150-160 字符
+- 自然融入主关键词
+- 以吸引点击的行动号召结尾
+- 每个页面唯一——禁止重复
 
-### Heading Structure
-- One H1 per page containing primary keyword
-- H2s for major sections (include secondary keywords)
-- H3s for subsections
-- Never skip heading levels
+### 标题层级结构
+- 每页只有一个 H1，包含主关键词
+- H2 用于主要章节（融入次要关键词）
+- H3 用于子章节
+- 禁止跳级使用标题
 
-## Content Quality
+## 内容质量规范
 
-- Minimum 300 words for indexed pages, 1500+ for pillar content
-- Primary keyword in first 100 words
-- Keyword density 1-2% (don't stuff)
-- Use semantic variations, not just exact match
-- Answer the search intent directly and completely
+- 可索引页面最少 300 字，支柱内容 1500 字以上
+- 主关键词出现在前 100 字内
+- 关键词密度 1-2%（禁止关键词堆砌）
+- 使用语义变体，而非只用精确匹配
+- 直接、完整地回答搜索意图
 
-## Technical Requirements
+## 技术要求
 
-- Canonical tags on all duplicate/similar content
-- Alt text on all images (descriptive, include keyword when relevant)
-- Internal links to related pages (3-5 per article)
-- External links to authoritative sources
-- Schema markup for articles, products, FAQs where applicable
+- 所有重复/相似内容必须有 Canonical 标签
+- 所有图片有 alt 文字（描述性，相关时包含关键词）
+- 每篇文章 3-5 个内链
+- 引用权威外部来源
+- 文章、产品、FAQ 等使用对应 Schema 标记
 
-## URL Structure
+## URL 结构
 
-- Lowercase, hyphen-separated words
-- Include primary keyword
-- Avoid stop words when possible
-- Max 3-4 URL segments for key pages
+- 小写，连字符分隔
+- 包含主关键词
+- 尽量避免停用词
+- 核心页面 URL 层级不超过 3-4 层
 
-## Core Web Vitals
+## Core Web Vitals 目标
 
-- LCP under 2.5s
-- FID under 100ms
-- CLS under 0.1
+- LCP（最大内容绘制）：2.5 秒以内
+- FID（首次输入延迟）：100ms 以内
+- CLS（累积布局偏移）：0.1 以内

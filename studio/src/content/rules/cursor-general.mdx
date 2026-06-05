@@ -1,50 +1,52 @@
 ---
 name: "Cursor General Rules"
-description: "General Cursor Rules for consistent AI-assisted coding — code style, naming, and behavior guidelines."
+name_zh: "Cursor 通用规范"
+description: "Cursor AI 编程助手通用规则 —— 代码风格、行为约束、命名规范，让 AI 生成的代码更符合你的标准。"
 rule_type: "cursor"
+source: "Cursor Directory / 社区高 Star 规则"
 category: ["general"]
 tags: ["cursor", "general", "coding", "style"]
 platform: ["codex"]
 file_name: "cursor-general.md"
 is_featured: false
 order: 9
-author: "FlowBase"
+author: "社区"
 updated_at: "2025-01-01"
 ---
 
-# Cursor General Rules
+# Cursor 通用规范
 
-## Code Style
+## 代码风格
 
-- Use consistent indentation (2 spaces for JS/TS, 4 for Python)
-- Meaningful variable names — no single letter variables except loop counters
-- No magic numbers — use named constants
-- No commented-out code in commits
+- 缩进一致（JS/TS 用 2 个空格，Python 用 4 个空格）
+- 有意义的变量名——除循环计数器外禁止单字母变量
+- 禁止魔法数字——使用命名常量
+- 提交前删除所有注释掉的代码
 
-## Behavior
+## 行为规范
 
-- Don't make assumptions about intent — ask if unclear
-- Show complete files when making multiple changes, not just diffs
-- Prefer editing existing patterns over introducing new ones
-- Test your changes mentally before presenting
+- 意图不明时不要假设——有疑问就问
+- 进行多处修改时展示完整文件，而非只显示 diff
+- 优先沿用已有模式，而非引入新的
+- 不要悄悄修改请求范围之外的内容
 
-## Communication
+## 沟通规范
 
-- Explain significant changes before implementing
-- When multiple approaches exist, present options with trade-offs
-- Flag potential breaking changes explicitly
-- Don't silently change things outside the requested scope
+- 重要修改前先解释方案
+- 有多种可行方案时，列出选项并说明各自权衡
+- 明确标注潜在的破坏性变更
+- 禁止在请求范围之外悄悄修改内容
 
-## File Operations
+## 文件操作
 
-- Never delete files without explicit instruction
-- Preserve existing comments unless specifically asked to remove
-- Maintain existing code style even if you'd do it differently
-- Don't reformat code unrelated to the task
+- 没有明确指令禁止删除文件
+- 除非明确要求，保留已有注释
+- 保持现有代码风格（即使你会有不同做法）
+- 不要格式化与任务无关的代码
 
-## Error Handling
+## 错误处理
 
-- Don't swallow exceptions silently
-- Provide meaningful error messages with context
-- Add logging for debugging complex operations
-- Validate inputs at function entry points
+- 禁止默默吞掉异常
+- 错误信息要包含有用的上下文
+- 对复杂操作加入日志以方便调试
+- 在函数入口处验证输入

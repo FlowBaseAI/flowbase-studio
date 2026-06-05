@@ -1,6 +1,8 @@
 ---
 name: "Puppeteer MCP"
-description: "Browser automation with Puppeteer — take screenshots, generate PDFs, scrape content, and automate Chrome headlessly."
+name_zh: "Puppeteer 浏览器自动化"
+description: "用 Puppeteer 控制 Chrome 浏览器 —— 网页截图、生成 PDF、抓取动态内容、自动化网页操作。"
+source: "Anthropic 官方"
 category: ["browser", "automation"]
 tags: ["puppeteer", "chrome", "screenshot", "pdf", "scraping"]
 platform: ["claude-code"]
@@ -17,13 +19,25 @@ author: "Anthropic"
 updated_at: "2025-01-01"
 ---
 
-## Overview
+## 这个 MCP 能做什么？
 
-Puppeteer MCP provides headless Chrome automation capabilities. Claude can take screenshots, generate PDFs, interact with JavaScript-heavy pages, and scrape dynamic content.
+Puppeteer MCP 使用无头 Chrome 浏览器，适合需要截图、PDF 生成或处理 JavaScript 渲染页面的场景。
 
-## Use Cases
+## 典型用途
 
-- **Screenshot Capture**: Take screenshots of any URL
-- **PDF Generation**: Convert web pages to PDF
-- **Dynamic Scraping**: Extract data from JavaScript-rendered pages
-- **Visual Testing**: Capture before/after screenshots for UI changes
+**网页截图**：「截取这个网页当前状态的截图」
+
+**PDF 生成**：「把这个网页转成 PDF 文档」
+
+**动态内容抓取**：「抓取这个 SPA 应用里的数据（需要 JS 渲染）」
+
+**视觉测试**：「对比两个版本页面的视觉差异」
+
+## Playwright vs Puppeteer
+
+- Playwright MCP：通过 Accessibility Tree 操作，更适合 AI 交互
+- Puppeteer MCP：更适合截图、PDF 等图形化输出
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

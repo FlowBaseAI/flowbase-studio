@@ -1,0 +1,216 @@
+---
+import Layout from '../components/layout/Layout.astro'
+
+const templates = [
+  {
+    id: 'astro-blog',
+    icon: '🚀',
+    name: 'Astro Blog',
+    desc: '完整的 Astro 静态博客配置 — SEO 优化、内容写作、自动化发布工作流。',
+    tags: ['astro', 'blog', 'seo', 'content'],
+    stack: 'Astro + TypeScript',
+    mcps: ['filesystem', 'brave-search'],
+    skills: ['seo-writer', 'blog-writer', 'proofreader'],
+    rules: ['astro-rules', 'typescript-rules', 'seo-rules'],
+    platform: 'claude-code',
+  },
+  {
+    id: 'nextjs-saas',
+    icon: '💻',
+    name: 'Next.js SaaS',
+    desc: '全栈 SaaS 应用基础配置 — 数据库、认证、代码审查、测试完整工作流。',
+    tags: ['nextjs', 'saas', 'fullstack', 'typescript'],
+    stack: 'Next.js + PostgreSQL',
+    mcps: ['github', 'postgresql', 'filesystem'],
+    skills: ['code-reviewer', 'test-writer', 'database-designer'],
+    rules: ['typescript-rules', 'react-rules', 'security-rules', 'testing-rules'],
+    platform: 'claude-code',
+  },
+  {
+    id: 'telegram-bot',
+    icon: '🤖',
+    name: 'Telegram Bot',
+    desc: 'AI 驱动的 Telegram 机器人 — 消息处理、自动回复、通知系统。',
+    tags: ['telegram', 'bot', 'python', 'automation'],
+    stack: 'Python + Telegram API',
+    mcps: ['telegram', 'filesystem', 'fetch'],
+    skills: ['prompt-engineer', 'summarizer'],
+    rules: ['python-rules', 'security-rules'],
+    platform: 'claude-code',
+  },
+  {
+    id: 'ai-tool',
+    icon: '🧠',
+    name: 'AI Tool',
+    desc: '构建 AI 驱动工具 — Prompt 工程、API 设计、安全性检查一体化配置。',
+    tags: ['ai', 'api', 'typescript', 'backend'],
+    stack: 'TypeScript + API',
+    mcps: ['github', 'filesystem', 'fetch'],
+    skills: ['prompt-engineer', 'api-designer', 'security-auditor'],
+    rules: ['typescript-rules', 'api-rules', 'security-rules'],
+    platform: 'claude-code',
+  },
+  {
+    id: 'content-factory',
+    icon: '📈',
+    name: 'Content Factory',
+    desc: '高产内容矩阵 — SEO 写作、研究调查、多平台内容分发自动化。',
+    tags: ['content', 'seo', 'marketing', 'research'],
+    stack: 'Multi-channel Content',
+    mcps: ['github', 'filesystem', 'brave-search'],
+    skills: ['seo-writer', 'research-agent', 'content-factory'],
+    rules: ['seo-rules', 'content-rules'],
+    platform: 'claude-code',
+  },
+  {
+    id: 'docs-site',
+    icon: '📚',
+    name: 'Documentation Site',
+    desc: '技术文档站点 — 文档写作、代码示例、版本管理、搜索集成完整配置。',
+    tags: ['docs', 'astro', 'technical-writing', 'git'],
+    stack: 'Astro + MDX',
+    mcps: ['github', 'filesystem'],
+    skills: ['doc-writer', 'proofreader', 'summarizer', 'changelog-writer'],
+    rules: ['astro-rules', 'typescript-rules', 'git-rules'],
+    platform: 'claude-code',
+  },
+]
+---
+<Layout title="Templates" description="Ready-to-use Claude Code project templates — Astro Blog, SaaS, Telegram Bot, AI Tool, and more.">
+
+  <div style="max-width: 1280px; margin: 0 auto; padding: 3rem 1.5rem;">
+
+    <!-- Header -->
+    <div style="margin-bottom: 3rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+        <a href="/" style="color: var(--color-text-subtle); font-size: 0.8125rem; text-decoration: none;">Home</a>
+        <span style="color: var(--color-text-subtle);">/</span>
+        <span style="color: var(--color-text-muted); font-size: 0.8125rem;">Templates</span>
+      </div>
+      <h1 style="font-size: 1.875rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.5rem; letter-spacing: -0.02em;">
+        Templates
+      </h1>
+      <p style="color: var(--color-text-muted); margin: 0; font-size: 0.9375rem; max-width: 560px;">
+        选择场景模板，一键导入 Workspace。MCP、Skills、Rules 自动配置完毕，直接 Export ZIP。
+      </p>
+    </div>
+
+    <!-- Templates grid -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.25rem;">
+      {templates.map(tpl => (
+        <div style="
+          background: var(--color-surface); border: 1px solid var(--color-border);
+          border-radius: var(--radius-lg); overflow: hidden;
+          display: flex; flex-direction: column;
+          transition: border-color 0.15s;
+        " class="tpl-card">
+          <!-- Card header -->
+          <div style="padding: 1.5rem 1.5rem 1.25rem;">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 0.75rem;">
+              <div style="display: flex; align-items: center; gap: 0.625rem;">
+                <span style="font-size: 1.5rem; line-height: 1;">{tpl.icon}</span>
+                <div>
+                  <h2 style="font-size: 1rem; font-weight: 700; color: var(--color-text); margin: 0; letter-spacing: -0.01em;">
+                    {tpl.name}
+                  </h2>
+                  <div style="font-size: 0.75rem; color: var(--color-text-subtle); margin-top: 0.125rem;">{tpl.stack}</div>
+                </div>
+              </div>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.55; margin: 0 0 1rem;">
+              {tpl.desc}
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.25rem;">
+              {tpl.tags.map(tag => (
+                <span style="font-size:0.6875rem;color:var(--color-text-subtle);background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:3px;padding:0.1rem 0.4rem;">{tag}</span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Included resources -->
+          <div style="border-top: 1px solid var(--color-border); padding: 1rem 1.5rem; background: var(--color-surface-2); flex: 1;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; font-size: 0.75rem;">
+              <div>
+                <div style="color:var(--color-accent);font-weight:600;margin-bottom:0.3rem;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.04em;">MCP</div>
+                {tpl.mcps.map(slug => (
+                  <div style="color:var(--color-text-subtle);line-height:1.6;">{slug.replace(/-/g,' ')}</div>
+                ))}
+              </div>
+              <div>
+                <div style="color:var(--color-success);font-weight:600;margin-bottom:0.3rem;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.04em;">Skills</div>
+                {tpl.skills.map(slug => (
+                  <div style="color:var(--color-text-subtle);line-height:1.6;">{slug.replace(/-/g,' ')}</div>
+                ))}
+              </div>
+              <div>
+                <div style="color:var(--color-warning);font-weight:600;margin-bottom:0.3rem;font-size:0.6875rem;text-transform:uppercase;letter-spacing:0.04em;">Rules</div>
+                {tpl.rules.map(slug => (
+                  <div style="color:var(--color-text-subtle);line-height:1.6;">{slug.replace(/-/g,' ')}</div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <!-- Action -->
+          <div style="border-top: 1px solid var(--color-border); padding: 1rem 1.5rem;">
+            <a
+              href={`/workspace?template=${tpl.id}`}
+              class="use-template-btn"
+              data-mcps={JSON.stringify(tpl.mcps)}
+              data-skills={JSON.stringify(tpl.skills)}
+              data-rules={JSON.stringify(tpl.rules)}
+              data-platform={tpl.platform}
+              data-name={tpl.name}
+              style="
+                display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+                width: 100%;
+                background: var(--color-accent); color: white; text-decoration: none;
+                padding: 0.6875rem 1rem; border-radius: var(--radius-sm);
+                font-size: 0.875rem; font-weight: 600; transition: background 0.15s;
+              "
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 5v14M5 12h14"/>
+              </svg>
+              Use Template
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</Layout>
+
+<style>
+.tpl-card:hover {
+  border-color: var(--color-border-2) !important;
+}
+</style>
+
+<script>
+  // When clicking "Use Template", persist to localStorage then navigate to workspace
+  document.querySelectorAll('.use-template-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault()
+      const mcps = JSON.parse(btn.dataset.mcps || '[]')
+      const skills = JSON.parse(btn.dataset.skills || '[]')
+      const rules = JSON.parse(btn.dataset.rules || '[]')
+      const platform = btn.dataset.platform || 'claude-code'
+
+      const SK = 'fbs:workspace:'
+      const curMcps = JSON.parse(localStorage.getItem(SK + 'selectedMcps') || '[]')
+      const curSkills = JSON.parse(localStorage.getItem(SK + 'selectedSkills') || '[]')
+      const curRules = JSON.parse(localStorage.getItem(SK + 'selectedRules') || '[]')
+
+      const merge = (cur, next) => [...new Set([...cur, ...next])]
+
+      localStorage.setItem(SK + 'selectedMcps', JSON.stringify(merge(curMcps, mcps)))
+      localStorage.setItem(SK + 'selectedSkills', JSON.stringify(merge(curSkills, skills)))
+      localStorage.setItem(SK + 'selectedRules', JSON.stringify(merge(curRules, rules)))
+      localStorage.setItem(SK + 'platform', platform)
+
+      window.location.href = '/workspace'
+    })
+  })
+</script>

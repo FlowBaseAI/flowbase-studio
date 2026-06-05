@@ -1,17 +1,273 @@
 ---
+import Layout from '../components/layout/Layout.astro'
+import { getCollection } from 'astro:content'
 
+const mcps = await getCollection('mcp')
+const skills = await getCollection('skills')
+const rules = await getCollection('rules')
+
+const steps = [
+  {
+    num: '01',
+    title: '选择 MCP',
+    desc: '从 20+ 个精选 MCP 服务中勾选你需要的工具 — GitHub、Browser、PostgreSQL 等。',
+  },
+  {
+    num: '02',
+    title: '选择 Skills & Rules',
+    desc: '选择 AI Agent 能力（Skills）和代码规范（Rules），按项目类型自由组合。',
+  },
+  {
+    num: '03',
+    title: '一键生成项目',
+    desc: '点击 Generate，立即获得包含 CLAUDE.md、settings.json 和所有配置文件的完整项目包。',
+  },
+]
+
+const features = [
+  {
+    icon: '⚡',
+    title: '零配置门槛',
+    desc: '不需要了解 JSON 格式，不需要查文档，可视化选配即可完成所有 Claude Code 项目配置。',
+  },
+  {
+    icon: '📦',
+    title: '即用即走',
+    desc: '下载 ZIP 或复制配置，放入项目目录即可运行。支持 Claude Code、Codex、Gemini CLI。',
+  },
+  {
+    icon: '🔍',
+    title: '精选资源库',
+    desc: '20+ MCP、30+ Skills、20+ Rules，每一条都经过验证，配有安装说明和使用案例。',
+  },
+  {
+    icon: '🌐',
+    title: '中文优先',
+    desc: '中国首个 Claude Code 中文可视化工作台，所有文档、说明、标签完整中文化。',
+  },
+]
 ---
+<Layout title="The Visual Workspace for Claude Code">
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+  <!-- Hero -->
+  <section style="
+    padding: 5rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  ">
+    <div style="
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(91,106,248,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    "></div>
+
+    <div style="max-width: 720px; margin: 0 auto; position: relative;">
+      <div style="
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: var(--color-surface);
+        border: 1px solid var(--color-border-2);
+        border-radius: 100px;
+        padding: 0.3rem 0.875rem;
+        font-size: 0.75rem;
+        color: var(--color-text-muted);
+        margin-bottom: 2rem;
+      ">
+        <span style="width:6px;height:6px;background:var(--color-success);border-radius:50%;flex-shrink:0;"></span>
+        中国首个 Claude Code 中文可视化工作台
+      </div>
+
+      <h1 style="
+        font-size: clamp(2.25rem, 5vw, 3.5rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        color: var(--color-text);
+        margin: 0 0 1.25rem;
+      ">
+        The Visual Workspace<br/>
+        <span style="color: var(--color-accent);">for Claude Code</span>
+      </h1>
+
+      <p style="
+        font-size: 1.125rem;
+        color: var(--color-text-muted);
+        line-height: 1.6;
+        margin: 0 0 2.5rem;
+        max-width: 560px;
+        margin-left: auto;
+        margin-right: auto;
+      ">
+        选择 MCP、Skills、Rules，一键生成完整的 Claude Code 项目配置。
+        无需学习 JSON，无需查文档，打开即用。
+      </p>
+
+      <div style="display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+        <a href="/workspace" style="
+          background: var(--color-accent);
+          color: white;
+          text-decoration: none;
+          padding: 0.75rem 1.75rem;
+          border-radius: var(--radius-md);
+          font-size: 0.9375rem;
+          font-weight: 600;
+          transition: background 0.15s;
+          display: inline-flex; align-items: center; gap: 0.5rem;
+        ">
+          打开 Studio
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="/mcp" style="
+          background: var(--color-surface);
+          color: var(--color-text-muted);
+          text-decoration: none;
+          padding: 0.75rem 1.75rem;
+          border-radius: var(--radius-md);
+          font-size: 0.9375rem;
+          font-weight: 500;
+          border: 1px solid var(--color-border);
+          transition: all 0.15s;
+        ">
+          浏览资源库
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section style="
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface);
+  ">
+    <div style="
+      max-width: 1280px; margin: 0 auto; padding: 2rem 1.5rem;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    ">
+      {[
+        { label: 'MCP 服务', value: mcps.length + '+' },
+        { label: 'Skills', value: skills.length + '+' },
+        { label: 'Rules', value: rules.length + '+' },
+      ].map((stat, i) => (
+        <div style={`
+          text-align: center; padding: 1.5rem 1rem;
+          ${i < 2 ? 'border-right: 1px solid var(--color-border);' : ''}
+        `}>
+          <div style="font-size: 2rem; font-weight: 700; color: var(--color-text); letter-spacing: -0.03em; line-height: 1;">
+            {stat.value}
+          </div>
+          <div style="font-size: 0.8125rem; color: var(--color-text-muted); margin-top: 0.25rem;">
+            {stat.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section style="padding: 5rem 1.5rem;">
+    <div style="max-width: 1280px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3.5rem;">
+        <h2 style="font-size: 1.75rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+          三步完成项目配置
+        </h2>
+        <p style="color: var(--color-text-muted); font-size: 0.9375rem; margin: 0;">
+          传统方式需要数小时学习，FBS 方式只需要几分钟。
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        {steps.map(step => (
+          <div style="
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            position: relative;
+            overflow: hidden;
+          ">
+            <div style="
+              position: absolute; top: 1.25rem; right: 1.25rem;
+              font-size: 3rem; font-weight: 800; color: var(--color-border-2);
+              line-height: 1; letter-spacing: -0.05em;
+              font-variant-numeric: tabular-nums;
+            ">{step.num}</div>
+            <h3 style="font-size: 1.0625rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.625rem;">
+              {step.title}
+            </h3>
+            <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6; margin: 0;">
+              {step.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section style="
+    padding: 5rem 1.5rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  ">
+    <div style="max-width: 1280px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3.5rem;">
+        <h2 style="font-size: 1.75rem; font-weight: 700; color: var(--color-text); margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+          为什么用 FlowBase Studio
+        </h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem;">
+        {features.map(f => (
+          <div style="
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+          ">
+            <div style="font-size: 1.5rem; margin-bottom: 0.75rem;">{f.icon}</div>
+            <h3 style="font-size: 0.9375rem; font-weight: 600; color: var(--color-text); margin: 0 0 0.5rem;">
+              {f.title}
+            </h3>
+            <p style="font-size: 0.8125rem; color: var(--color-text-muted); line-height: 1.6; margin: 0;">
+              {f.desc}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding: 5rem 1.5rem; text-align: center;">
+    <div style="max-width: 480px; margin: 0 auto;">
+      <h2 style="font-size: 1.75rem; font-weight: 700; color: var(--color-text); margin: 0 0 1rem; letter-spacing: -0.02em;">
+        立即开始构建
+      </h2>
+      <p style="color: var(--color-text-muted); margin: 0 0 2rem; font-size: 0.9375rem; line-height: 1.6;">
+        免费使用，无需注册。打开 Studio，选配，生成，完成。
+      </p>
+      <a href="/workspace" style="
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: var(--color-accent);
+        color: white;
+        text-decoration: none;
+        padding: 0.875rem 2rem;
+        border-radius: var(--radius-md);
+        font-size: 0.9375rem;
+        font-weight: 600;
+        transition: background 0.15s;
+      ">
+        打开 Studio
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+</Layout>

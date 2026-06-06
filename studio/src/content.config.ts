@@ -27,11 +27,13 @@ const skillsCollection = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/skills' }),
   schema: z.object({
     name: z.string(),                               // English name (canonical)
+    name_en: z.string().optional(),                 // English display name
     name_zh: z.string().optional(),                 // Chinese display name
     description: z.string(),                        // Chinese-first description
     category: z.array(z.string()),
     tags: z.array(z.string()).default([]),
     difficulty: z.enum(['beginner', 'intermediate', 'advanced']),
+    use_cases: z.array(z.string()).default([]),
     platform: z.array(platformEnum).default(['claude-code']),
     file_name: z.string(),
     source: z.string().optional(),                  // e.g. "社区 / Awesome Claude Code"

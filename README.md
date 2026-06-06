@@ -4,11 +4,13 @@ The Visual Workspace for Claude Code.
 
 Build, Configure and Export Claude Code Projects Visually.
 
+[English](./README.md) | [简体中文](./README.zh-CN.md) | [繁體中文](./README.zh-TW.md)
+
 [![GitHub stars](https://img.shields.io/github/stars/FlowBaseAI/flowbase-studio?style=flat&logo=github)](https://github.com/FlowBaseAI/flowbase-studio/stargazers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](#license)
 [![Website](https://img.shields.io/badge/Website-FlowBaseAI-black)](https://studio.flowbase.com.cn)
 
-[Website](https://studio.flowbase.com.cn) · [Live Demo](https://studio.flowbase.com.cn) · [GitHub](https://github.com/FlowBaseAI/flowbase-studio)
+[Website](https://studio.flowbase.com.cn) | [Live Demo](https://studio.flowbase.com.cn) | [GitHub](https://github.com/FlowBaseAI/flowbase-studio)
 
 ## Screenshots
 

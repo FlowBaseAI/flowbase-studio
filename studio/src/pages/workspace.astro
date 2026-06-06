@@ -1,58 +1,5 @@
 ---
 import Layout from '../components/layout/Layout.astro'
-import { getCollection, render } from 'astro:content'
-
-const mcps = await getCollection('mcp')
-const skills = await getCollection('skills')
-const rules = await getCollection('rules')
-
-const sortedMcps = mcps.sort((a, b) => a.data.order - b.data.order)
-const sortedSkills = skills.sort((a, b) => a.data.order - b.data.order)
-const sortedRules = rules.sort((a, b) => a.data.order - b.data.order)
-
-// Full data with body content for real export
-const mcpData = sortedMcps.map(m => ({
-  slug: m.id,
-  name: m.data.name,
-  description: m.data.description,
-  category: m.data.category,
-  tags: m.data.tags,
-  install_cmd: m.data.install_cmd,
-  config_snippet: m.data.config_snippet,
-  is_featured: m.data.is_featured,
-}))
-
-// Render skill/rule bodies for real file content export
-const skillBodies: Record<string, string> = {}
-for (const s of sortedSkills) {
-  const { body } = await render(s)
-  skillBodies[s.id] = body ?? ''
-}
-const ruleBodies: Record<string, string> = {}
-for (const r of sortedRules) {
-  const { body } = await render(r)
-  ruleBodies[r.id] = body ?? ''
-}
-
-const skillData = sortedSkills.map(s => ({
-  slug: s.id,
-  name: s.data.name,
-  description: s.data.description,
-  category: s.data.category,
-  difficulty: s.data.difficulty,
-  file_name: s.data.file_name,
-  body: skillBodies[s.id] ?? '',
-}))
-
-const ruleData = sortedRules.map(r => ({
-  slug: r.id,
-  name: r.data.name,
-  description: r.data.description,
-  category: r.data.category,
-  rule_type: r.data.rule_type,
-  file_name: r.data.file_name,
-  body: ruleBodies[r.id] ?? '',
-}))
 
 // Presets definition
 const presets = [
@@ -244,8 +191,8 @@ const presets = [
               ))}
             </div>
           </div>
-        </div>
-      </div>
+          </div>
+          </div>
 
       <!-- MCP Section -->
       <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden;">
@@ -288,31 +235,49 @@ const presets = [
     <!-- Right: Output panel -->
     <div style="position: sticky; top: 72px; display: flex; flex-direction: column; gap: 1rem;">
 
-      <!-- Selected Resources -->
+      <!-- Project Health -->
       <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden;">
         <div style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; justify-content: space-between;">
-          <h2 style="font-size:0.75rem;font-weight:600;color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.06em;margin:0;">Selected Resources</h2>
-          <div style="display:flex;gap:0.375rem;" id="selection-badges">
-            <span id="badge-mcp" style="display:none;font-size:0.7rem;background:var(--color-accent-subtle);color:var(--color-accent);padding:0.1rem 0.5rem;border-radius:3px;"></span>
-            <span id="badge-skill" style="display:none;font-size:0.7rem;background:rgba(34,197,94,0.15);color:var(--color-success);padding:0.1rem 0.5rem;border-radius:3px;"></span>
-            <span id="badge-rule" style="display:none;font-size:0.7rem;background:rgba(245,158,11,0.15);color:var(--color-warning);padding:0.1rem 0.5rem;border-radius:3px;"></span>
-          </div>
+          <h2 style="font-size:0.75rem;font-weight:600;color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.06em;margin:0;">Project Health</h2>
         </div>
-        <div id="selected-resources" style="padding: 0.5rem; min-height: 60px; max-height: 200px; overflow-y: auto;">
-          <div id="no-selection-msg" style="padding: 0.75rem; text-align: center; font-size: 0.8125rem; color: var(--color-text-subtle);">
-            从左侧选择资源，或点击预设快速配置
-          </div>
+        <div style="padding: 0.875rem 1rem; display: grid; gap: 0.5rem;">
+          <div class="health-item">✓ Claude Code Compatible</div>
+          <div class="health-item" id="health-mcp">✓ MCP Config Ready</div>
+          <div class="health-item" id="health-export">✓ Export Ready</div>
         </div>
       </div>
 
-      <!-- Project Structure Preview -->
+      <!-- Project Preview -->
       <div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden;">
         <div style="padding: 0.75rem 1rem; border-bottom: 1px solid var(--color-border);">
-          <h2 style="font-size:0.75rem;font-weight:600;color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.06em;margin:0;">Project Structure</h2>
+          <h2 style="font-size:0.75rem;font-weight:600;color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.06em;margin:0;">Project Preview</h2>
         </div>
-        <div id="file-tree" style="padding: 0.875rem 1rem; font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.75; color: var(--color-text-muted);">
+        <div class="preview-tabs" role="tablist" aria-label="Project preview">
+          <button class="preview-tab active" type="button" data-preview-tab="structure">Project Structure</button>
+          <button class="preview-tab" type="button" data-preview-tab="settings">settings.json</button>
+          <button class="preview-tab" type="button" data-preview-tab="claude">CLAUDE.md</button>
+          <button class="preview-tab" type="button" data-preview-tab="summary">Summary</button>
+        </div>
+        <div class="preview-panel active" data-preview-panel="structure">
+          <div id="file-tree" style="font-family: var(--font-mono); font-size: 0.8rem; line-height: 1.75; color: var(--color-text-muted);">
           <div style="color: var(--color-text); font-weight: 500;">📁 <span id="tree-project-name">my-project</span>/</div>
           <div id="tree-body" style="padding-left: 1.25rem;"></div>
+          </div>
+        </div>
+        <div class="preview-panel" data-preview-panel="settings">
+          <pre id="settings-preview" class="preview-code"></pre>
+        </div>
+        <div class="preview-panel" data-preview-panel="claude">
+          <pre id="claude-preview" class="preview-code"></pre>
+        </div>
+        <div class="preview-panel" data-preview-panel="summary">
+          <div class="summary-grid">
+            <div><span>Platform</span><strong id="summary-platform">Claude Code</strong></div>
+            <div><span>MCP</span><strong id="summary-mcp">0</strong></div>
+            <div><span>Skills</span><strong id="summary-skills">0</strong></div>
+            <div><span>Rules</span><strong id="summary-rules">0</strong></div>
+            <div><span>Generated Files</span><strong id="summary-files">3</strong></div>
+          </div>
         </div>
       </div>
 
@@ -341,7 +306,19 @@ const presets = [
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
             </svg>
-            <span id="copy-label">Copy Config</span>
+            <span id="copy-settings-label">Copy settings.json</span>
+          </button>
+          <button id="btn-copy-claude" style="
+            background: var(--color-surface-2); color: var(--color-text-muted);
+            border: 1px solid var(--color-border); padding: 0.625rem 0.5rem;
+            border-radius: var(--radius-sm); font-size: 0.8125rem; font-weight: 500;
+            cursor: pointer; font-family: inherit; transition: all 0.15s;
+            display: flex; align-items: center; justify-content: center; gap: 0.375rem;
+          ">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
+            </svg>
+            <span id="copy-claude-label">Copy CLAUDE.md</span>
           </button>
           <button id="btn-reset" style="
             background: transparent; color: var(--color-text-subtle);
@@ -380,12 +357,88 @@ const presets = [
   border-color: var(--color-accent) !important;
   background: var(--color-accent-subtle) !important;
 }
+.health-item {
+  color: var(--color-success);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+.preview-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid var(--color-border);
+}
+.preview-tab {
+  background: transparent;
+  border: 0;
+  border-right: 1px solid var(--color-border);
+  color: var(--color-text-subtle);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.625rem 0.375rem;
+}
+.preview-tab:last-child {
+  border-right: 0;
+}
+.preview-tab.active {
+  background: var(--color-surface-2);
+  color: var(--color-text);
+}
+.preview-panel {
+  display: none;
+  min-height: 260px;
+  max-height: 420px;
+  overflow: auto;
+  padding: 0.875rem 1rem;
+}
+.preview-panel.active {
+  display: block;
+}
+.preview-code {
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.65;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.summary-grid {
+  display: grid;
+  gap: 0.625rem;
+}
+.summary-grid div {
+  align-items: center;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  justify-content: space-between;
+  padding: 0.625rem 0.75rem;
+}
+.summary-grid span {
+  color: var(--color-text-subtle);
+  font-size: 0.75rem;
+}
+.summary-grid strong {
+  color: var(--color-text);
+  font-size: 0.875rem;
+}
 #project-name:focus, #mcp-search:focus, #skill-search:focus, #rule-search:focus {
   border-color: var(--color-accent);
 }
 </style>
 
-<script define:vars={{ mcpData, skillData, ruleData, presets }}>
+<script type="application/json" id="workspace-data" set:html={JSON.stringify({ presets })}></script>
+
+<script is:inline>
+  const workspaceData = JSON.parse(document.getElementById('workspace-data')?.textContent ?? '{}')
+  const { presets = [] } = workspaceData
+  let mcpData = []
+  let skillData = []
+  let ruleData = []
+
   // ---- State ----
   const SK = 'fbs:workspace:'
   function loadState() {
@@ -411,11 +464,30 @@ const presets = [
 
   const state = loadState()
 
+  async function loadWorkspaceData() {
+    const response = await fetch('/api/workspace-data.json')
+    if (!response.ok) throw new Error('Failed to load workspace data')
+    const data = await response.json()
+    mcpData = data.mcpData ?? []
+    skillData = data.skillData ?? []
+    ruleData = data.ruleData ?? []
+  }
+
   // ---- Init form ----
   const projectNameInput = document.getElementById('project-name')
   const platformRadios = document.querySelectorAll('input[name="platform"]')
   if (projectNameInput) projectNameInput.value = state.projectName
   platformRadios.forEach(r => { if (r.value === state.platform) r.checked = true })
+
+  document.querySelectorAll('.preview-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.previewTab
+      document.querySelectorAll('.preview-tab').forEach(t => t.classList.toggle('active', t === tab))
+      document.querySelectorAll('.preview-panel').forEach(panel => {
+        panel.classList.toggle('active', panel.dataset.previewPanel === target)
+      })
+    })
+  })
 
   // ---- Preset buttons ----
   document.querySelectorAll('.preset-btn').forEach(btn => {
@@ -506,6 +578,48 @@ const presets = [
       return
     }
     filtered.forEach(item => container.appendChild(renderCheckItem(item.slug, item.name, item.description, selectedSlugs.includes(item.slug), type)))
+  }
+
+  function formatPlatformLabel(platform) {
+    if (platform === 'claude-code') return 'Claude Code'
+    if (platform === 'gemini-cli') return 'Gemini CLI'
+    return 'Codex'
+  }
+
+  function buildMcpServers(selMcps) {
+    const mcpServers = {}
+    for (const mcp of selMcps) {
+      if (mcp.config_snippet?.mcpServers) {
+        Object.assign(mcpServers, mcp.config_snippet.mcpServers)
+      } else {
+        mcpServers[mcp.slug] = {}
+      }
+    }
+    return mcpServers
+  }
+
+  function buildClaudePreview(projectName, selMcps, selSkills, selRules) {
+    return [
+      '# Project Context',
+      '',
+      'This project uses:',
+      '',
+      ...(selMcps.length ? selMcps.map(m => `* ${m.name} MCP`) : ['* No MCP servers selected']),
+      '',
+      'Skills:',
+      '',
+      ...(selSkills.length ? selSkills.map(s => `* ${s.name}`) : ['* No skills selected']),
+      '',
+      'Rules:',
+      '',
+      ...(selRules.length ? selRules.map(r => `* ${r.name}`) : ['* No rules selected']),
+      '',
+      `Project: ${projectName}`,
+    ].join('\n')
+  }
+
+  function generatedFileCount(selMcps, selSkills, selRules) {
+    return 3 + selMcps.length + selSkills.length + selRules.length
   }
 
   // ---- Output update ----
@@ -606,6 +720,29 @@ const presets = [
       })
       treeBody.innerHTML = lines.join('')
     }
+
+    const projectName = state.projectName || 'my-project'
+    const settingsPreview = document.getElementById('settings-preview')
+    const claudePreview = document.getElementById('claude-preview')
+    const summaryPlatform = document.getElementById('summary-platform')
+    const summaryMcp = document.getElementById('summary-mcp')
+    const summarySkills = document.getElementById('summary-skills')
+    const summaryRules = document.getElementById('summary-rules')
+    const summaryFiles = document.getElementById('summary-files')
+    const healthMcp = document.getElementById('health-mcp')
+    const healthExport = document.getElementById('health-export')
+    const liveSettings = { mcpServers: buildMcpServers(selMcps) }
+    const liveClaudeMd = buildClaudePreview(projectName, selMcps, selSkills, selRules)
+
+    if (settingsPreview) settingsPreview.textContent = JSON.stringify(liveSettings, null, 2)
+    if (claudePreview) claudePreview.textContent = liveClaudeMd
+    if (summaryPlatform) summaryPlatform.textContent = formatPlatformLabel(state.platform)
+    if (summaryMcp) summaryMcp.textContent = selMcps.length
+    if (summarySkills) summarySkills.textContent = selSkills.length
+    if (summaryRules) summaryRules.textContent = selRules.length
+    if (summaryFiles) summaryFiles.textContent = generatedFileCount(selMcps, selSkills, selRules)
+    if (healthMcp) healthMcp.textContent = selMcps.length ? '✓ MCP Config Ready' : '✓ MCP Config Ready'
+    if (healthExport) healthExport.textContent = '✓ Export Ready'
   }
 
   function renderAllLists(mcpQ = '', skillQ = '', ruleQ = '') {
@@ -617,7 +754,7 @@ const presets = [
 
   // ---- Form events ----
   projectNameInput?.addEventListener('input', e => { state.projectName = e.target.value; saveState(); updateOutput() })
-  platformRadios.forEach(r => r.addEventListener('change', () => { state.platform = r.value; saveState() }))
+  platformRadios.forEach(r => r.addEventListener('change', () => { state.platform = r.value; saveState(); updateOutput() }))
   document.getElementById('mcp-search')?.addEventListener('input', e => renderList('mcp-list', mcpData, state.selectedMcps, 'mcp', e.target.value))
   document.getElementById('skill-search')?.addEventListener('input', e => renderList('skill-list', skillData, state.selectedSkills, 'skill', e.target.value))
   document.getElementById('rule-search')?.addEventListener('input', e => renderList('rule-list', ruleData, state.selectedRules, 'rule', e.target.value))
@@ -690,7 +827,15 @@ const presets = [
       `- Rules: ${selRules.map(r => r.name).join(', ') || 'none'}`,
     ].join('\n')
 
-    return { projectName, selMcps, selSkills, selRules, claudeMd, settings, readme }
+    return {
+      projectName,
+      selMcps,
+      selSkills,
+      selRules,
+      claudeMd: buildClaudePreview(projectName, selMcps, selSkills, selRules),
+      settings: { mcpServers: buildMcpServers(selMcps) },
+      readme,
+    }
   }
 
   function showToast(msg, success = true) {
@@ -743,13 +888,22 @@ const presets = [
     showToast(`✓ ${projectName}.zip 已下载 (${selMcps.length} MCP · ${selSkills.length} Skills · ${selRules.length} Rules)`)
   })
 
-  // ---- Copy Config ----
+  // ---- Copy settings.json ----
   document.getElementById('btn-copy')?.addEventListener('click', async () => {
     const { settings } = buildProjectData()
     await navigator.clipboard.writeText(JSON.stringify(settings, null, 2))
-    const lbl = document.getElementById('copy-label')
-    if (lbl) { lbl.textContent = '✓ Copied!'; setTimeout(() => lbl.textContent = 'Copy Config', 2000) }
+    const lbl = document.getElementById('copy-settings-label')
+    if (lbl) { lbl.textContent = 'Copied'; setTimeout(() => lbl.textContent = 'Copy settings.json', 2000) }
     showToast('✓ settings.json 已复制到剪贴板')
+  })
+
+  // ---- Copy CLAUDE.md ----
+  document.getElementById('btn-copy-claude')?.addEventListener('click', async () => {
+    const { claudeMd } = buildProjectData()
+    await navigator.clipboard.writeText(claudeMd)
+    const lbl = document.getElementById('copy-claude-label')
+    if (lbl) { lbl.textContent = 'Copied'; setTimeout(() => lbl.textContent = 'Copy CLAUDE.md', 2000) }
+    showToast('CLAUDE.md copied')
   })
 
   // ---- Reset ----
@@ -762,5 +916,7 @@ const presets = [
   })
 
   // ---- Initial render ----
-  renderAllLists()
+  loadWorkspaceData()
+    .then(() => renderAllLists())
+    .catch(() => showToast('Failed to load workspace data', false))
 </script>

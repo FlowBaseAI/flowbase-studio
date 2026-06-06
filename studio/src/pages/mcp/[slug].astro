@@ -207,6 +207,20 @@ const configJson = JSON.stringify(mcp.data.config_snippet, null, 2)
           </div>
         </div>
 
+        {(mcp.data.source || mcp.data.official_url || mcp.data.stars !== undefined) && (
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:0.875rem;display:flex;flex-direction:column;gap:0.625rem;">
+            <h2 style="font-size:0.75rem;font-weight:600;color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.06em;margin:0;">Source & Links</h2>
+            {mcp.data.source && <div style="font-size:0.8125rem;color:var(--color-text-muted);line-height:1.4;">来源：{mcp.data.source}</div>}
+            {mcp.data.stars !== undefined && <div style="font-size:0.8125rem;color:var(--color-text-muted);">GitHub Stars：★ {mcp.data.stars.toLocaleString()}</div>}
+            {mcp.data.updated_at && <div style="font-size:0.8125rem;color:var(--color-text-muted);">最后更新：{mcp.data.updated_at.slice(0, 10)}</div>}
+            {mcp.data.official_url && (
+              <a href={mcp.data.official_url} target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;justify-content:center;color:var(--color-text);text-decoration:none;font-size:0.8125rem;background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:0.5rem 0.75rem;">
+                官方文档
+              </a>
+            )}
+          </div>
+        )}
+
       </div>
     </div>
   </div>

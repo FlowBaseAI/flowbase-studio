@@ -7,6 +7,7 @@ const mcpCollection = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/mcp' }),
   schema: z.object({
     name: z.string(),                               // English name (canonical)
+    name_en: z.string().optional(),                 // English display name
     name_zh: z.string().optional(),                 // Chinese display name
     description: z.string(),                        // Chinese-first description
     source: z.string().optional(),                  // e.g. "Anthropic 官方" / "Microsoft 官方" / "社区"
@@ -14,7 +15,10 @@ const mcpCollection = defineCollection({
     tags: z.array(z.string()).default([]),
     platform: z.array(platformEnum).default(['claude-code']),
     github_url: z.string().url(),
+    official_url: z.string().url().optional(),
+    stars: z.number().optional(),
     install_cmd: z.string(),
+    install_command: z.string().optional(),
     config_snippet: z.record(z.any()),
     is_featured: z.boolean().default(false),
     order: z.number().default(99),
@@ -37,6 +41,8 @@ const skillsCollection = defineCollection({
     platform: z.array(platformEnum).default(['claude-code']),
     file_name: z.string(),
     source: z.string().optional(),                  // e.g. "社区 / Awesome Claude Code"
+    github_url: z.string().url().optional(),
+    stars: z.number().optional(),
     is_featured: z.boolean().default(false),
     order: z.number().default(99),
     author: z.string().default('社区'),
@@ -48,6 +54,7 @@ const rulesCollection = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/rules' }),
   schema: z.object({
     name: z.string(),                               // English name (canonical)
+    name_en: z.string().optional(),                 // English display name
     name_zh: z.string().optional(),                 // Chinese display name
     description: z.string(),                        // Chinese-first description
     rule_type: z.enum(['claude', 'cursor', 'codex']),
@@ -56,6 +63,9 @@ const rulesCollection = defineCollection({
     platform: z.array(platformEnum).default(['claude-code']),
     file_name: z.string(),
     source: z.string().optional(),                  // e.g. "Cursor Directory" / "Anthropic 官方"
+    github_url: z.string().url().optional(),
+    stars: z.number().optional(),
+    use_cases: z.array(z.string()).default([]),
     is_featured: z.boolean().default(false),
     order: z.number().default(99),
     author: z.string().default('社区'),

@@ -69,6 +69,10 @@ const difficultyVariant: Record<string, 'success' | 'warning' | 'accent'> = {
             badge={difficultyLabel[skill.data.difficulty]}
             badgeVariant={difficultyVariant[skill.data.difficulty]}
             source={skill.data.source ?? skill.data.author}
+            author={skill.data.author}
+            githubUrl={skill.data.github_url}
+            stars={skill.data.stars}
+            updatedAt={skill.data.updated_at}
           />
         </div>
       ))}

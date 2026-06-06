@@ -149,6 +149,26 @@ const difficultyVariant: Record<string, 'success' | 'warning' | 'accent'> = {
           </div>
         </div>
 
+        {(skill.data.source || skill.data.github_url || skill.data.stars !== undefined || skill.data.use_cases.length > 0) && (
+          <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:0.875rem;display:flex;flex-direction:column;gap:0.625rem;">
+            <h2 style="font-size:0.75rem;font-weight:600;color:var(--color-text-subtle);text-transform:uppercase;letter-spacing:0.06em;margin:0;">Source & Links</h2>
+            {skill.data.source && <div style="font-size:0.8125rem;color:var(--color-text-muted);line-height:1.4;">来源：{skill.data.source}</div>}
+            {skill.data.stars !== undefined && <div style="font-size:0.8125rem;color:var(--color-text-muted);">GitHub Stars：★ {skill.data.stars.toLocaleString()}</div>}
+            {skill.data.updated_at && <div style="font-size:0.8125rem;color:var(--color-text-muted);">最后更新：{skill.data.updated_at.slice(0, 10)}</div>}
+            {skill.data.use_cases.length > 0 && (
+              <div style="display:flex;flex-direction:column;gap:0.25rem;">
+                <span style="font-size:0.75rem;color:var(--color-text-subtle);">适合谁 / 使用场景</span>
+                {skill.data.use_cases.map(item => <span style="font-size:0.8125rem;color:var(--color-text-muted);line-height:1.4;">{item}</span>)}
+              </div>
+            )}
+            {skill.data.github_url && (
+              <a href={skill.data.github_url} target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;justify-content:center;color:var(--color-text);text-decoration:none;font-size:0.8125rem;background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-sm);padding:0.5rem 0.75rem;">
+                GitHub 原项目
+              </a>
+            )}
+          </div>
+        )}
+
       </div>
     </div>
   </div>

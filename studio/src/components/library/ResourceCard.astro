@@ -11,10 +11,15 @@ interface Props {
   badge?: string
   badgeVariant?: 'default' | 'accent' | 'success' | 'warning' | 'muted'
   source?: string
+  author?: string
+  githubUrl?: string
+  stars?: number
+  updatedAt?: string
   meta?: string
 }
 
-const { name, name_zh, description, slug, href, tags = [], badge, badgeVariant = 'default', source, meta } = Astro.props
+const { name, name_zh, description, slug, href, tags = [], badge, badgeVariant = 'default', source, author, githubUrl, stars, updatedAt, meta } = Astro.props
+const updatedLabel = updatedAt ? updatedAt.slice(0, 10) : undefined
 ---
 <a
   href={href}
@@ -67,12 +72,37 @@ const { name, name_zh, description, slug, href, tags = [], badge, badgeVariant =
         ">{tag}</span>
       ))}
     </div>
-    {(source || meta) && (
+    {stars !== undefined && (
       <span style="font-size: 0.6875rem; color: var(--color-text-subtle); white-space: nowrap; flex-shrink: 0;">
-        {source ?? meta}
+        ★ {stars.toLocaleString()}
       </span>
     )}
   </div>
+
+  {(source || author || githubUrl || updatedLabel || meta) && (
+    <div style="display: flex; flex-wrap: wrap; gap: 0.375rem 0.625rem; margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--color-border);">
+      {(source || meta) && (
+        <span style="font-size: 0.6875rem; color: var(--color-text-subtle);">
+          Source: {source ?? meta}
+        </span>
+      )}
+      {author && (
+        <span style="font-size: 0.6875rem; color: var(--color-text-subtle);">
+          Author: {author}
+        </span>
+      )}
+      {githubUrl && (
+        <span style="font-size: 0.6875rem; color: var(--color-text-subtle);">
+          GitHub
+        </span>
+      )}
+      {updatedLabel && (
+        <span style="font-size: 0.6875rem; color: var(--color-text-subtle);">
+          Updated: {updatedLabel}
+        </span>
+      )}
+    </div>
+  )}
 </a>
 
 <style>

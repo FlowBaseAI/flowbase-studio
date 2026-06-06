@@ -63,6 +63,10 @@ const typeVariant: Record<string, 'accent' | 'warning' | 'default'> = {
             badge={typeLabel[rule.data.rule_type]}
             badgeVariant={typeVariant[rule.data.rule_type]}
             source={rule.data.source ?? rule.data.author}
+            author={rule.data.author}
+            githubUrl={rule.data.github_url}
+            stars={rule.data.stars}
+            updatedAt={rule.data.updated_at}
           />
         </div>
       ))}

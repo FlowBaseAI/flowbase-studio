@@ -77,6 +77,10 @@ const categories = [...new Set(sorted.flatMap(m => m.data.category))].sort()
             badge={mcp.data.is_featured ? 'Featured' : undefined}
             badgeVariant="accent"
             source={mcp.data.source}
+            author={mcp.data.author}
+            githubUrl={mcp.data.github_url}
+            stars={mcp.data.stars}
+            updatedAt={mcp.data.updated_at}
           />
         </div>
       ))}

@@ -1,0 +1,44 @@
+---
+name: "Stripe MCP"
+name_zh: "Stripe 支付"
+description: "让 Claude 查询 Stripe 支付数据 —— 查看收入、分析订阅、处理退款咨询，成为你的支付数据助手。"
+source: "Stripe 官方 / Agent Toolkit"
+category: ["payments", "finance"]
+tags: ["stripe", "payments", "subscription", "billing", "saas"]
+platform: ["claude-code"]
+github_url: "https://github.com/stripe/agent-toolkit"
+install_cmd: "npx -y @stripe/agent-toolkit"
+config_snippet:
+  mcpServers:
+    stripe:
+      command: "npx"
+      args: ["-y", "@stripe/agent-toolkit", "--tools=all"]
+      env:
+        STRIPE_SECRET_KEY: "sk_live_your_stripe_key"
+is_featured: false
+order: 29
+author: "Stripe"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Stripe Agent Toolkit 包含 MCP 支持，让 Claude 可以查询 Stripe 账户数据，辅助支付相关的分析和运营工作。
+
+## 典型用途
+
+**收入分析**：「分析上个月的 MRR 增长趋势」
+
+**订阅管理**：「找出本月流失的订阅用户」
+
+**退款处理**：「查询过去 7 天的退款记录，分析原因分布」
+
+**客户查询**：「查找这个邮箱的支付历史」
+
+## ⚠️ 安全说明
+
+建议使用受限权限的 Restricted Key，只授予必要的读取权限，避免意外操作。
+
+## 来源
+
+Stripe 官方 Agent Toolkit，支持 MCP 协议。

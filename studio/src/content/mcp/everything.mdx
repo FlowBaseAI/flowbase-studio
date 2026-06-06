@@ -1,0 +1,40 @@
+---
+name: "Everything MCP"
+name_zh: "功能测试服务器"
+description: "Anthropic 官方测试用 MCP —— 演示所有 MCP 协议功能，用于开发和调试 MCP 客户端。"
+source: "Anthropic 官方"
+category: ["devtools", "utility"]
+tags: ["testing", "development", "mcp", "demo", "debug"]
+platform: ["claude-code"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-everything"
+config_snippet:
+  mcpServers:
+    everything:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-everything"]
+is_featured: false
+order: 43
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Everything MCP 是 Anthropic 官方提供的测试服务器，实现了所有 MCP 协议功能（工具、资源、提示词），用于开发和调试。
+
+## 典型用途
+
+**MCP 开发调试**：测试自定义 MCP 客户端是否正确实现协议
+
+**功能探索**：了解 MCP 协议支持的所有工具和资源类型
+
+**集成测试**：验证 Claude Code 的 MCP 集成是否正常工作
+
+## 适用人群
+
+主要面向 MCP 开发者和想深入了解 MCP 协议的技术用户。
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

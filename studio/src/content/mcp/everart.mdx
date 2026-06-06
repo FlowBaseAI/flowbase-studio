@@ -1,0 +1,44 @@
+---
+name: "EverArt MCP"
+name_zh: "AI 图像生成"
+description: "通过 EverArt API 让 Claude 生成 AI 图像 —— 根据文字描述创作图片，适合内容创作和设计辅助场景。"
+source: "Anthropic 官方"
+category: ["ai", "creative"]
+tags: ["image", "generation", "ai", "creative", "design"]
+platform: ["claude-code"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-everart"
+config_snippet:
+  mcpServers:
+    everart:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-everart"]
+      env:
+        EVERART_API_KEY: "your_everart_api_key"
+is_featured: false
+order: 25
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+EverArt MCP 让 Claude 能够根据文字描述生成 AI 图像，将图像生成能力直接集成到 Claude Code 工作流中。
+
+## 典型用途
+
+**内容配图**：「为这篇博客文章生成一张封面图」
+
+**设计草稿**：「生成这个 UI 组件的视觉草图」
+
+**创意探索**：「生成几个不同风格的品牌 Logo 概念」
+
+**文档插图**：为技术文档自动生成说明性图片
+
+## 获取 API Key
+
+前往 EverArt 官网注册并获取 API Key。
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

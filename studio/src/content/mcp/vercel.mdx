@@ -1,0 +1,44 @@
+---
+name: "Vercel MCP"
+name_zh: "Vercel 部署平台"
+description: "让 Claude 管理 Vercel 项目 —— 查看部署状态、分析构建日志、管理环境变量，加速前端部署运维。"
+source: "社区 · Vercel 生态"
+category: ["devops", "cloud"]
+tags: ["vercel", "deployment", "frontend", "nextjs", "cdn"]
+platform: ["claude-code"]
+github_url: "https://github.com/Quegenx/vercel-mcp-server"
+install_cmd: "npx -y vercel-mcp-server"
+config_snippet:
+  mcpServers:
+    vercel:
+      command: "npx"
+      args: ["-y", "vercel-mcp-server"]
+      env:
+        VERCEL_TOKEN: "your_vercel_token"
+is_featured: false
+order: 36
+author: "社区"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Vercel MCP 让 Claude 访问你的 Vercel 账户，查看部署状态、分析构建问题、管理项目配置。
+
+## 典型用途
+
+**部署监控**：「查看最近的部署状态，有没有失败的构建」
+
+**日志分析**：「分析这次构建失败的日志，告诉我哪里出了问题」
+
+**环境变量**：「列出生产环境的环境变量列表（不显示值）」
+
+**域名管理**：「查看项目绑定的所有域名」
+
+## 获取 Token
+
+Vercel 控制台 → Settings → Tokens 创建访问令牌。
+
+## 来源
+
+社区开源项目，Vercel 生态工具。

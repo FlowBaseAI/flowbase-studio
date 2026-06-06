@@ -1,0 +1,45 @@
+---
+name: "Sentry MCP"
+name_zh: "Sentry 错误监控"
+description: "让 Claude 直接访问 Sentry 错误数据 —— 查询 Issue、分析堆栈追踪、调试生产 Bug，加速问题定位。"
+source: "Anthropic 官方"
+category: ["devtools", "monitoring"]
+tags: ["sentry", "errors", "debugging", "monitoring", "devops"]
+platform: ["claude-code"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-sentry"
+config_snippet:
+  mcpServers:
+    sentry:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-sentry"]
+      env:
+        SENTRY_AUTH_TOKEN: "your_sentry_auth_token"
+        SENTRY_ORGANIZATION: "your_org_slug"
+is_featured: false
+order: 22
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Sentry MCP 让 Claude 直接查询你的 Sentry 项目数据，帮助快速理解和修复生产环境的错误。
+
+## 典型用途
+
+**错误分析**：「分析过去 24 小时发生最多的 5 个错误」
+
+**堆栈追踪解读**：「解释这个错误的堆栈追踪，告诉我根因」
+
+**影响评估**：「这个 Bug 影响了多少用户，哪个版本开始出现的」
+
+**修复建议**：「根据这个错误信息，建议如何修复」
+
+## 配置说明
+
+在 Sentry 设置 → API Keys 创建 Auth Token，需要 `event:read` 权限。
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

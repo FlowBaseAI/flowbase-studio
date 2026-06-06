@@ -1,0 +1,41 @@
+---
+name: "Airtable MCP"
+name_zh: "Airtable 电子表格数据库"
+description: "让 Claude 读写 Airtable 数据 —— 查询记录、创建条目、分析表格数据，适合内容运营和项目追踪。"
+source: "社区"
+category: ["productivity", "database"]
+tags: ["airtable", "database", "spreadsheet", "no-code"]
+platform: ["claude-code"]
+github_url: "https://github.com/domdomegg/airtable-mcp-server"
+install_cmd: "npx -y airtable-mcp-server"
+config_snippet:
+  mcpServers:
+    airtable:
+      command: "npx"
+      args: ["-y", "airtable-mcp-server"]
+      env:
+        AIRTABLE_API_KEY: "your_airtable_personal_access_token"
+        AIRTABLE_BASE_ID: "your_base_id"
+is_featured: false
+order: 34
+author: "社区"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Airtable MCP 让 Claude 直接访问和操作 Airtable 数据库，适合使用 Airtable 管理内容、项目或客户数据的团队。
+
+## 典型用途
+
+**内容管理**：「查看编辑日历中本周需要发布的内容」
+
+**数据录入**：「把这批数据批量添加到客户管理表格」
+
+**数据分析**：「分析产品反馈表格，统计最常见的用户痛点」
+
+**报告生成**：「根据项目追踪表格生成本周进度报告」
+
+## 来源
+
+社区开源项目，Airtable 生态工具。

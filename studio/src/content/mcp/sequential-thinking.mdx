@@ -1,0 +1,42 @@
+---
+name: "Sequential Thinking MCP"
+name_zh: "结构化推理"
+description: "给 Claude 增加结构化推理能力 —— 将复杂问题拆解为步骤，支持动态调整思路，提升解决复杂任务的准确性。"
+source: "Anthropic 官方"
+category: ["ai", "utility"]
+tags: ["reasoning", "thinking", "chain-of-thought", "problem-solving"]
+platform: ["claude-code"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-sequential-thinking"
+config_snippet:
+  mcpServers:
+    sequential-thinking:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+is_featured: false
+order: 23
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Sequential Thinking MCP 为 Claude 提供结构化的思维工具，让模型能够将复杂问题拆解为步骤，逐步推理，并在过程中动态调整思路。
+
+## 典型用途
+
+**复杂问题解决**：需要多步骤推理的技术架构设计
+
+**方案规划**：将大型项目分解为可执行的步骤
+
+**逻辑分析**：需要严密推理链的业务决策分析
+
+**错误排查**：系统性地排查复杂的 Bug
+
+## 使用建议
+
+特别适合与代码生成、架构设计、数据分析等复杂任务结合使用，能显著提升输出质量。
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

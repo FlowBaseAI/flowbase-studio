@@ -1,0 +1,45 @@
+---
+name: "Supabase MCP"
+name_zh: "Supabase 后端平台"
+description: "连接 Supabase 项目 —— 查询数据库、管理用户认证、操作存储，让 Claude 成为你的 Supabase 管理助手。"
+source: "社区 · Supabase 生态"
+category: ["database", "cloud"]
+tags: ["supabase", "postgresql", "auth", "storage", "backend"]
+platform: ["claude-code"]
+github_url: "https://github.com/supabase-community/supabase-mcp"
+install_cmd: "npx -y supabase-mcp"
+config_snippet:
+  mcpServers:
+    supabase:
+      command: "npx"
+      args: ["-y", "supabase-mcp"]
+      env:
+        SUPABASE_URL: "https://your-project.supabase.co"
+        SUPABASE_SERVICE_KEY: "your_service_role_key"
+is_featured: false
+order: 28
+author: "社区"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Supabase MCP 让 Claude 直接操作你的 Supabase 项目，包括 PostgreSQL 数据库查询、用户管理、文件存储等操作。
+
+## 典型用途
+
+**数据查询**：「查询用户表中过去 7 天注册的用户」
+
+**RLS 策略**：「帮我检查现有的 Row Level Security 策略是否配置正确」
+
+**存储管理**：「列出 Storage 桶中的文件，清理过期内容」
+
+**用户管理**：「查看认证用户列表，找出长期未登录的账号」
+
+## 配置说明
+
+使用 Service Role Key（不是 anon key），在 Supabase 项目设置 → API 中获取。
+
+## 来源
+
+社区开源项目，Supabase 生态常用工具。

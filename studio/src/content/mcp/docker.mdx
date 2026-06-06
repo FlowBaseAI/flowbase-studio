@@ -1,0 +1,42 @@
+---
+name: "Docker MCP"
+name_zh: "Docker 容器管理"
+description: "让 Claude 管理 Docker 容器和镜像 —— 查看运行状态、查看日志、执行命令，无需记忆复杂 CLI 指令。"
+source: "社区 · Docker Hub"
+category: ["devops", "infrastructure"]
+tags: ["docker", "containers", "devops", "infrastructure"]
+platform: ["claude-code"]
+github_url: "https://github.com/ckreiling/mcp-server-docker"
+install_cmd: "npx -y mcp-server-docker"
+config_snippet:
+  mcpServers:
+    docker:
+      command: "npx"
+      args: ["-y", "mcp-server-docker"]
+is_featured: false
+order: 30
+author: "社区"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Docker MCP 让 Claude 可以直接与本地 Docker 环境交互，管理容器和镜像，无需记忆复杂的 CLI 命令。
+
+## 典型用途
+
+**容器管理**：「查看所有运行中的容器，哪个占用内存最多」
+
+**日志查看**：「查看 nginx 容器最近的错误日志」
+
+**故障排查**：「这个容器为什么一直重启，帮我分析日志」
+
+**镜像管理**：「清理所有未使用的 Docker 镜像」
+
+## 前置要求
+
+本地已安装并运行 Docker Desktop 或 Docker Engine。
+
+## 来源
+
+社区开源项目，Docker 生态常用工具。

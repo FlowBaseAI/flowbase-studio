@@ -1,0 +1,44 @@
+---
+name: "Google Maps MCP"
+name_zh: "Google 地图"
+description: "让 Claude 使用 Google Maps API —— 地点搜索、路线规划、地理编码、周边查询，适合位置相关应用开发。"
+source: "Anthropic 官方"
+category: ["search", "utility"]
+tags: ["google", "maps", "location", "places", "geocoding"]
+platform: ["claude-code"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-google-maps"
+config_snippet:
+  mcpServers:
+    google-maps:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-google-maps"]
+      env:
+        GOOGLE_MAPS_API_KEY: "your_google_maps_api_key"
+is_featured: false
+order: 21
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Google Maps MCP 让 Claude 直接调用 Google Maps Platform API，处理地理位置相关的查询和操作。
+
+## 典型用途
+
+**地点搜索**：「在北京朝阳区找评分 4.5 分以上的咖啡馆」
+
+**路线规划**：「从上海虹桥到浦东机场最快路线是什么」
+
+**地理编码**：「把这个地址列表转换为经纬度坐标」
+
+**周边查询**：「这个坐标 2 公里内有哪些加油站」
+
+## 配置说明
+
+在 Google Cloud Console 申请 Maps Platform API Key，启用 Maps JavaScript API、Places API、Geocoding API。
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

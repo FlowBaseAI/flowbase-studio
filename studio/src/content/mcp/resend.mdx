@@ -1,0 +1,44 @@
+---
+name: "Resend MCP"
+name_zh: "Resend 邮件发送"
+description: "通过 Resend API 发送邮件 —— 让 Claude 在工作流中直接发送通知邮件，适合开发者和自动化场景。"
+source: "社区 · Resend 生态"
+category: ["comms", "utility"]
+tags: ["resend", "email", "smtp", "notification", "transactional"]
+platform: ["claude-code"]
+github_url: "https://github.com/resend/mcp-send-email"
+install_cmd: "npx -y @resend/mcp"
+config_snippet:
+  mcpServers:
+    resend:
+      command: "npx"
+      args: ["-y", "@resend/mcp"]
+      env:
+        RESEND_API_KEY: "re_your_resend_api_key"
+is_featured: false
+order: 42
+author: "Resend"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Resend MCP 让 Claude 在工作流中发送事务性邮件，适合通知、报告分发和自动化场景。
+
+## 典型用途
+
+**报告分发**：「把今天的数据分析报告发送给团队」
+
+**通知邮件**：「任务完成后自动发送通知邮件」
+
+**测试邮件**：「发送一封测试邮件验证模板效果」
+
+**批量通知**：「给这个列表里的用户发送产品更新通知」
+
+## 特点
+
+Resend 专为开发者设计，支持 React Email 模板，交付率高，有良好的中国访问记录。
+
+## 来源
+
+Resend 官方 MCP 服务器。

@@ -1,0 +1,42 @@
+---
+name: "Time MCP"
+name_zh: "时间与时区"
+description: "让 Claude 获取准确的当前时间和时区信息 —— 解决 LLM 不知道当前时间的问题，支持多时区转换。"
+source: "Anthropic 官方"
+category: ["utility"]
+tags: ["time", "timezone", "datetime", "utility"]
+platform: ["claude-code", "codex", "gemini-cli"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-time"
+config_snippet:
+  mcpServers:
+    time:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-time"]
+is_featured: false
+order: 24
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Time MCP 解决了 LLM 不知道当前时间的根本问题，让 Claude 能够获取准确的实时时间，并进行时区转换。
+
+## 典型用途
+
+**时间感知任务**：「帮我安排今天下午的日程」
+
+**时区转换**：「北京时间下午 3 点，纽约是几点」
+
+**日期计算**：「今天距离春节还有多少天」
+
+**时间标记**：生成包含准确时间戳的日志和报告
+
+## 适用场景
+
+所有需要 Claude 知晓当前时间的场景，特别是日程管理、定时任务和时效性内容生成。
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

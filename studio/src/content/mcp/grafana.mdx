@@ -1,0 +1,41 @@
+---
+name: "Grafana MCP"
+name_zh: "Grafana 可观测性"
+description: "让 Claude 查询 Grafana 监控数据 —— 读取 Dashboard、分析指标趋势、辅助告警排查，提升运维效率。"
+source: "Grafana 官方"
+category: ["devops", "monitoring"]
+tags: ["grafana", "monitoring", "metrics", "observability", "devops"]
+platform: ["claude-code"]
+github_url: "https://github.com/grafana/mcp-grafana"
+install_cmd: "npx -y @grafana/mcp-server"
+config_snippet:
+  mcpServers:
+    grafana:
+      command: "npx"
+      args: ["-y", "@grafana/mcp-server"]
+      env:
+        GRAFANA_URL: "https://your-grafana.instance.com"
+        GRAFANA_API_KEY: "your_grafana_service_account_token"
+is_featured: false
+order: 39
+author: "Grafana"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Grafana 官方 MCP 让 Claude 访问 Grafana 实例，读取 Dashboard 数据、查询指标，辅助运维分析。
+
+## 典型用途
+
+**指标分析**：「查看过去 1 小时的 API 响应时间趋势，有没有异常」
+
+**告警分析**：「当前有哪些未解决的告警，按严重程度排列」
+
+**性能报告**：「生成数据库连接池的使用率分析报告」
+
+**容量规划**：「根据过去 30 天的趋势，预测未来内存需求」
+
+## 来源
+
+Grafana Labs 官方 MCP 服务器。

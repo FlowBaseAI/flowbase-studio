@@ -1,0 +1,44 @@
+---
+name: "Figma MCP"
+name_zh: "Figma 设计工具"
+description: "让 Claude 访问 Figma 设计文件 —— 读取组件、提取设计 Token、生成对应代码，连接设计与开发。"
+source: "社区 · Figma 生态"
+category: ["design", "devtools"]
+tags: ["figma", "design", "ui", "components", "design-system"]
+platform: ["claude-code"]
+github_url: "https://github.com/GLaDOS-418/figma-developer-mcp"
+install_cmd: "npx -y figma-developer-mcp"
+config_snippet:
+  mcpServers:
+    figma:
+      command: "npx"
+      args: ["-y", "figma-developer-mcp"]
+      env:
+        FIGMA_ACCESS_TOKEN: "your_figma_access_token"
+is_featured: false
+order: 35
+author: "社区"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Figma MCP 让 Claude 读取 Figma 设计文件，提取组件信息、颜色值、间距等设计决策，帮助开发者更准确地实现设计稿。
+
+## 典型用途
+
+**设计转代码**：「读取这个 Figma 组件，帮我写对应的 React 代码」
+
+**设计 Token 提取**：「提取这个设计文件中的颜色变量和字体规范」
+
+**设计评审**：「检查这个页面的设计是否与设计系统规范一致」
+
+**组件分析**：「列出这个 Figma 文件中所有使用的组件」
+
+## 获取 Access Token
+
+Figma 账户设置 → Security → Personal access tokens。
+
+## 来源
+
+社区开源项目，Figma 生态工具。

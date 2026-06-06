@@ -1,0 +1,46 @@
+---
+name: "Jira MCP"
+name_zh: "Jira 项目管理"
+description: "连接 Atlassian Jira —— 查询 Issue、创建任务、管理 Sprint，让 Claude 成为你的敏捷项目助手。"
+source: "社区 · Atlassian 生态"
+category: ["devtools", "productivity"]
+tags: ["jira", "atlassian", "agile", "project-management", "sprint"]
+platform: ["claude-code"]
+github_url: "https://github.com/george-putter/jira-mcp"
+install_cmd: "npx -y jira-mcp"
+config_snippet:
+  mcpServers:
+    jira:
+      command: "npx"
+      args: ["-y", "jira-mcp"]
+      env:
+        JIRA_BASE_URL: "https://yourcompany.atlassian.net"
+        JIRA_EMAIL: "you@company.com"
+        JIRA_API_TOKEN: "your_jira_api_token"
+is_featured: false
+order: 33
+author: "社区"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Jira MCP 让 Claude 直接访问 Jira 项目数据，帮助项目管理和开发团队提升效率。
+
+## 典型用途
+
+**Issue 查询**：「查看本 Sprint 还有多少 P0 Bug 未解决」
+
+**任务创建**：「根据这个 Bug 描述创建一个详细的 Jira Issue」
+
+**Sprint 报告**：「生成本 Sprint 的完成情况摘要」
+
+**工作量分析**：「统计过去一个月每个团队成员关闭的 Issue 数量」
+
+## 获取 API Token
+
+Atlassian 账户设置 → Security → Create and manage API tokens。
+
+## 来源
+
+社区开源项目，Atlassian 生态常用工具。

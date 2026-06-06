@@ -1,0 +1,46 @@
+---
+name: "Neon MCP"
+name_zh: "Neon Serverless 数据库"
+description: "Neon 官方出品 —— 管理 Serverless PostgreSQL 数据库，创建分支、运行查询、管理项目，适合现代 Web 应用。"
+source: "Neon 官方"
+category: ["database", "cloud"]
+tags: ["neon", "postgresql", "serverless", "database", "branching"]
+platform: ["claude-code"]
+github_url: "https://github.com/neondatabase/mcp-server-neon"
+install_cmd: "npx -y @neondatabase/mcp-server-neon"
+config_snippet:
+  mcpServers:
+    neon:
+      command: "npx"
+      args: ["-y", "@neondatabase/mcp-server-neon"]
+      env:
+        NEON_API_KEY: "your_neon_api_key"
+is_featured: false
+order: 27
+author: "Neon"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Neon 是 Serverless PostgreSQL 平台，其官方 MCP 让 Claude 可以直接管理数据库项目、创建分支、运行查询。
+
+## 典型用途
+
+**数据库分支**：「为这次功能开发创建一个数据库分支」
+
+**Schema 管理**：「查看当前数据库 Schema，帮我规划迁移方案」
+
+**查询执行**：「在开发分支上测试这个 SQL 查询」
+
+**项目管理**：「列出所有 Neon 项目，显示各项目的连接信息」
+
+## Neon 核心优势
+
+- 数据库分支（像 Git 一样管理数据库）
+- 按需扩展，无访问时自动暂停
+- 免费计划对独立开发者友好
+
+## 来源
+
+Neon 官方发布，GitHub 活跃维护。

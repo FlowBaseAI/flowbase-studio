@@ -1,0 +1,40 @@
+---
+name: "MongoDB MCP"
+name_zh: "MongoDB 文档数据库"
+description: "让 Claude 查询 MongoDB 集合 —— 自然语言转换为聚合查询，分析文档结构，加速 NoSQL 开发。"
+source: "社区"
+category: ["database"]
+tags: ["mongodb", "nosql", "database", "aggregation"]
+platform: ["claude-code"]
+github_url: "https://github.com/kiliczsh/mcp-mongo-server"
+install_cmd: "npx -y mcp-mongo-server"
+config_snippet:
+  mcpServers:
+    mongodb:
+      command: "npx"
+      args: ["-y", "mcp-mongo-server"]
+      env:
+        MONGODB_URI: "mongodb://localhost:27017/mydb"
+is_featured: false
+order: 32
+author: "社区"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+MongoDB MCP 让 Claude 直接连接 MongoDB，用自然语言描述需求，Claude 自动生成并执行查询。
+
+## 典型用途
+
+**数据查询**：「查找过去 30 天内下了多次订单的用户」
+
+**聚合分析**：「按城市统计用户分布，排序展示」
+
+**Schema 分析**：「分析这个集合的文档结构，找出字段不一致的记录」
+
+**索引建议**：「根据这些查询模式，建议应该创建哪些索引」
+
+## 来源
+
+社区开源项目。

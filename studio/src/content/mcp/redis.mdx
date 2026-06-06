@@ -1,0 +1,40 @@
+---
+name: "Redis MCP"
+name_zh: "Redis 缓存数据库"
+description: "让 Claude 操作 Redis —— 查看缓存数据、分析 Key 分布、调试缓存策略，快速诊断缓存相关问题。"
+source: "社区"
+category: ["database", "cache"]
+tags: ["redis", "cache", "database", "performance"]
+platform: ["claude-code"]
+github_url: "https://github.com/GaborKoleszar/mcp-redis"
+install_cmd: "npx -y mcp-redis"
+config_snippet:
+  mcpServers:
+    redis:
+      command: "npx"
+      args: ["-y", "mcp-redis"]
+      env:
+        REDIS_URL: "redis://localhost:6379"
+is_featured: false
+order: 31
+author: "社区"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Redis MCP 让 Claude 直接连接 Redis，查看和分析缓存数据，帮助调试缓存策略和性能问题。
+
+## 典型用途
+
+**缓存调试**：「查看这个用户 Session 的缓存数据是否正确」
+
+**Key 分析**：「统计 Redis 中各类型 Key 的数量和内存占用」
+
+**过期策略**：「检查这些 Key 的 TTL 是否合理」
+
+**性能分析**：「分析 Redis 的内存使用情况，找出占用最大的 Key」
+
+## 来源
+
+社区开源项目。

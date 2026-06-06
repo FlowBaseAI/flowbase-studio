@@ -1,0 +1,44 @@
+---
+name: "HubSpot MCP"
+name_zh: "HubSpot CRM"
+description: "让 Claude 访问 HubSpot CRM 数据 —— 查询联系人、分析销售漏斗、生成报告，成为你的 CRM 数据助手。"
+source: "社区 · HubSpot 生态"
+category: ["productivity", "marketing"]
+tags: ["hubspot", "crm", "sales", "marketing", "contacts"]
+platform: ["claude-code"]
+github_url: "https://github.com/v4lheru/hubspot-mcp"
+install_cmd: "npx -y hubspot-mcp"
+config_snippet:
+  mcpServers:
+    hubspot:
+      command: "npx"
+      args: ["-y", "hubspot-mcp"]
+      env:
+        HUBSPOT_ACCESS_TOKEN: "your_hubspot_private_app_token"
+is_featured: false
+order: 38
+author: "社区"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+HubSpot MCP 让 Claude 访问你的 HubSpot CRM 数据，辅助销售、市场营销和客户服务工作。
+
+## 典型用途
+
+**销售分析**：「分析本季度的销售漏斗，转化率在哪个阶段最低」
+
+**联系人查询**：「找出 3 个月内没有互动的潜在客户」
+
+**报告生成**：「生成本月的营销活动效果报告」
+
+**客户洞察**：「分析企业客户的平均成交周期和金额」
+
+## 获取 Token
+
+HubSpot 开发者中心创建 Private App，获取访问令牌。
+
+## 来源
+
+社区开源项目，HubSpot 生态工具。

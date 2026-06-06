@@ -1,0 +1,47 @@
+---
+name: "Cloudflare MCP"
+name_zh: "Cloudflare 边缘云"
+description: "Cloudflare 官方出品 —— 管理 Workers、R2 存储、KV、DNS，直接在对话中操作你的 Cloudflare 资源。"
+source: "Cloudflare 官方"
+category: ["devops", "cloud"]
+tags: ["cloudflare", "workers", "cdn", "dns", "edge", "cloud"]
+platform: ["claude-code"]
+github_url: "https://github.com/cloudflare/mcp-server-cloudflare"
+install_cmd: "npx -y @cloudflare/mcp-server-cloudflare"
+config_snippet:
+  mcpServers:
+    cloudflare:
+      command: "npx"
+      args: ["-y", "@cloudflare/mcp-server-cloudflare"]
+      env:
+        CLOUDFLARE_API_TOKEN: "your_cloudflare_api_token"
+        CLOUDFLARE_ACCOUNT_ID: "your_account_id"
+is_featured: true
+order: 26
+author: "Cloudflare"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Cloudflare 官方发布的 MCP 服务器，让 Claude 可以直接管理你的 Cloudflare 账户资源，包括 Workers、R2 对象存储、KV 存储、D1 数据库等。
+
+## 典型用途
+
+**Workers 开发**：「帮我写一个 Cloudflare Worker 实现 API 代理，然后部署」
+
+**R2 管理**：「列出 R2 存储桶中的文件，删除超过 30 天的日志」
+
+**DNS 配置**：「帮我添加一条 CNAME 记录指向这个地址」
+
+**KV 操作**：「读取 KV 命名空间中的配置，更新缓存策略」
+
+**D1 查询**：「查询 D1 数据库中的用户数据」
+
+## 配置说明
+
+在 Cloudflare 仪表板 → API Tokens 创建具有相应权限的 API Token。
+
+## 来源
+
+Cloudflare 官方开源，GitHub 活跃维护。

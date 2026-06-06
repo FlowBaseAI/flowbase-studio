@@ -1,0 +1,42 @@
+---
+name: "GitHub Actions MCP"
+name_zh: "GitHub Actions CI/CD"
+description: "让 Claude 访问 GitHub Actions 工作流 —— 查看构建状态、分析失败原因、触发工作流，优化 CI/CD 流程。"
+source: "社区"
+category: ["devops", "devtools"]
+tags: ["github-actions", "cicd", "workflow", "automation", "devops"]
+platform: ["claude-code"]
+github_url: "https://github.com/ko1ynnky/github-actions-mcp-server"
+install_cmd: "npx -y github-actions-mcp-server"
+config_snippet:
+  mcpServers:
+    github-actions:
+      command: "npx"
+      args: ["-y", "github-actions-mcp-server"]
+      env:
+        GITHUB_TOKEN: "your_github_token"
+        GITHUB_OWNER: "your_username_or_org"
+        GITHUB_REPO: "your_repo_name"
+is_featured: false
+order: 37
+author: "社区"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+GitHub Actions MCP 让 Claude 直接访问 GitHub Actions 工作流数据，帮助分析 CI/CD 问题和优化流水线。
+
+## 典型用途
+
+**构建状态**：「查看最近 10 次 CI 运行，哪些失败了」
+
+**失败分析**：「这次构建失败的详细日志是什么，问题在哪」
+
+**工作流管理**：「列出所有 GitHub Actions 工作流，哪个运行最频繁」
+
+**性能优化**：「分析这个工作流的耗时，哪个步骤最慢」
+
+## 来源
+
+社区开源项目。

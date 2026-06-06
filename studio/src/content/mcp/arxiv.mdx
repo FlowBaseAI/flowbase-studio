@@ -1,0 +1,42 @@
+---
+name: "ArXiv MCP"
+name_zh: "学术论文搜索"
+description: "让 Claude 搜索和读取 ArXiv 学术论文 —— 查找最新研究、提取论文摘要，适合研究人员和 AI 从业者。"
+source: "社区"
+category: ["research", "ai"]
+tags: ["arxiv", "papers", "research", "academic", "ai"]
+platform: ["claude-code"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y mcp-server-arxiv"
+config_snippet:
+  mcpServers:
+    arxiv:
+      command: "npx"
+      args: ["-y", "mcp-server-arxiv"]
+is_featured: false
+order: 45
+author: "社区"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+ArXiv MCP 让 Claude 直接搜索和读取 ArXiv 上的学术论文，帮助研究人员快速了解最新进展。
+
+## 典型用途
+
+**论文搜索**：「搜索 2024 年关于 RAG 架构的最新论文」
+
+**摘要提取**：「读取这篇论文，用中文解释核心方法和实验结果」
+
+**研究综述**：「综合最近 6 个月关于 MoE 模型的研究，有什么新发现」
+
+**引用分析**：「这篇论文的核心观点是什么，有没有后续工作」
+
+## 适用人群
+
+AI 研究人员、机器学习工程师、学术工作者、技术内容创作者。
+
+## 来源
+
+社区开源项目。

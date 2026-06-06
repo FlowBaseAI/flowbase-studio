@@ -1,0 +1,38 @@
+---
+name: "YouTube MCP"
+name_zh: "YouTube 视频分析"
+description: "让 Claude 提取和分析 YouTube 视频内容 —— 获取字幕、摘要视频、提取关键信息，无需完整观看视频。"
+source: "社区"
+category: ["research", "web"]
+tags: ["youtube", "video", "transcript", "analysis", "research"]
+platform: ["claude-code"]
+github_url: "https://github.com/kimtaeyoon83/mcp-server-youtube-transcript"
+install_cmd: "npx -y mcp-server-youtube-transcript"
+config_snippet:
+  mcpServers:
+    youtube:
+      command: "npx"
+      args: ["-y", "mcp-server-youtube-transcript"]
+is_featured: false
+order: 44
+author: "社区"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+YouTube MCP 让 Claude 获取 YouTube 视频的字幕文字，并对内容进行分析、摘要和信息提取。
+
+## 典型用途
+
+**视频摘要**：「把这个 1 小时的技术演讲提炼成 10 分钟的阅读摘要」
+
+**学习笔记**：「根据这个教程视频生成学习笔记和关键代码」
+
+**内容研究**：「分析这几个竞品的产品演示视频，总结他们的核心卖点」
+
+**知识提取**：「从这个访谈视频中提取所有提到的工具和书籍推荐」
+
+## 来源
+
+社区开源项目，GitHub 活跃维护。

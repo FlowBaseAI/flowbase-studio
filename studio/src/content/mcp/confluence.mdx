@@ -1,0 +1,42 @@
+---
+name: "Confluence MCP"
+name_zh: "Confluence 知识库"
+description: "连接 Atlassian Confluence —— 让 Claude 检索和整理 Wiki 内容，成为你的企业知识库智能助手。"
+source: "社区 · Atlassian 生态"
+category: ["knowledge", "productivity"]
+tags: ["confluence", "atlassian", "wiki", "documentation", "knowledge-base"]
+platform: ["claude-code"]
+github_url: "https://github.com/sooperset/mcp-atlassian"
+install_cmd: "npx -y mcp-atlassian"
+config_snippet:
+  mcpServers:
+    confluence:
+      command: "npx"
+      args: ["-y", "mcp-atlassian"]
+      env:
+        CONFLUENCE_URL: "https://yourcompany.atlassian.net/wiki"
+        CONFLUENCE_EMAIL: "you@company.com"
+        CONFLUENCE_API_TOKEN: "your_api_token"
+is_featured: false
+order: 41
+author: "社区"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+Confluence MCP 让 Claude 访问 Confluence 知识库，搜索文档、提取信息，将散落的企业知识变得易于访问。
+
+## 典型用途
+
+**知识检索**：「在 Confluence 中找关于这个系统的架构文档」
+
+**内容整合**：「把这几个相关页面的内容整合成一份摘要」
+
+**文档生成**：「根据现有 Confluence 文档，生成新员工入职指南」
+
+**知识问答**：「根据 Confluence 中的 FAQ 回答这个用户问题」
+
+## 来源
+
+社区开源项目，同时支持 Jira 和 Confluence。

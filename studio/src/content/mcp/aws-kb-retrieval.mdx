@@ -1,0 +1,47 @@
+---
+name: "AWS Bedrock KB MCP"
+name_zh: "AWS 知识库检索"
+description: "Anthropic 官方出品 —— 接入 Amazon Bedrock Knowledge Base，让 Claude 检索企业私有知识库。"
+source: "Anthropic 官方"
+category: ["ai", "cloud"]
+tags: ["aws", "bedrock", "knowledge-base", "rag", "enterprise"]
+platform: ["claude-code"]
+github_url: "https://github.com/modelcontextprotocol/servers"
+install_cmd: "npx -y @modelcontextprotocol/server-aws-kb-retrieval"
+config_snippet:
+  mcpServers:
+    aws-kb-retrieval:
+      command: "npx"
+      args: ["-y", "@modelcontextprotocol/server-aws-kb-retrieval"]
+      env:
+        AWS_ACCESS_KEY_ID: "your_access_key"
+        AWS_SECRET_ACCESS_KEY: "your_secret_key"
+        AWS_REGION: "us-east-1"
+        KNOWLEDGE_BASE_ID: "your_kb_id"
+is_featured: false
+order: 40
+author: "Anthropic"
+updated_at: "2025-01-01"
+---
+
+## 这个 MCP 能做什么？
+
+AWS Bedrock KB MCP 让 Claude 检索存储在 Amazon Bedrock Knowledge Base 中的企业私有文档，实现 RAG（检索增强生成）工作流。
+
+## 典型用途
+
+**企业知识检索**：「在公司内部文档中找关于这个系统架构的说明」
+
+**合规查询**：「检索合规手册中关于数据处理的相关规定」
+
+**产品文档**：「根据内部 FAQ 回答用户的常见问题」
+
+**技术支持**：「在技术文档库中找这个错误的解决方案」
+
+## 适用场景
+
+特别适合有大量私有文档、需要 RAG 能力的企业场景。
+
+## 来源
+
+Anthropic 官方 MCP 服务器集合。

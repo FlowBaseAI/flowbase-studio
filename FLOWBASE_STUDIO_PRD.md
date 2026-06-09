@@ -1,24 +1,26 @@
+# FLOWBASE_STUDIO_PRD.md
+
 # FlowBase Studio (FBS)
 
 ## Vision
 
-FlowBase Studio（简称 FBS）是 FlowBase 生态的核心产品。
+FlowBase Studio（简称 FBS）是 FlowBase 生态核心产品。
 
 FBS 不是导航站。
 
 FBS 不是资源收录站。
 
-FBS 的核心定位是：
+FBS 的核心定位：
 
-**The Visual Workspace for Claude Code.**
+# The Visual Workspace for Claude Code
 
-中文：
+中文定位：
 
-**中国首个 Claude Code 中文可视化工作台。**
+中国首个 Claude Code 中文可视化工作台。
 
 ---
 
-## Core Mission
+## Product Mission
 
 让用户无需学习：
 
@@ -28,7 +30,7 @@ FBS 的核心定位是：
 * Skills 文件
 * Rules 文件
 
-通过可视化界面即可完成 Claude Code 项目搭建。
+通过可视化界面即可完成 Claude Code 项目构建。
 
 ---
 
@@ -94,9 +96,87 @@ FBS 方式：
 
 FBS = Claude Code + Visual Workspace
 
-目标不是成为最大的资源库。
+目标：
 
-目标是成为最容易使用 Claude Code 的平台。
+成为中文用户使用 Claude Code 的第一入口。
+
+不是最大的资源库。
+
+而是最容易使用 Claude Code 的平台。
+
+---
+
+# Technical Stack
+
+Framework
+
+* Astro
+
+Language
+
+* TypeScript
+
+Styling
+
+* TailwindCSS
+
+Content
+
+* MDX
+
+Database
+
+* PostgreSQL
+
+ORM
+
+* Drizzle ORM
+
+Search
+
+* Pagefind
+
+Deployment
+
+* VPS
+* PM2
+
+禁止使用：
+
+* Next.js
+* Nuxt
+* Laravel
+* Vue
+
+除非后续明确升级架构。
+
+---
+
+# Design System
+
+Follow FlowBase Design Language
+
+Keywords
+
+* Dark
+* Industrial
+* Premium
+* Minimal
+* Workflow First
+
+Reference
+
+* Linear
+* Raycast
+* Arc Browser
+* Vercel
+
+禁止：
+
+* Cyberpunk
+* Neon
+* Rainbow Gradient
+* Excessive Animation
 
 ---
 
@@ -114,7 +194,7 @@ Workspace 才是产品核心。
 
 ## Claude Workspace
 
-核心模块
+核心模块。
 
 用户进入：
 
@@ -138,11 +218,17 @@ Output
 
 ---
 
-示例：
+Project
 
 Project Name
 
+Example:
+
 FlowBase
+
+Whispr
+
+My SaaS
 
 ---
 
@@ -166,6 +252,10 @@ MCP
 
 ☑ Playwright
 
+☑ PostgreSQL
+
+☑ Notion
+
 ---
 
 Skills
@@ -174,7 +264,11 @@ Skills
 
 ☑ Research Agent
 
+☑ Content Factory
+
 ☑ Code Reviewer
+
+☑ Bug Hunter
 
 ---
 
@@ -183,6 +277,12 @@ Rules
 ☑ FlowBase Rules
 
 ☑ SEO Rules
+
+☑ Next.js Rules
+
+☑ Astro Rules
+
+☑ TypeScript Rules
 
 ---
 
@@ -218,15 +318,11 @@ rules/
 
 settings.json
 
----
-
 支持：
 
-Download ZIP
-
-Copy Config
-
-Export Project
+* Download ZIP
+* Copy Config
+* Export Project
 
 ---
 
@@ -234,19 +330,23 @@ Export Project
 
 作为 Workspace 数据源。
 
+每个 MCP 包含：
+
+* Name
+* Description
+* Category
+* GitHub
+* Install Command
+* Config Example
+* Use Cases
+* Tags
+
 支持：
 
-搜索
-
-筛选
-
-安装说明
-
-配置说明
-
-GitHub 链接
-
-使用案例
+* 搜索
+* 筛选
+* 收藏
+* 导入 Workspace
 
 ---
 
@@ -254,15 +354,21 @@ GitHub 链接
 
 作为 Workspace 数据源。
 
+每个 Skill 包含：
+
+* Name
+* Description
+* Difficulty
+* Tags
+* Author
+* Content
+
 支持：
 
-查看
-
-搜索
-
-导入 Workspace
-
-导出 Skill
+* 搜索
+* 收藏
+* 导入 Workspace
+* 导出 Skill
 
 ---
 
@@ -272,13 +378,25 @@ GitHub 链接
 
 支持：
 
-查看
+* Claude Rules
+* Cursor Rules
+* Codex Rules
 
-搜索
+分类：
 
-导入 Workspace
+* Astro
+* React
+* TypeScript
+* Python
+* SEO
+* Content
 
-导出 Rule
+支持：
+
+* 搜索
+* 收藏
+* 导入 Workspace
+* 导出 Rule
 
 ---
 
@@ -286,15 +404,31 @@ GitHub 链接
 
 支持搜索：
 
-MCP
+* MCP
+* Skills
+* Rules
+* Workflows
+* Templates
 
-Skills
+---
 
-Rules
+# Content Structure
 
-Workflow
+/content
 
-Templates
+/content/mcp
+
+/content/skills
+
+/content/rules
+
+/content/workflows
+
+所有资源使用 MDX 管理。
+
+第一版不依赖数据库。
+
+优先静态内容驱动。
 
 ---
 
@@ -310,6 +444,37 @@ User Accounts
 
 ---
 
+Workflow Library
+
+例如：
+
+* Claude Code Content Factory
+* GitHub Research Workflow
+* SEO Workflow
+* MCP Development Workflow
+
+包含：
+
+* 原理
+* 步骤
+* Prompt
+* MCP需求
+* Skill需求
+
+---
+
+Templates
+
+包含：
+
+* Blog
+* SaaS
+* Landing Page
+* Telegram Bot
+* AI Tool
+
+---
+
 # Phase 3
 
 Local Workspace
@@ -320,17 +485,12 @@ Local Workspace
 
 支持：
 
-读取 .claude
-
-管理 CLAUDE.md
-
-管理 Skills
-
-管理 MCP
-
-管理 Rules
-
-同步项目
+* 读取 .claude
+* 管理 CLAUDE.md
+* 管理 Skills
+* 管理 MCP
+* 管理 Rules
+* 同步项目
 
 ---
 
@@ -338,19 +498,37 @@ Local Workspace
 
 Marketplace
 
-支持用户提交：
+允许用户提交：
 
-MCP
-
-Skills
-
-Rules
-
-Workflow
-
-Templates
+* MCP
+* Skill
+* Rule
+* Workflow
+* Template
 
 打造中文 Agent 生态社区。
+
+---
+
+# Success Metrics
+
+GitHub Stars
+
+1000+
+
+Monthly Visits
+
+10000+
+
+Library Resources
+
+MCP 200+
+
+Skills 1000+
+
+Rules 500+
+
+Workflows 200+
 
 ---
 

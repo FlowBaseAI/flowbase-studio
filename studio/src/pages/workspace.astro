@@ -432,7 +432,9 @@ const presets = [
 
 <script type="application/json" id="workspace-data" set:html={JSON.stringify({ presets })}></script>
 
-<script is:inline>
+<script>
+  import JSZip from 'jszip'
+
   const workspaceData = JSON.parse(document.getElementById('workspace-data')?.textContent ?? '{}')
   const { presets = [] } = workspaceData
   let mcpData = []
@@ -851,59 +853,105 @@ const presets = [
     t._timer = setTimeout(() => { t.style.display = 'none' }, 3000)
   }
 
+  async function copyTextToClipboard(text) {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text)
+        return
+      }
+    } catch {
+      // Fall back to the selection-based copy path below.
+    }
+
+    const textarea = document.createElement('textarea')
+    textarea.value = text
+    textarea.setAttribute('readonly', '')
+    textarea.style.position = 'fixed'
+    textarea.style.top = '-1000px'
+    textarea.style.left = '-1000px'
+    textarea.style.opacity = '0'
+    document.body.appendChild(textarea)
+    textarea.focus()
+    textarea.select()
+    const copied = document.execCommand('copy')
+    document.body.removeChild(textarea)
+    if (!copied) throw new Error('Clipboard copy was blocked')
+  }
+
   // ---- Export ZIP ----
   document.getElementById('btn-download')?.addEventListener('click', async () => {
-    const { default: JSZip } = await import('jszip')
-    const { projectName, selMcps, selSkills, selRules, claudeMd, settings, readme } = buildProjectData()
+    try {
+      const { projectName, selMcps, selSkills, selRules, claudeMd, settings, readme } = buildProjectData()
 
-    const zip = new JSZip()
-    const root = zip.folder(projectName)
+      const zip = new JSZip()
+      const root = zip.folder(projectName)
+      if (!root) throw new Error('Failed to create project folder')
 
-    root.file('CLAUDE.md', claudeMd)
-    root.file('README.md', readme)
+      root.file('CLAUDE.md', claudeMd)
+      root.file('README.md', readme)
 
-    const claudeDir = root.folder('.claude')
-    claudeDir.file('settings.json', JSON.stringify(settings, null, 2))
+      const claudeDir = root.folder('.claude')
+      if (!claudeDir) throw new Error('Failed to create .claude folder')
+      claudeDir.file('settings.json', JSON.stringify(settings, null, 2))
 
-    if (selSkills.length) {
-      const skillsDir = root.folder('skills')
-      for (const s of selSkills) {
-        skillsDir.file(s.file_name, s.body || `# ${s.name}\n\n${s.description}\n`)
+      if (selSkills.length) {
+        const skillsDir = root.folder('skills')
+        if (!skillsDir) throw new Error('Failed to create skills folder')
+        for (const s of selSkills) {
+          skillsDir.file(s.file_name, s.body || `# ${s.name}\n\n${s.description}\n`)
+        }
       }
-    }
 
-    if (selRules.length) {
-      const rulesDir = root.folder('rules')
-      for (const r of selRules) {
-        rulesDir.file(r.file_name, r.body || `# ${r.name}\n\n${r.description}\n`)
+      if (selRules.length) {
+        const rulesDir = root.folder('rules')
+        if (!rulesDir) throw new Error('Failed to create rules folder')
+        for (const r of selRules) {
+          rulesDir.file(r.file_name, r.body || `# ${r.name}\n\n${r.description}\n`)
+        }
       }
-    }
 
-    const blob = await zip.generateAsync({ type: 'blob' })
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement('a')
-    a.href = url; a.download = `${projectName}.zip`
-    document.body.appendChild(a); a.click()
-    document.body.removeChild(a); URL.revokeObjectURL(url)
-    showToast(`✓ ${projectName}.zip 已下载 (${selMcps.length} MCP · ${selSkills.length} Skills · ${selRules.length} Rules)`)
+      const blob = await zip.generateAsync({ type: 'blob' })
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download = `${projectName}.zip`
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+      setTimeout(() => URL.revokeObjectURL(url), 0)
+      showToast(`✓ ${projectName}.zip 已下载 (${selMcps.length} MCP · ${selSkills.length} Skills · ${selRules.length} Rules)`)
+    } catch (error) {
+      console.error('Export ZIP failed', error)
+      showToast('Export ZIP 失败，请刷新后重试', false)
+    }
   })
 
   // ---- Copy settings.json ----
   document.getElementById('btn-copy')?.addEventListener('click', async () => {
-    const { settings } = buildProjectData()
-    await navigator.clipboard.writeText(JSON.stringify(settings, null, 2))
-    const lbl = document.getElementById('copy-settings-label')
-    if (lbl) { lbl.textContent = 'Copied'; setTimeout(() => lbl.textContent = 'Copy settings.json', 2000) }
-    showToast('✓ settings.json 已复制到剪贴板')
+    try {
+      const { settings } = buildProjectData()
+      await copyTextToClipboard(JSON.stringify(settings, null, 2))
+      const lbl = document.getElementById('copy-settings-label')
+      if (lbl) { lbl.textContent = 'Copied'; setTimeout(() => lbl.textContent = 'Copy settings.json', 2000) }
+      showToast('✓ settings.json 已复制到剪贴板')
+    } catch (error) {
+      console.error('Copy settings.json failed', error)
+      showToast('复制 settings.json 失败', false)
+    }
   })
 
   // ---- Copy CLAUDE.md ----
   document.getElementById('btn-copy-claude')?.addEventListener('click', async () => {
-    const { claudeMd } = buildProjectData()
-    await navigator.clipboard.writeText(claudeMd)
-    const lbl = document.getElementById('copy-claude-label')
-    if (lbl) { lbl.textContent = 'Copied'; setTimeout(() => lbl.textContent = 'Copy CLAUDE.md', 2000) }
-    showToast('CLAUDE.md copied')
+    try {
+      const { claudeMd } = buildProjectData()
+      await copyTextToClipboard(claudeMd)
+      const lbl = document.getElementById('copy-claude-label')
+      if (lbl) { lbl.textContent = 'Copied'; setTimeout(() => lbl.textContent = 'Copy CLAUDE.md', 2000) }
+      showToast('✓ CLAUDE.md 已复制到剪贴板')
+    } catch (error) {
+      console.error('Copy CLAUDE.md failed', error)
+      showToast('复制 CLAUDE.md 失败', false)
+    }
   })
 
   // ---- Reset ----

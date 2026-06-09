@@ -1,0 +1,63 @@
+---
+name: "China Hot Topic Researcher"
+name_en: "China Hot Topic Researcher"
+name_zh: "国内爆款选题研究员"
+description: "每天检索国内 AI、开发者、MCP、Claude Code、自动化和 SEO 热点，去重后输出适合 FlowBase 发布的爆款选题。"
+source: "FlowBase 原创"
+category: ["research", "seo", "content-strategy"]
+tags: ["hot-topics", "china", "seo", "ai-coding", "mcp", "content"]
+difficulty: "intermediate"
+use_cases: ["发现国内热门 AI 选题", "为文章和资源库做去重", "生成高搜索意图标题和关键词"]
+platform: ["claude-code", "codex"]
+file_name: "china-hot-topic-researcher.md"
+is_featured: true
+order: 6
+author: "FlowBase"
+updated_at: "2026-06-09"
+---
+
+## 国内爆款选题研究员
+
+这个 Skill 用来帮助 FlowBase 每天更新内容前先做选题判断：什么正在国内开发者圈、AI 工具圈、创业者圈变热，哪些词值得写成文章、MCP、Skills 或 Rules。
+
+## 适用场景
+
+- 每天早上更新 FlowBase Web 文章。
+- 为 Studio 补充 MCP Servers、Skills、Rules。
+- 检查今天的选题是否和已有内容重复。
+- 把国内用户会搜索的词转成 SEO 标题、描述和标签。
+
+## 工作方式
+
+1. 检索国内 AI 编程、Claude Code、MCP、Agent、自动化、SEO、飞书、Cursor、Codex CLI 等关键词。
+2. 提取搜索意图：教程、配置、选型、对比、落地、避坑、模板。
+3. 和现有内容做去重：检查 title、slug、name、name_zh、file_name、tags。
+4. 为每类内容分别输出不同类目，不把当天内容都写成同一个主题。
+5. 给出可发布标题、Meta 描述、关键词、目标用户和推荐内链。
+
+## 输出模板
+
+```text
+今日热点：
+- 主关键词：
+- 相关长尾词：
+- 国内用户需求：
+- 适合内容类型：文章 / MCP / Skill / Rule
+- 去重结论：
+- SEO 标题：
+- Meta 描述：
+- 推荐标签：
+- 推荐内链：
+```
+
+## 质量标准
+
+- 不写空泛趋势，必须落到用户能配置、能部署、能验证的工作流。
+- 不重复昨天或已有文章的主题。
+- 标题必须包含真实搜索词。
+- 描述必须说明解决什么问题。
+- 标签必须覆盖工具名、使用场景和国内语境。
+
+## 注意事项
+
+如果某个热点只有噱头，没有稳定使用场景，不建议进入 FlowBase。FlowBase 要服务真实工作流，不做普通导航站。

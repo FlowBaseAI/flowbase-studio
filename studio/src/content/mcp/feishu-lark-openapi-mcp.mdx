@@ -1,0 +1,81 @@
+---
+name: "Feishu/Lark OpenAPI MCP"
+name_en: "Feishu/Lark OpenAPI MCP"
+name_zh: "飞书 OpenAPI MCP"
+description: "飞书/Lark 官方 OpenAPI MCP，让 Claude Code 连接飞书文档、消息、日程和协作数据，适合国内团队把需求、日报和研发流程接入 AI 工作台。"
+source: "飞书/Lark 官方"
+category: ["collaboration", "productivity", "china"]
+tags: ["feishu", "lark", "mcp", "collaboration", "docs", "china-team"]
+platform: ["claude-code", "codex"]
+github_url: "https://github.com/larksuite/lark-openapi-mcp"
+official_url: "https://open.feishu.cn/"
+install_cmd: "npx -y @larksuiteoapi/lark-mcp mcp -a <your_app_id> -s <your_app_secret>"
+config_snippet:
+  mcpServers:
+    lark-mcp:
+      command: "npx"
+      args: ["-y", "@larksuiteoapi/lark-mcp", "mcp", "-a", "<your_app_id>", "-s", "<your_app_secret>"]
+is_featured: true
+order: 4
+author: "LarkSuite"
+updated_at: "2026-06-09"
+---
+
+## 这个 MCP 能做什么？
+
+飞书 OpenAPI MCP 适合国内团队把 Claude Code 接入真实协作流：读取飞书文档、整理需求、处理消息、联动日程和项目资料，让 AI 不只停留在代码仓库里。
+
+## 典型用途
+
+**需求转开发任务**：让 Claude Code 读取飞书 PRD，生成任务拆解、验收标准和 CLAUDE.md。
+
+**日报和周报**：汇总 GitHub 改动、Issue、部署结果，生成适合团队同步的飞书内容。
+
+**知识库问答**：把飞书文档作为项目知识来源，让 Agent 回答内部规范、接口说明和历史决策。
+
+**运营协作**：把客户反馈、内容选题、SEO 需求整理成可执行工作流。
+
+## 国内团队为什么需要
+
+很多中文团队的需求、会议纪要和项目沟通都在飞书里。如果 Claude Code 只能读代码仓库，它就拿不到完整上下文。接入飞书 MCP 后，Workspace 可以把“需求、代码、验证、日报”串起来。
+
+## 环境配置
+
+你需要先在飞书开放平台创建应用，并准备 App ID 和 App Secret。
+
+```json
+{
+  "mcpServers": {
+    "lark-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@larksuiteoapi/lark-mcp",
+        "mcp",
+        "-a",
+        "<your_app_id>",
+        "-s",
+        "<your_app_secret>"
+      ]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先从只读文档和需求整理开始，不要一开始就开放写入权限。
+- 为不同项目创建独立飞书应用，避免权限混用。
+- 把飞书输入转成明确任务，再交给 Claude Code 修改仓库。
+- 涉及客户资料、合同、财务数据时必须加入人工审批。
+
+## 推荐搭配
+
+- GitHub MCP：同步 Issue、PR 和代码上下文。
+- Filesystem MCP：读取本地项目文件。
+- Playwright MCP：验证页面和导出截图证据。
+- SEO Writer Skill：把飞书选题转成可发布文章。
+
+## 来源
+
+飞书/Lark 官方 OpenAPI MCP 项目，适合需要把国内协作平台接入 Claude Code Workspace 的团队。

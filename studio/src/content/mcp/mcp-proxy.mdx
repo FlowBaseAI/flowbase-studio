@@ -1,0 +1,53 @@
+---
+name: "MCP Proxy"
+name_en: "MCP Proxy"
+name_zh: "MCP 代理网关"
+description: "在不同 MCP 传输和客户端之间代理连接，适合企业内统一接入与隔离。"
+source: "Community"
+category: ["gateway","ops"]
+tags: ["proxy","gateway","transport","mcp"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/sparfenyuk/mcp-proxy"
+official_url: "https://github.com/sparfenyuk/mcp-proxy"
+install_cmd: "uvx mcp-proxy"
+config_snippet:
+  mcpServers:
+    mcp-proxy:
+      command: "uvx"
+      args: ["mcp-proxy"]
+is_featured: false
+order: 14
+author: "Community"
+updated_at: "2026-06-09"
+---
+
+## 这个 MCP 能做什么？
+
+MCP 代理网关 能把 proxy 相关能力接入 Claude Code Workspace，让国内团队在一个可视化工作台中选择、配置并导出项目。它适合与 GitHub、Filesystem、Playwright 和 SEO 类 Skill 搭配使用。
+
+## 国内团队使用场景
+
+- 为 Claude Code 提供可调用工具上下文
+- 把热门国际工具转成国内团队可落地流程
+- 在 Studio 中作为 Workspace 数据源选择
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "mcp-proxy": {
+      "command": "uvx",
+      "args": [
+      "mcp-proxy"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试项目中启用，不要直接接入生产环境。
+- 只开放当前任务需要的权限和环境变量。
+- 记录安装命令、配置片段和验证结果。

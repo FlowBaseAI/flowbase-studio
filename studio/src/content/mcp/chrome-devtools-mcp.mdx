@@ -1,0 +1,54 @@
+---
+name: "Chrome DevTools MCP"
+name_en: "Chrome DevTools MCP"
+name_zh: "Chrome DevTools 调试 MCP"
+description: "让 Claude Code 控制和检查真实 Chrome 页面，适合性能、网络、DOM 和截图调试。"
+source: "ChromeDevTools"
+category: ["browser","debugging","performance"]
+tags: ["chrome-devtools","browser","performance","frontend"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/ChromeDevTools/chrome-devtools-mcp"
+official_url: "https://github.com/ChromeDevTools/chrome-devtools-mcp"
+install_cmd: "npx -y chrome-devtools-mcp"
+config_snippet:
+  mcpServers:
+    chrome-devtools:
+      command: "npx"
+      args: ["-y","chrome-devtools-mcp"]
+is_featured: true
+order: 8
+author: "ChromeDevTools"
+updated_at: "2026-06-09"
+---
+
+## 这个 MCP 能做什么？
+
+Chrome DevTools 调试 MCP 能把 chrome-devtools 相关能力接入 Claude Code Workspace，让国内团队在一个可视化工作台中选择、配置并导出项目。它适合与 GitHub、Filesystem、Playwright 和 SEO 类 Skill 搭配使用。
+
+## 国内团队使用场景
+
+- 为 Claude Code 提供可调用工具上下文
+- 把热门国际工具转成国内团队可落地流程
+- 在 Studio 中作为 Workspace 数据源选择
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "chrome-devtools": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "chrome-devtools-mcp"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试项目中启用，不要直接接入生产环境。
+- 只开放当前任务需要的权限和环境变量。
+- 记录安装命令、配置片段和验证结果。

@@ -1,0 +1,54 @@
+---
+name: "MCP Inspector"
+name_en: "MCP Inspector"
+name_zh: "MCP 调试检查器"
+description: "官方 MCP 可视化测试工具，用于调试服务器能力、请求响应和工具定义。"
+source: "Model Context Protocol 官方"
+category: ["testing","developer-tools"]
+tags: ["inspector","debug","mcp","testing"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/modelcontextprotocol/inspector"
+official_url: "https://github.com/modelcontextprotocol/inspector"
+install_cmd: "npx -y @modelcontextprotocol/inspector"
+config_snippet:
+  mcpServers:
+    mcp-inspector:
+      command: "npx"
+      args: ["-y","@modelcontextprotocol/inspector"]
+is_featured: false
+order: 12
+author: "Model Context Protocol 官方"
+updated_at: "2026-06-09"
+---
+
+## 这个 MCP 能做什么？
+
+MCP 调试检查器 能把 inspector 相关能力接入 Claude Code Workspace，让国内团队在一个可视化工作台中选择、配置并导出项目。它适合与 GitHub、Filesystem、Playwright 和 SEO 类 Skill 搭配使用。
+
+## 国内团队使用场景
+
+- 为 Claude Code 提供可调用工具上下文
+- 把热门国际工具转成国内团队可落地流程
+- 在 Studio 中作为 Workspace 数据源选择
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "mcp-inspector": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "@modelcontextprotocol/inspector"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试项目中启用，不要直接接入生产环境。
+- 只开放当前任务需要的权限和环境变量。
+- 记录安装命令、配置片段和验证结果。

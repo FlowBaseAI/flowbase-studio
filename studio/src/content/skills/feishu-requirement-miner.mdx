@@ -1,0 +1,45 @@
+---
+name: "Feishu Requirement Miner"
+name_en: "Feishu Requirement Miner"
+name_zh: "飞书需求挖掘员"
+description: "从飞书文档、会议纪要和评论中提取开发任务、验收标准和风险问题。"
+source: "FlowBase 原创"
+category: ["productivity","prd"]
+tags: ["feishu","prd","requirements"]
+difficulty: "intermediate"
+use_cases: ["飞书 PRD 转任务","会议纪要转开发清单","补齐验收标准"]
+platform: ["claude-code","codex"]
+file_name: "feishu-requirement-miner.md"
+is_featured: true
+order: 22
+author: "FlowBase"
+updated_at: "2026-06-09"
+---
+
+## 飞书需求挖掘员
+
+飞书需求挖掘员 是面向 FlowBase Workspace 的中文 Skill，目标是把热门 AI 工具能力转成国内团队可执行、可验证、可复盘的工作流。
+
+## 适用场景
+
+- 飞书 PRD 转任务
+- 会议纪要转开发清单
+- 补齐验收标准
+
+## 工作方式
+
+1. 先读取任务目标和约束条件。
+2. 检查是否与现有内容或项目规则冲突。
+3. 输出分步骤计划、风险点和验收标准。
+4. 需要修改代码或部署时，要求保留证据。
+
+## 输出要求
+
+- 结构化任务清单
+- 风险和权限提示
+- 可执行下一步
+- 适合复制到 Claude Code 的说明
+
+## 注意事项
+
+不要跳过去重、权限、验证和人工确认。FlowBase 的 Skill 要帮助用户稳定交付，而不是制造一次性提示词。

@@ -1,0 +1,45 @@
+---
+name: "CLI Agent Orchestrator"
+name_en: "CLI Agent Orchestrator"
+name_zh: "CLI Agent 编排员"
+description: "协调 Claude Code、Codex CLI、Cursor CLI 的职责边界、分支隔离和交付顺序。"
+source: "FlowBase 原创"
+category: ["ai-coding","workflow"]
+tags: ["cli-agent","orchestration","codex"]
+difficulty: "advanced"
+use_cases: ["多 Agent 分工","避免重复修改","生成执行计划"]
+platform: ["claude-code","codex"]
+file_name: "cli-agent-orchestrator.md"
+is_featured: false
+order: 24
+author: "FlowBase"
+updated_at: "2026-06-09"
+---
+
+## CLI Agent 编排员
+
+CLI Agent 编排员 是面向 FlowBase Workspace 的中文 Skill，目标是把热门 AI 工具能力转成国内团队可执行、可验证、可复盘的工作流。
+
+## 适用场景
+
+- 多 Agent 分工
+- 避免重复修改
+- 生成执行计划
+
+## 工作方式
+
+1. 先读取任务目标和约束条件。
+2. 检查是否与现有内容或项目规则冲突。
+3. 输出分步骤计划、风险点和验收标准。
+4. 需要修改代码或部署时，要求保留证据。
+
+## 输出要求
+
+- 结构化任务清单
+- 风险和权限提示
+- 可执行下一步
+- 适合复制到 Claude Code 的说明
+
+## 注意事项
+
+不要跳过去重、权限、验证和人工确认。FlowBase 的 Skill 要帮助用户稳定交付，而不是制造一次性提示词。

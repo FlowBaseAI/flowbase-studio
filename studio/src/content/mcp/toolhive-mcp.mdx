@@ -1,0 +1,53 @@
+---
+name: "ToolHive MCP Manager"
+name_en: "ToolHive MCP Manager"
+name_zh: "ToolHive MCP 管理器"
+description: "用容器化方式运行和隔离 MCP Server，适合团队统一管理工具安全。"
+source: "Stacklok"
+category: ["security","ops"]
+tags: ["toolhive","container","security","mcp-manager"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/stacklok/toolhive"
+official_url: "https://github.com/stacklok/toolhive"
+install_cmd: "brew install stacklok/tap/toolhive"
+config_snippet:
+  mcpServers:
+    toolhive:
+      command: "toolhive"
+      args: ["--help"]
+is_featured: false
+order: 13
+author: "Stacklok"
+updated_at: "2026-06-09"
+---
+
+## 这个 MCP 能做什么？
+
+ToolHive MCP 管理器 能把 toolhive 相关能力接入 Claude Code Workspace，让国内团队在一个可视化工作台中选择、配置并导出项目。它适合与 GitHub、Filesystem、Playwright 和 SEO 类 Skill 搭配使用。
+
+## 国内团队使用场景
+
+- 为 Claude Code 提供可调用工具上下文
+- 把热门国际工具转成国内团队可落地流程
+- 在 Studio 中作为 Workspace 数据源选择
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "toolhive": {
+      "command": "toolhive",
+      "args": [
+      "--help"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试项目中启用，不要直接接入生产环境。
+- 只开放当前任务需要的权限和环境变量。
+- 记录安装命令、配置片段和验证结果。

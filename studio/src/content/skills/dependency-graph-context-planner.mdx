@@ -1,0 +1,41 @@
+---
+name: "Dependency Graph Context Planner"
+name_en: "Dependency Graph Context Planner"
+name_zh: "依赖图上下文规划员"
+description: "根据调用链和依赖关系裁剪 Claude Code 上下文，降低成本和误改概率。"
+source: "FlowBase 原创"
+category: ["ai-coding","context"]
+tags: ["dependency-graph","context","cost"]
+difficulty: "intermediate"
+use_cases: ["大型仓库上下文选择","重构影响面分析","Token 成本控制"]
+platform: ["claude-code","codex"]
+file_name: "dependency-graph-context-planner.md"
+is_featured: true
+order: 43
+author: "FlowBase"
+updated_at: "2026-06-10"
+---
+
+## 依赖图上下文规划员
+
+依赖图上下文规划员 面向国内团队的真实 AI Agent 落地场景，强调去重、权限边界、验证证据和可复盘输出。
+
+## 适用场景
+
+- 大型仓库上下文选择
+- 重构影响面分析
+- Token 成本控制
+
+## 工作方式
+
+1. 读取任务目标和约束。
+2. 检查已有项目内容和规则。
+3. 生成结构化计划。
+4. 输出风险、验证和交付格式。
+
+## 输出要求
+
+- 任务计划
+- 风险清单
+- 验收标准
+- 可复制到 Claude Code/Codex 的执行说明

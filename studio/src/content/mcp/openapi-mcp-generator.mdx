@@ -1,0 +1,54 @@
+---
+name: "OpenAPI MCP Generator"
+name_en: "OpenAPI MCP Generator"
+name_zh: "OpenAPI 转 MCP 生成器"
+description: "把 OpenAPI 规格转换成 MCP 工具，适合把企业内部接口接入 Claude Code。"
+source: "Community"
+category: ["api","integration"]
+tags: ["openapi","api","integration","mcp"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/ReAPI-com/mcp-openapi"
+official_url: "https://github.com/ReAPI-com/mcp-openapi"
+install_cmd: "npx -y mcp-openapi"
+config_snippet:
+  mcpServers:
+    openapi-mcp:
+      command: "npx"
+      args: ["-y","mcp-openapi"]
+is_featured: true
+order: 39
+author: "Community"
+updated_at: "2026-06-10"
+---
+
+## 这个 MCP 能做什么？
+
+OpenAPI 转 MCP 生成器 适合把 api 能力接入 Claude Code Workspace，让国内团队在选择 MCP 时更容易判断用途、权限和验证方法。
+
+## 国内团队使用场景
+
+- 作为 Studio Workspace 的 MCP 数据源
+- 为 Claude Code 或 Codex 提供外部工具能力
+- 服务国内团队的开发、运维、安全或内容工作流
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "openapi-mcp": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "mcp-openapi"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试项目启用。
+- 检查安装命令和权限范围。
+- 涉及云资源或安全扫描时必须保留审计记录。

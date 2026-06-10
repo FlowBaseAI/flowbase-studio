@@ -1,0 +1,53 @@
+---
+name: "Aiven MCP"
+name_en: "Aiven MCP"
+name_zh: "Aiven 数据平台 MCP"
+description: "连接 Aiven 托管 PostgreSQL、Kafka、ClickHouse 等数据服务，适合数据平台运维。"
+source: "Aiven"
+category: ["database","cloud"]
+tags: ["aiven","postgres","kafka","data"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/Aiven-Open/mcp-aiven"
+official_url: "https://github.com/Aiven-Open/mcp-aiven"
+install_cmd: "uvx mcp-aiven"
+config_snippet:
+  mcpServers:
+    aiven:
+      command: "uvx"
+      args: ["mcp-aiven"]
+is_featured: false
+order: 34
+author: "Aiven"
+updated_at: "2026-06-10"
+---
+
+## 这个 MCP 能做什么？
+
+Aiven 数据平台 MCP 适合把 database 能力接入 Claude Code Workspace，让国内团队在选择 MCP 时更容易判断用途、权限和验证方法。
+
+## 国内团队使用场景
+
+- 作为 Studio Workspace 的 MCP 数据源
+- 为 Claude Code 或 Codex 提供外部工具能力
+- 服务国内团队的开发、运维、安全或内容工作流
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "aiven": {
+      "command": "uvx",
+      "args": [
+      "mcp-aiven"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试项目启用。
+- 检查安装命令和权限范围。
+- 涉及云资源或安全扫描时必须保留审计记录。

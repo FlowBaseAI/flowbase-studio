@@ -1,0 +1,55 @@
+---
+name: "Repomix MCP"
+name_en: "Repomix MCP"
+name_zh: "Repomix 仓库打包 MCP"
+description: "把代码仓库打包成适合 LLM 阅读的结构化上下文，适合大型项目分析。"
+source: "Repomix"
+category: ["code-context","developer-tools"]
+tags: ["repomix","context","repository","llm"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/yamadashy/repomix"
+official_url: "https://github.com/yamadashy/repomix"
+install_cmd: "npx -y repomix --mcp"
+config_snippet:
+  mcpServers:
+    repomix:
+      command: "npx"
+      args: ["-y","repomix","--mcp"]
+is_featured: true
+order: 35
+author: "Repomix"
+updated_at: "2026-06-10"
+---
+
+## 这个 MCP 能做什么？
+
+Repomix 仓库打包 MCP 适合把 code-context 能力接入 Claude Code Workspace，让国内团队在选择 MCP 时更容易判断用途、权限和验证方法。
+
+## 国内团队使用场景
+
+- 作为 Studio Workspace 的 MCP 数据源
+- 为 Claude Code 或 Codex 提供外部工具能力
+- 服务国内团队的开发、运维、安全或内容工作流
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "repomix": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "repomix",
+      "--mcp"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试项目启用。
+- 检查安装命令和权限范围。
+- 涉及云资源或安全扫描时必须保留审计记录。

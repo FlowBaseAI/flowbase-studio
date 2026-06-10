@@ -1,0 +1,53 @@
+---
+name: "Semgrep MCP"
+name_en: "Semgrep MCP"
+name_zh: "Semgrep 安全扫描 MCP"
+description: "把 Semgrep 静态分析接入 Claude Code，用于发现和修复代码安全问题。"
+source: "Semgrep"
+category: ["security","code-analysis"]
+tags: ["semgrep","security","sast","appsec"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/semgrep/mcp"
+official_url: "https://github.com/semgrep/mcp"
+install_cmd: "uvx semgrep-mcp"
+config_snippet:
+  mcpServers:
+    semgrep:
+      command: "uvx"
+      args: ["semgrep-mcp"]
+is_featured: true
+order: 30
+author: "Semgrep"
+updated_at: "2026-06-10"
+---
+
+## 这个 MCP 能做什么？
+
+Semgrep 安全扫描 MCP 适合把 security 能力接入 Claude Code Workspace，让国内团队在选择 MCP 时更容易判断用途、权限和验证方法。
+
+## 国内团队使用场景
+
+- 作为 Studio Workspace 的 MCP 数据源
+- 为 Claude Code 或 Codex 提供外部工具能力
+- 服务国内团队的开发、运维、安全或内容工作流
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "semgrep": {
+      "command": "uvx",
+      "args": [
+      "semgrep-mcp"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试项目启用。
+- 检查安装命令和权限范围。
+- 涉及云资源或安全扫描时必须保留审计记录。

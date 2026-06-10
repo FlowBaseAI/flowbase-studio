@@ -1,0 +1,54 @@
+---
+name: "Kubernetes MCP Server"
+name_en: "Kubernetes MCP Server"
+name_zh: "Kubernetes 集群 MCP"
+description: "为 Claude Code 提供 Kubernetes 资源查询和运维上下文，适合测试集群诊断。"
+source: "Community"
+category: ["kubernetes","ops"]
+tags: ["kubernetes","k8s","ops","devops"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/Flux159/mcp-server-kubernetes"
+official_url: "https://github.com/Flux159/mcp-server-kubernetes"
+install_cmd: "npx -y mcp-server-kubernetes"
+config_snippet:
+  mcpServers:
+    kubernetes:
+      command: "npx"
+      args: ["-y","mcp-server-kubernetes"]
+is_featured: false
+order: 32
+author: "Community"
+updated_at: "2026-06-10"
+---
+
+## 这个 MCP 能做什么？
+
+Kubernetes 集群 MCP 适合把 kubernetes 能力接入 Claude Code Workspace，让国内团队在选择 MCP 时更容易判断用途、权限和验证方法。
+
+## 国内团队使用场景
+
+- 作为 Studio Workspace 的 MCP 数据源
+- 为 Claude Code 或 Codex 提供外部工具能力
+- 服务国内团队的开发、运维、安全或内容工作流
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "kubernetes": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "mcp-server-kubernetes"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试项目启用。
+- 检查安装命令和权限范围。
+- 涉及云资源或安全扫描时必须保留审计记录。

@@ -1,0 +1,53 @@
+---
+name: "Gitingest MCP"
+name_en: "Gitingest MCP"
+name_zh: "Gitingest 仓库摘要 MCP"
+description: "把 Git 仓库转换成 LLM 友好的文本摘要，适合快速理解开源项目。"
+source: "Community"
+category: ["code-context","research"]
+tags: ["gitingest","repository","summary","research"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/cyclotruc/gitingest"
+official_url: "https://github.com/cyclotruc/gitingest"
+install_cmd: "uvx gitingest-mcp"
+config_snippet:
+  mcpServers:
+    gitingest:
+      command: "uvx"
+      args: ["gitingest-mcp"]
+is_featured: false
+order: 36
+author: "Community"
+updated_at: "2026-06-10"
+---
+
+## 这个 MCP 能做什么？
+
+Gitingest 仓库摘要 MCP 适合把 code-context 能力接入 Claude Code Workspace，让国内团队在选择 MCP 时更容易判断用途、权限和验证方法。
+
+## 国内团队使用场景
+
+- 作为 Studio Workspace 的 MCP 数据源
+- 为 Claude Code 或 Codex 提供外部工具能力
+- 服务国内团队的开发、运维、安全或内容工作流
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "gitingest": {
+      "command": "uvx",
+      "args": [
+      "gitingest-mcp"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试项目启用。
+- 检查安装命令和权限范围。
+- 涉及云资源或安全扫描时必须保留审计记录。

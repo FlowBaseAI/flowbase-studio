@@ -1,0 +1,54 @@
+---
+name: "SonarQube MCP Server"
+name_en: "SonarQube MCP Server"
+name_zh: "SonarQube 质量分析 MCP"
+description: "把 SonarQube 质量门禁和代码问题接入 Agent 审查流程。"
+source: "SonarSource"
+category: ["code-quality","security"]
+tags: ["sonarqube","quality","security","review"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/SonarSource/sonarqube-mcp-server"
+official_url: "https://github.com/SonarSource/sonarqube-mcp-server"
+install_cmd: "npx -y sonarqube-mcp-server"
+config_snippet:
+  mcpServers:
+    sonarqube:
+      command: "npx"
+      args: ["-y","sonarqube-mcp-server"]
+is_featured: false
+order: 37
+author: "SonarSource"
+updated_at: "2026-06-10"
+---
+
+## 这个 MCP 能做什么？
+
+SonarQube 质量分析 MCP 适合把 code-quality 能力接入 Claude Code Workspace，让国内团队在选择 MCP 时更容易判断用途、权限和验证方法。
+
+## 国内团队使用场景
+
+- 作为 Studio Workspace 的 MCP 数据源
+- 为 Claude Code 或 Codex 提供外部工具能力
+- 服务国内团队的开发、运维、安全或内容工作流
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "sonarqube": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "sonarqube-mcp-server"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试项目启用。
+- 检查安装命令和权限范围。
+- 涉及云资源或安全扫描时必须保留审计记录。

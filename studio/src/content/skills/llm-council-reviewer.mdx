@@ -1,0 +1,41 @@
+---
+name: "LLM Council Reviewer"
+name_en: "LLM Council Reviewer"
+name_zh: "LLM Council 复核员"
+description: "组织多个模型独立审查代码改动，并输出一致性结论和冲突点。"
+source: "FlowBase 原创"
+category: ["code-review","governance"]
+tags: ["llm-council","review","risk"]
+difficulty: "advanced"
+use_cases: ["高风险 PR 审查","多模型交叉验证","审查冲突归并"]
+platform: ["claude-code","codex"]
+file_name: "llm-council-reviewer.md"
+is_featured: true
+order: 41
+author: "FlowBase"
+updated_at: "2026-06-10"
+---
+
+## LLM Council 复核员
+
+LLM Council 复核员 面向国内团队的真实 AI Agent 落地场景，强调去重、权限边界、验证证据和可复盘输出。
+
+## 适用场景
+
+- 高风险 PR 审查
+- 多模型交叉验证
+- 审查冲突归并
+
+## 工作方式
+
+1. 读取任务目标和约束。
+2. 检查已有项目内容和规则。
+3. 生成结构化计划。
+4. 输出风险、验证和交付格式。
+
+## 输出要求
+
+- 任务计划
+- 风险清单
+- 验收标准
+- 可复制到 Claude Code/Codex 的执行说明

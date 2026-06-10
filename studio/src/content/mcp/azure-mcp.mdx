@@ -1,0 +1,54 @@
+---
+name: "Azure MCP"
+name_en: "Azure MCP"
+name_zh: "Azure 云服务 MCP"
+description: "把 Azure 资源、文档和云操作接入 Agent 工作流，适合企业云项目。"
+source: "Microsoft"
+category: ["cloud","azure"]
+tags: ["azure","cloud","enterprise","mcp"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/Azure/azure-mcp"
+official_url: "https://github.com/Azure/azure-mcp"
+install_cmd: "npx -y @azure/mcp"
+config_snippet:
+  mcpServers:
+    azure:
+      command: "npx"
+      args: ["-y","@azure/mcp"]
+is_featured: false
+order: 33
+author: "Microsoft"
+updated_at: "2026-06-10"
+---
+
+## 这个 MCP 能做什么？
+
+Azure 云服务 MCP 适合把 cloud 能力接入 Claude Code Workspace，让国内团队在选择 MCP 时更容易判断用途、权限和验证方法。
+
+## 国内团队使用场景
+
+- 作为 Studio Workspace 的 MCP 数据源
+- 为 Claude Code 或 Codex 提供外部工具能力
+- 服务国内团队的开发、运维、安全或内容工作流
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "azure": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "@azure/mcp"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试项目启用。
+- 检查安装命令和权限范围。
+- 涉及云资源或安全扫描时必须保留审计记录。

@@ -1,0 +1,54 @@
+---
+name: "Elasticsearch MCP Server"
+name_en: "Elasticsearch MCP Server"
+name_zh: "Elasticsearch 搜索 MCP"
+description: "把 Elasticsearch 查询能力接入 Agent，适合日志检索、站内搜索和内容分析。"
+source: "Elastic"
+category: ["search","database"]
+tags: ["elasticsearch","search","logs","analytics"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/elastic/mcp-server-elasticsearch"
+official_url: "https://github.com/elastic/mcp-server-elasticsearch"
+install_cmd: "npx -y @elastic/mcp-server-elasticsearch"
+config_snippet:
+  mcpServers:
+    elasticsearch:
+      command: "npx"
+      args: ["-y","@elastic/mcp-server-elasticsearch"]
+is_featured: false
+order: 57
+author: "Elastic"
+updated_at: "2026-06-11"
+---
+
+## 这个 MCP 能做什么？
+
+Elasticsearch 搜索 MCP 适合把 search 能力接入 Claude Code Workspace，为国内团队提供可选、可配置、可导出的 MCP 工具。
+
+## 国内团队使用场景
+
+- 作为 FlowBase Studio Workspace 数据源
+- 服务 AI Agent 的安全、观测、RAG、搜索或身份场景
+- 为国内团队提供配置示例和权限边界
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "elasticsearch": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "@elastic/mcp-server-elasticsearch"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试环境连接。
+- 只开放最小权限。
+- 涉及身份、日志或数据检索时保留审计记录。

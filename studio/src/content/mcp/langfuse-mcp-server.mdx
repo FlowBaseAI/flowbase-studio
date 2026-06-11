@@ -1,0 +1,54 @@
+---
+name: "Langfuse MCP Server"
+name_en: "Langfuse MCP Server"
+name_zh: "Langfuse LLM 观测 MCP"
+description: "把 LLM Trace、成本和质量数据接入 Claude Code 工作流。"
+source: "Langfuse"
+category: ["observability","llmops"]
+tags: ["langfuse","llmops","trace","cost"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/langfuse/mcp-server-langfuse"
+official_url: "https://github.com/langfuse/mcp-server-langfuse"
+install_cmd: "npx -y mcp-server-langfuse"
+config_snippet:
+  mcpServers:
+    langfuse:
+      command: "npx"
+      args: ["-y","mcp-server-langfuse"]
+is_featured: true
+order: 51
+author: "Langfuse"
+updated_at: "2026-06-11"
+---
+
+## 这个 MCP 能做什么？
+
+Langfuse LLM 观测 MCP 适合把 observability 能力接入 Claude Code Workspace，为国内团队提供可选、可配置、可导出的 MCP 工具。
+
+## 国内团队使用场景
+
+- 作为 FlowBase Studio Workspace 数据源
+- 服务 AI Agent 的安全、观测、RAG、搜索或身份场景
+- 为国内团队提供配置示例和权限边界
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "langfuse": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "mcp-server-langfuse"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试环境连接。
+- 只开放最小权限。
+- 涉及身份、日志或数据检索时保留审计记录。

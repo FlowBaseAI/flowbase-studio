@@ -1,0 +1,53 @@
+---
+name: "Qdrant MCP Server"
+name_en: "Qdrant MCP Server"
+name_zh: "Qdrant 向量数据库 MCP"
+description: "为 Agent 提供向量检索和 RAG 数据访问，适合知识库和代码库问答。"
+source: "Qdrant"
+category: ["vector-db","rag"]
+tags: ["qdrant","vector","rag","database"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/qdrant/mcp-server-qdrant"
+official_url: "https://github.com/qdrant/mcp-server-qdrant"
+install_cmd: "uvx mcp-server-qdrant"
+config_snippet:
+  mcpServers:
+    qdrant:
+      command: "uvx"
+      args: ["mcp-server-qdrant"]
+is_featured: true
+order: 54
+author: "Qdrant"
+updated_at: "2026-06-11"
+---
+
+## 这个 MCP 能做什么？
+
+Qdrant 向量数据库 MCP 适合把 vector-db 能力接入 Claude Code Workspace，为国内团队提供可选、可配置、可导出的 MCP 工具。
+
+## 国内团队使用场景
+
+- 作为 FlowBase Studio Workspace 数据源
+- 服务 AI Agent 的安全、观测、RAG、搜索或身份场景
+- 为国内团队提供配置示例和权限边界
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "qdrant": {
+      "command": "uvx",
+      "args": [
+      "mcp-server-qdrant"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试环境连接。
+- 只开放最小权限。
+- 涉及身份、日志或数据检索时保留审计记录。

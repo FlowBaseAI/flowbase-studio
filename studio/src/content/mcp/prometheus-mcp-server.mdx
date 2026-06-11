@@ -1,0 +1,53 @@
+---
+name: "Prometheus MCP Server"
+name_en: "Prometheus MCP Server"
+name_zh: "Prometheus 监控 MCP"
+description: "把 Prometheus 指标接入 Agent，用于服务健康、成本和自动化运维分析。"
+source: "Community"
+category: ["observability","ops"]
+tags: ["prometheus","observability","metrics","ops"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/pab1it0/prometheus-mcp-server"
+official_url: "https://github.com/pab1it0/prometheus-mcp-server"
+install_cmd: "uvx prometheus-mcp-server"
+config_snippet:
+  mcpServers:
+    prometheus:
+      command: "uvx"
+      args: ["prometheus-mcp-server"]
+is_featured: true
+order: 50
+author: "Community"
+updated_at: "2026-06-11"
+---
+
+## 这个 MCP 能做什么？
+
+Prometheus 监控 MCP 适合把 observability 能力接入 Claude Code Workspace，为国内团队提供可选、可配置、可导出的 MCP 工具。
+
+## 国内团队使用场景
+
+- 作为 FlowBase Studio Workspace 数据源
+- 服务 AI Agent 的安全、观测、RAG、搜索或身份场景
+- 为国内团队提供配置示例和权限边界
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "prometheus": {
+      "command": "uvx",
+      "args": [
+      "prometheus-mcp-server"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试环境连接。
+- 只开放最小权限。
+- 涉及身份、日志或数据检索时保留审计记录。

@@ -1,0 +1,53 @@
+---
+name: "Neo4j MCP Server"
+name_en: "Neo4j MCP Server"
+name_zh: "Neo4j 图数据库 MCP"
+description: "让 Agent 查询图数据库关系，适合依赖图、知识图谱和风控分析。"
+source: "Neo4j"
+category: ["graph-db","data"]
+tags: ["neo4j","graph","knowledge-graph","dependency"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/neo4j-contrib/mcp-neo4j"
+official_url: "https://github.com/neo4j-contrib/mcp-neo4j"
+install_cmd: "uvx mcp-neo4j"
+config_snippet:
+  mcpServers:
+    neo4j:
+      command: "uvx"
+      args: ["mcp-neo4j"]
+is_featured: false
+order: 58
+author: "Neo4j"
+updated_at: "2026-06-11"
+---
+
+## 这个 MCP 能做什么？
+
+Neo4j 图数据库 MCP 适合把 graph-db 能力接入 Claude Code Workspace，为国内团队提供可选、可配置、可导出的 MCP 工具。
+
+## 国内团队使用场景
+
+- 作为 FlowBase Studio Workspace 数据源
+- 服务 AI Agent 的安全、观测、RAG、搜索或身份场景
+- 为国内团队提供配置示例和权限边界
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "neo4j": {
+      "command": "uvx",
+      "args": [
+      "mcp-neo4j"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试环境连接。
+- 只开放最小权限。
+- 涉及身份、日志或数据检索时保留审计记录。

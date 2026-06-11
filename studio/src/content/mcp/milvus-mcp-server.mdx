@@ -1,0 +1,53 @@
+---
+name: "Milvus MCP Server"
+name_en: "Milvus MCP Server"
+name_zh: "Milvus 向量检索 MCP"
+description: "连接 Milvus 向量库，适合企业知识库、文档检索和多模态搜索。"
+source: "Milvus"
+category: ["vector-db","rag"]
+tags: ["milvus","vector","rag","search"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/milvus-io/mcp-server"
+official_url: "https://github.com/milvus-io/mcp-server"
+install_cmd: "uvx milvus-mcp-server"
+config_snippet:
+  mcpServers:
+    milvus:
+      command: "uvx"
+      args: ["milvus-mcp-server"]
+is_featured: false
+order: 56
+author: "Milvus"
+updated_at: "2026-06-11"
+---
+
+## 这个 MCP 能做什么？
+
+Milvus 向量检索 MCP 适合把 vector-db 能力接入 Claude Code Workspace，为国内团队提供可选、可配置、可导出的 MCP 工具。
+
+## 国内团队使用场景
+
+- 作为 FlowBase Studio Workspace 数据源
+- 服务 AI Agent 的安全、观测、RAG、搜索或身份场景
+- 为国内团队提供配置示例和权限边界
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "milvus": {
+      "command": "uvx",
+      "args": [
+      "milvus-mcp-server"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试环境连接。
+- 只开放最小权限。
+- 涉及身份、日志或数据检索时保留审计记录。

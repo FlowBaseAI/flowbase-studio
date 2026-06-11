@@ -1,0 +1,54 @@
+---
+name: "Auth0 MCP Server"
+name_en: "Auth0 MCP Server"
+name_zh: "Auth0 认证 MCP"
+description: "用于查询和管理 Auth0 身份配置，适合远程 MCP OAuth 审查和企业登录集成。"
+source: "Auth0"
+category: ["auth","security"]
+tags: ["auth0","oauth","identity","security"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/auth0/auth0-mcp-server"
+official_url: "https://github.com/auth0/auth0-mcp-server"
+install_cmd: "npx -y auth0-mcp-server"
+config_snippet:
+  mcpServers:
+    auth0:
+      command: "npx"
+      args: ["-y","auth0-mcp-server"]
+is_featured: true
+order: 52
+author: "Auth0"
+updated_at: "2026-06-11"
+---
+
+## 这个 MCP 能做什么？
+
+Auth0 认证 MCP 适合把 auth 能力接入 Claude Code Workspace，为国内团队提供可选、可配置、可导出的 MCP 工具。
+
+## 国内团队使用场景
+
+- 作为 FlowBase Studio Workspace 数据源
+- 服务 AI Agent 的安全、观测、RAG、搜索或身份场景
+- 为国内团队提供配置示例和权限边界
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "auth0": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "auth0-mcp-server"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试环境连接。
+- 只开放最小权限。
+- 涉及身份、日志或数据检索时保留审计记录。

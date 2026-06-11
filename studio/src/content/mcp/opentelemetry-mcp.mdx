@@ -1,0 +1,53 @@
+---
+name: "OpenTelemetry MCP"
+name_en: "OpenTelemetry MCP"
+name_zh: "OpenTelemetry 可观测 MCP"
+description: "把 Trace、Metric、Log 语义接入 Agent，辅助定位服务和 AI 工作流异常。"
+source: "Community"
+category: ["observability","ops"]
+tags: ["opentelemetry","tracing","metrics","logs"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/open-telemetry/opentelemetry-mcp"
+official_url: "https://github.com/open-telemetry/opentelemetry-mcp"
+install_cmd: "uvx opentelemetry-mcp"
+config_snippet:
+  mcpServers:
+    opentelemetry:
+      command: "uvx"
+      args: ["opentelemetry-mcp"]
+is_featured: false
+order: 53
+author: "Community"
+updated_at: "2026-06-11"
+---
+
+## 这个 MCP 能做什么？
+
+OpenTelemetry 可观测 MCP 适合把 observability 能力接入 Claude Code Workspace，为国内团队提供可选、可配置、可导出的 MCP 工具。
+
+## 国内团队使用场景
+
+- 作为 FlowBase Studio Workspace 数据源
+- 服务 AI Agent 的安全、观测、RAG、搜索或身份场景
+- 为国内团队提供配置示例和权限边界
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "opentelemetry": {
+      "command": "uvx",
+      "args": [
+      "opentelemetry-mcp"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试环境连接。
+- 只开放最小权限。
+- 涉及身份、日志或数据检索时保留审计记录。

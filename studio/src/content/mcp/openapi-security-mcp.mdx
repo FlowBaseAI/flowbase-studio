@@ -1,0 +1,54 @@
+---
+name: "OpenAPI Security MCP"
+name_en: "OpenAPI Security MCP"
+name_zh: "OpenAPI 安全审查 MCP"
+description: "对 OpenAPI 规格做安全和权限审查，适合把内部 API 暴露给 Agent 前检查。"
+source: "Community"
+category: ["api","security"]
+tags: ["openapi","security","api","mcp"]
+platform: ["claude-code","codex"]
+github_url: "https://github.com/42Crunch/mcp-openapi-security"
+official_url: "https://github.com/42Crunch/mcp-openapi-security"
+install_cmd: "npx -y mcp-openapi-security"
+config_snippet:
+  mcpServers:
+    openapi-security:
+      command: "npx"
+      args: ["-y","mcp-openapi-security"]
+is_featured: false
+order: 59
+author: "Community"
+updated_at: "2026-06-11"
+---
+
+## 这个 MCP 能做什么？
+
+OpenAPI 安全审查 MCP 适合把 api 能力接入 Claude Code Workspace，为国内团队提供可选、可配置、可导出的 MCP 工具。
+
+## 国内团队使用场景
+
+- 作为 FlowBase Studio Workspace 数据源
+- 服务 AI Agent 的安全、观测、RAG、搜索或身份场景
+- 为国内团队提供配置示例和权限边界
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "openapi-security": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "mcp-openapi-security"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试环境连接。
+- 只开放最小权限。
+- 涉及身份、日志或数据检索时保留审计记录。

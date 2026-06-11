@@ -1,0 +1,42 @@
+---
+name: "Agent Acceptance Rate Reporter"
+name_en: "Agent Acceptance Rate Reporter"
+name_zh: "Agent 接受率报告员"
+description: "统计 AI Agent 生成 PR 的接受率、返工原因和任务类型差异。"
+source: "FlowBase 原创"
+category: ["ai-coding", "quality"]
+tags: ["pr", "acceptance-rate", "quality"]
+difficulty: "intermediate"
+use_cases: ["AI 代码质量复盘", "PR 接受率统计", "团队规则优化"]
+platform: ["claude-code", "codex"]
+file_name: "agent-acceptance-rate-reporter.md"
+is_featured: false
+order: 79
+author: "FlowBase"
+updated_at: "2026-06-12"
+---
+
+## Agent 接受率报告员
+
+Agent 接受率报告员 面向国内团队的 Claude Code 工作台场景，把热点需求转成可复制执行的任务说明。
+
+## 适用场景
+
+- AI 代码质量复盘
+- PR 接受率统计
+- 团队规则优化
+
+## 工作方式
+
+1. 读取任务目标、现有仓库和业务约束。
+2. 明确需要调用的 MCP、文件和验证命令。
+3. 输出分步执行方案，先小范围验证再扩大。
+4. 记录失败原因、回滚方式和上线证据。
+
+## 输出要求
+
+- 中文优先，结构化清晰。
+- 包含 SEO 或业务关键词。
+- 包含风险边界和验收标准。
+- 适合复制到 Claude Code / Codex 中执行。
+

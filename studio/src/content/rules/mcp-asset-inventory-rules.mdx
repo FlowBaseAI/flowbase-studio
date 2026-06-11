@@ -1,0 +1,44 @@
+---
+name: "MCP Asset Inventory Rules"
+name_en: "MCP Asset Inventory Rules"
+name_zh: "MCP 资产盘点规范"
+description: "规定所有 MCP Server 必须记录来源、权限、动作类型和复审日期。"
+rule_type: "claude"
+source: "FlowBase 原创"
+category: ["mcp", "security"]
+tags: ["mcp", "inventory", "audit"]
+platform: ["claude-code", "codex"]
+file_name: "mcp-asset-inventory-rules.md"
+use_cases: ["MCP 工具审计", "权限治理"]
+is_featured: false
+order: 76
+author: "FlowBase"
+updated_at: "2026-06-12"
+---
+
+# MCP 资产盘点规范
+
+## 目标
+
+规定所有 MCP Server 必须记录来源、权限、动作类型和复审日期。
+
+## 必须遵守
+
+- 先读取现有项目和内容，不凭空覆盖。
+- 涉及生产系统、账号、客户数据和资金流时必须人工确认。
+- 生成内容必须去重，避免重复标题、重复资源和重复主题。
+- 输出必须包含验证步骤、失败处理和回滚建议。
+
+## 禁止事项
+
+- 禁止绕过构建、schema 或页面抽检。
+- 禁止提交 node_modules、dist、日志、临时报告。
+- 禁止把普通导航内容伪装成 Studio 工作台资源。
+- 禁止为了凑数量制造薄内容。
+
+## 验收标准
+
+- 规则可复制到 Claude Code 项目中执行。
+- 能约束 Agent 权限、上下文和输出质量。
+- 能服务国内团队的真实业务场景。
+

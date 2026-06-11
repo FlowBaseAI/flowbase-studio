@@ -1,0 +1,57 @@
+---
+name: "Volcengine Data Intelligence MCP"
+name_en: "Volcengine Data Intelligence MCP"
+name_zh: "火山引擎数据智能 MCP"
+description: "把火山引擎数据服务、日志和 AI 应用配置纳入 Agent 工作台。"
+source: "FlowBase 原创"
+category: ["cloud", "data"]
+tags: ["volcengine", "data", "ai-app"]
+platform: ["claude-code", "codex"]
+github_url: "https://github.com/volcengine/volc-sdk-nodejs"
+official_url: "https://www.volcengine.com/docs"
+install_cmd: "npx -y volcengine-mcp --profile readonly"
+config_snippet:
+  mcpServers:
+    volcengineData:
+      command: "npx"
+      args: ["-y", "volcengine-mcp", "--profile", "readonly"]
+is_featured: false
+order: 74
+author: "FlowBase"
+updated_at: "2026-06-12"
+---
+
+## 这个 MCP 能做什么？
+
+火山引擎数据智能 MCP 是面向 Claude Code Workspace 的接入蓝图，用于把 火山引擎数据和云服务 纳入可选择、可配置、可导出的工作台能力。
+
+## 国内团队使用场景
+
+- 在 FlowBase Studio 中作为项目上下文或自动化工具源。
+- 连接企业内部知识、工单、数据、云资源或分析系统。
+- 为 AI Agent 任务保留权限、参数和审计边界。
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "volcengineData": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "volcengine-mcp",
+      "--profile",
+      "readonly"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试空间连接，不直接使用生产密钥。
+- 只开放最小读取或写入权限。
+- 对删除、发送、支付、发布类动作增加人工确认。
+

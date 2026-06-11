@@ -1,0 +1,56 @@
+---
+name: "MinIO Private Object Store MCP"
+name_en: "MinIO Private Object Store MCP"
+name_zh: "MinIO 私有对象存储 MCP"
+description: "把私有对象存储中的日志、报表和文档作为 Agent 可控文件源。"
+source: "FlowBase 原创"
+category: ["storage", "data"]
+tags: ["minio", "s3", "object-storage"]
+platform: ["claude-code", "codex"]
+github_url: "https://github.com/minio/minio-js"
+official_url: "https://min.io/docs/minio/linux/developers/javascript/API.html"
+install_cmd: "npx -y minio-mcp-server --readonly"
+config_snippet:
+  mcpServers:
+    minioObjectStore:
+      command: "npx"
+      args: ["-y", "minio-mcp-server", "--readonly"]
+is_featured: false
+order: 76
+author: "FlowBase"
+updated_at: "2026-06-12"
+---
+
+## 这个 MCP 能做什么？
+
+MinIO 私有对象存储 MCP 是面向 Claude Code Workspace 的接入蓝图，用于把 MinIO / S3 兼容对象存储 纳入可选择、可配置、可导出的工作台能力。
+
+## 国内团队使用场景
+
+- 在 FlowBase Studio 中作为项目上下文或自动化工具源。
+- 连接企业内部知识、工单、数据、云资源或分析系统。
+- 为 AI Agent 任务保留权限、参数和审计边界。
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "minioObjectStore": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "minio-mcp-server",
+      "--readonly"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试空间连接，不直接使用生产密钥。
+- 只开放最小读取或写入权限。
+- 对删除、发送、支付、发布类动作增加人工确认。
+

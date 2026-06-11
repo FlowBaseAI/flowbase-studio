@@ -1,0 +1,56 @@
+---
+name: "Aliyun SLS Ops MCP"
+name_en: "Aliyun SLS Ops MCP"
+name_zh: "阿里云 SLS 运维 MCP"
+description: "把阿里云日志服务查询、告警和排障上下文接入 Claude Code。"
+source: "FlowBase 原创"
+category: ["cloud", "observability"]
+tags: ["aliyun", "sls", "logs"]
+platform: ["claude-code", "codex"]
+github_url: "https://github.com/aliyun/alibabacloud-sls-nodejs-sdk"
+official_url: "https://help.aliyun.com/product/28958.html"
+install_cmd: "npx -y aliyun-sls-mcp --readonly"
+config_snippet:
+  mcpServers:
+    aliyunSlsOps:
+      command: "npx"
+      args: ["-y", "aliyun-sls-mcp", "--readonly"]
+is_featured: false
+order: 75
+author: "FlowBase"
+updated_at: "2026-06-12"
+---
+
+## 这个 MCP 能做什么？
+
+阿里云 SLS 运维 MCP 是面向 Claude Code Workspace 的接入蓝图，用于把 阿里云日志服务 纳入可选择、可配置、可导出的工作台能力。
+
+## 国内团队使用场景
+
+- 在 FlowBase Studio 中作为项目上下文或自动化工具源。
+- 连接企业内部知识、工单、数据、云资源或分析系统。
+- 为 AI Agent 任务保留权限、参数和审计边界。
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "aliyunSlsOps": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "aliyun-sls-mcp",
+      "--readonly"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试空间连接，不直接使用生产密钥。
+- 只开放最小读取或写入权限。
+- 对删除、发送、支付、发布类动作增加人工确认。
+

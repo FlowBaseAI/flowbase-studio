@@ -1,0 +1,56 @@
+---
+name: "Meilisearch Site Search MCP"
+name_en: "Meilisearch Site Search MCP"
+name_zh: "Meilisearch 站内搜索 MCP"
+description: "把站内搜索索引、关键词和无结果词接入 SEO 与内容迭代流程。"
+source: "FlowBase 原创"
+category: ["search", "seo"]
+tags: ["meilisearch", "site-search", "seo"]
+platform: ["claude-code", "codex"]
+github_url: "https://github.com/meilisearch/meilisearch-js"
+official_url: "https://www.meilisearch.com/docs"
+install_cmd: "npx -y meilisearch-mcp --readonly"
+config_snippet:
+  mcpServers:
+    meilisearchSiteSearch:
+      command: "npx"
+      args: ["-y", "meilisearch-mcp", "--readonly"]
+is_featured: false
+order: 79
+author: "FlowBase"
+updated_at: "2026-06-12"
+---
+
+## 这个 MCP 能做什么？
+
+Meilisearch 站内搜索 MCP 是面向 Claude Code Workspace 的接入蓝图，用于把 Meilisearch 站内搜索 纳入可选择、可配置、可导出的工作台能力。
+
+## 国内团队使用场景
+
+- 在 FlowBase Studio 中作为项目上下文或自动化工具源。
+- 连接企业内部知识、工单、数据、云资源或分析系统。
+- 为 AI Agent 任务保留权限、参数和审计边界。
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "meilisearchSiteSearch": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "meilisearch-mcp",
+      "--readonly"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先在测试空间连接，不直接使用生产密钥。
+- 只开放最小读取或写入权限。
+- 对删除、发送、支付、发布类动作增加人工确认。
+

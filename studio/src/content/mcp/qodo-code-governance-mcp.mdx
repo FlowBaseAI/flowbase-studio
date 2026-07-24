@@ -1,0 +1,55 @@
+---
+name: "Qodo Code Governance MCP"
+name_en: "Qodo Code Governance MCP"
+name_zh: "Qodo 代码治理 MCP"
+description: "把 AI 生成代码审查、规则执行和多仓库治理接入 Agent 流程。"
+source: "FlowBase 原创"
+category: ["code-review", "governance"]
+tags: ["qodo", "code-review", "governance"]
+platform: ["claude-code", "codex"]
+github_url: "https://github.com/qodo-ai/pr-agent"
+official_url: "https://www.qodo.ai/"
+install_cmd: "npx -y qodo-governance-mcp"
+config_snippet:
+  mcpServers:
+    qodoGovernance:
+      command: "npx"
+      args: ["-y","qodo-governance-mcp"]
+is_featured: false
+order: 107
+author: "FlowBase"
+updated_at: "2026-07-25"
+---
+
+## 这个 MCP 能做什么？
+
+Qodo 代码治理 MCP 面向 Claude Code 中文工作台，帮助团队把 AI 代码治理 接入可选择、可配置、可导出的 Agent 工作流。
+
+## 国内团队使用场景
+
+- 企业项目、云资源、AI 搜索、测试和 Agent 治理场景。
+- 需要把外部系统变成 Claude Code 可控工具源。
+- 需要在导出前明确权限、参数和审计边界。
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "qodoGovernance": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "qodo-governance-mcp"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先启用只读模式。
+- 为高危写入动作加人工确认。
+- 每次导出后记录版本、负责人和验证结果。
+

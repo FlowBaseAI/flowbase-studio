@@ -1,0 +1,41 @@
+---
+name: "MCP 20260728 Migration Planner"
+name_en: "MCP 20260728 Migration Planner"
+name_zh: "MCP 2026-07-28 迁移规划师"
+description: "为无状态核心、Extensions、Tasks、MCP Apps 和授权硬化生成迁移计划。"
+source: "FlowBase 原创"
+category: ["mcp", "migration"]
+tags: ["mcp-20260728", "migration", "tasks"]
+difficulty: "advanced"
+use_cases: ["MCP 升级评估", "远程 MCP 网关改造", "工具 schema 检查"]
+platform: ["claude-code", "codex"]
+file_name: "mcp-20260728-migration-planner.md"
+is_featured: true
+order: 100
+author: "FlowBase"
+updated_at: "2026-07-25"
+---
+
+## MCP 2026-07-28 迁移规划师
+
+为无状态核心、Extensions、Tasks、MCP Apps 和授权硬化生成迁移计划。
+
+## 适用场景
+
+- MCP 升级评估
+- 远程 MCP 网关改造
+- 工具 schema 检查
+
+## 工作方式
+
+1. 读取任务目标、仓库状态和用户约束。
+2. 选择最小必要 MCP、文件和验证命令。
+3. 输出分步方案，并明确哪些步骤需要人工确认。
+4. 生成可复用的 Claude Code / Codex 指令。
+
+## 输出要求
+
+- 中文优先。
+- 包含业务场景、风险边界和验收标准。
+- 不生成重复资源或普通导航内容。
+

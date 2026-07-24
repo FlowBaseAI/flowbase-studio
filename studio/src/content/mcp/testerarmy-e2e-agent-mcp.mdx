@@ -1,0 +1,55 @@
+---
+name: "TesterArmy E2E Agent MCP"
+name_en: "TesterArmy E2E Agent MCP"
+name_zh: "自然语言 E2E 测试 MCP"
+description: "把自然语言测试计划、页面验证和失败截图接入 Claude Code 工作台。"
+source: "FlowBase 原创"
+category: ["testing", "automation"]
+tags: ["e2e", "testing", "agent"]
+platform: ["claude-code", "codex"]
+github_url: "https://github.com/microsoft/playwright-mcp"
+official_url: "https://playwright.dev/"
+install_cmd: "npx -y testerarmy-e2e-agent-mcp"
+config_snippet:
+  mcpServers:
+    testerarmyE2E:
+      command: "npx"
+      args: ["-y","testerarmy-e2e-agent-mcp"]
+is_featured: false
+order: 109
+author: "FlowBase"
+updated_at: "2026-07-25"
+---
+
+## 这个 MCP 能做什么？
+
+自然语言 E2E 测试 MCP 面向 Claude Code 中文工作台，帮助团队把 自然语言 E2E 测试 接入可选择、可配置、可导出的 Agent 工作流。
+
+## 国内团队使用场景
+
+- 企业项目、云资源、AI 搜索、测试和 Agent 治理场景。
+- 需要把外部系统变成 Claude Code 可控工具源。
+- 需要在导出前明确权限、参数和审计边界。
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "testerarmyE2E": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "testerarmy-e2e-agent-mcp"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先启用只读模式。
+- 为高危写入动作加人工确认。
+- 每次导出后记录版本、负责人和验证结果。
+

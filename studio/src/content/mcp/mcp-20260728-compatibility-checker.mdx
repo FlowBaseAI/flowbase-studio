@@ -1,0 +1,55 @@
+---
+name: "MCP 20260728 Compatibility Checker"
+name_en: "MCP 20260728 Compatibility Checker"
+name_zh: "MCP 2026-07-28 兼容性检查 MCP"
+description: "检查现有 MCP Server 是否依赖旧会话、旧 logging、roots 或不兼容工具 schema。"
+source: "FlowBase 原创"
+category: ["mcp", "migration"]
+tags: ["mcp-20260728", "compatibility", "schema"]
+platform: ["claude-code", "codex"]
+github_url: "https://github.com/modelcontextprotocol/modelcontextprotocol"
+official_url: "https://modelcontextprotocol.io/"
+install_cmd: "npx -y mcp-20260728-checker"
+config_snippet:
+  mcpServers:
+    mcp20260728Checker:
+      command: "npx"
+      args: ["-y","mcp-20260728-checker"]
+is_featured: true
+order: 100
+author: "FlowBase"
+updated_at: "2026-07-25"
+---
+
+## 这个 MCP 能做什么？
+
+MCP 2026-07-28 兼容性检查 MCP 面向 Claude Code 中文工作台，帮助团队把 MCP 协议迁移检查 接入可选择、可配置、可导出的 Agent 工作流。
+
+## 国内团队使用场景
+
+- 企业项目、云资源、AI 搜索、测试和 Agent 治理场景。
+- 需要把外部系统变成 Claude Code 可控工具源。
+- 需要在导出前明确权限、参数和审计边界。
+
+## 配置示例
+
+```json
+{
+  "mcpServers": {
+    "mcp20260728Checker": {
+      "command": "npx",
+      "args": [
+      "-y",
+      "mcp-20260728-checker"
+]
+    }
+  }
+}
+```
+
+## 使用建议
+
+- 先启用只读模式。
+- 为高危写入动作加人工确认。
+- 每次导出后记录版本、负责人和验证结果。
+
